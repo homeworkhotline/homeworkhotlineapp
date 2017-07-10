@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grade: 1
+  codename: MyString
+  homelang: MyString
+  internet: false
+  school_id: 1
+
+two:
+  grade: 1
+  codename: MyString
+  homelang: MyString
+  internet: false
+  school_id: 1

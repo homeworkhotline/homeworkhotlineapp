@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,500,600,700,700i,900,900i" rel="stylesheet">
+    <title><%= yield(:title) %> | Homework Hotline</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+    <style type="text/css">
+      a {
+  color:#00b7ff !important;
+}
+a:hover {
+  background-color: white !important;
+  color: #0089bf !important;
+}
+p,h1,h2,h3,h4,h5,h6,li,a {
+  font-family: 'Lato', sans-serif;
+}
+    </style>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<body>
+<% if current_user.developer? %>
+	<%= button_to "Send email", sendmail_path(@principal) %>
+<% end %>
+<h1>Thank you for filling out the form! Dr. Archie will reach out to your contact to let them know a date and time for a meeting.</h1>
+<style type="text/css">
+  h1 {
+    color: #073045;
+    line-height: 40px;
+    font-family: Lato;
+    font-weight: 400;
+    font-size: 40px;
+    text-align: center;
+    margin: 100px 100px;
+  }
+</style>
+</body>

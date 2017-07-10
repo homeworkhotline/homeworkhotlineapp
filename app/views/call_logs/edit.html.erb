@@ -1,0 +1,423 @@
+<% content_for :page, "Call Log" %>
+<% content_for :title, "Call Log" %>
+<div class="banner"></div>
+<%= form_for(@call_log) do |f| %>
+  <div class="calldetails">
+  <h2>CALL DETAILS</h2>
+  <div class="field">
+  <h3>Times dialed</h3>
+    <%= f.number_field :timesdialed %>
+  </div>
+
+  <div class="field">
+  <h3>Language spoken</h3>
+    <%= f.text_field :lang %>
+  </div>
+
+  <div class="field">
+  <h3>Parent participation</h3>
+    <%= f.check_box :parent %>
+  </div>
+  </div>
+<div class="material">
+<h2>MATERIAL COVERED</h2>
+  <div class="field">
+    <h3>Subject</h3><%= f.select :skill, grouped_options_for_select([["Math", ["K - 8", "Pre-Aglebra", "Integrated Math 1", "Aglebra 1", "Integrated Math 2", "Geometry", "Integrated Math 3", "Algbera 2", "Bridge Math", "Pre-Cal/Trig", "Calculus", "Economics", "Statistics", "College"]],["Science",["K - 8", "Physical Science", "Health", "Chemistry", "Forensic", "Biology", "Physics"]], ['Other', ["ACT Prep / Freshman Seminar", "Foreign Language - Spanish", "Language Arts / Reading / Vocabulary", "SS/ Geography / History / Govt.", "Music"]],["Non-Academic", ["Hotline info"]]]), {prompt: "Subject..."}, required: true %>
+  </div>
+
+  <div class="field checks">
+  <h3>Materials</h3>
+    <h4 style="width: 263px !important;">Textbook</h4>
+    <%= f.check_box :textbool, id: "textbool" %>
+  </div>
+
+  <div class="field checks">
+    <h4>Worksheet</h4>
+    <%= f.check_box :worksheet %>
+  </div>
+
+  <div class="field checks">
+    <h4>Stoodle</h4>
+    <%= f.check_box :stoodle %>
+  </div>
+
+  <div class="field checks">
+    <h4>Image Share</h4>
+    <%= f.check_box :image_share %>
+  </div>
+
+  <div class="field hide">
+    <h3>Textbook</h3>
+    <%= f.select :textbook, grouped_options_for_select([["Math", ["Go Math", "Cirriculum Assc. Ready  Mathematics","Envision", "Houghton Go Math" "Glencoe Adavanced Mathemetical Concepts", "Glencoe Math - Common Core", "Pearson Envision", "Glencoe Math Connects 1", "Glencoe Math Connects 2", "Glencoe Math Connects 3", "Glencoe Pre-Aglebra", "McGraw Hill Math Connects", "Holt McDougal Mathematics 1", "Holt McDougal Mathematics 2", "Holt McDougal Mathematics 3", "Holt Middle School Math Course 1", "Holt Middle School Math Course 2", "Holt Middle School Math Course 3", "Holt Pre Aglebra", "Blitzer Algebra and Trigonometry", "Gelncoe Aglebra 1", "Glencoe Geometry", "HMH Integrated Math 1", "HMH Integrated Math 2", "HMH Integrated Math 3", "HMH Aglebra", "HMH Geometry Vol. 1", "Holt Algebra 1", "Holt Algebra 2", "Holt Geometry", "Houghton Mifflin Geometry", "Houghton Integrated Math 1", "McDougal Aglebra 1", "McDougal Algebra 2", "McGraw Tennesse Bridge Math", "Prentice Hall Pre-Aglebra", "Prentice Hall Algebra 1", "Prentice Hall Geometry", "Prentice Hall Algebra 2", "Carmegle Geometry", "PreCalculus with Limits",]],["Language Arts",["Educators Wordly Wise", "Glencoe Language Arts Grammar and Language", "Glencoe Writers Choice: Grammar and Composition", "Holt Elements of Grammar", "Holt Elements of Language", "Holt Elements of Literature", "Holt McDougal Literature", "Houghton English", "Houghton Mifflin Journeys", "Houghton Spelling and Vocabulary", "McGraw Language Arts", "McGraw Hill Reading Wonders", "McMillan Tennesse Treasures", "Prentice Hall Literature", "Prentice Hall Writing and Grammar", "Scott Foresman Everyday Spelling", "Scott Foresman Grammar & Writing", "Scott Foresman Reading Street", "Zaner Bloser Word Wisdom"]], ['History / Social Studies', ["Gibbs Tennesse Through Time", "Glencoe American Vision", "Glencoe Journey Across Time", "Harcourt Social Studies", "Holt US History", "Holt World Geography", "Holt World Geography", "Houghton Mifflin Social Studies", "McDougal Littell World Geography", "McGraw Hill Discovering Our Past: A History of the World", "McDougal Littell The Americans", "Pearson World History", "Prentice Hall American Government", "Prentice Hall World History", "Studies Weekly", "Weekly Reader"]],["Science", ["Glencoe Physical Science", "Glencoe Science", "Holt Environmental Science", "Holt Modern Chemistry", "Holt Physics", "Holt Science and Technology", "Holt Science Spectrum", "Houghton Mifflin Tennesse Science", "McGraw Hill Science", "McMillan Science: A Closer Look", "Pearson Chemistry", "Pearson Conceptual Physics", "Prentice Hall Biology", "Prentice Hall Chemistry", "Prentice Hall Physical Science", "Ap Chemistry"]], ["Spanish",["Avancemos! 1", "Avancemos! 2"]],["Other",["Ready TN Core", "Cracking the ACT - 2015 Edition"]]]), {prompt: "Textbook..."} %>
+  </div>
+
+  <div class="field hide">
+    <h4>Page</h4>
+    <%= f.number_field :page %>
+  </div>
+
+  <div class="field" style="margin-top: 30px; margin-bottom: 30px;">
+  <h3>Skill assessed</h3>
+    <%= f.text_area :notes %>
+  </div>
+</div>
+<div class="session">
+<h2>SESSION EVALUATION</h2>
+<h3>Understanding at the start of session:</h3>
+  <div class="field">
+    <%= f.range_field :startknow, :min=>-5, :max=>0, class: "start", value: 0 %>
+</div>
+<h4 class="understand beginning">Homework check with no problems.</h4>
+<h3>Understanding at the end of session:</h3>
+  <div class="field">
+    <%= f.range_field :endknow, :min=>0, :max=>2, class: "end", value: 0 %>
+  </div>
+  <h4 class="understand ending" style="margin-bottom: 10px;">No progress.</h4>
+  <div class="post">
+  <h4 class="understand" style="display: inline-block;">Post-test given.</h4>
+    <%= f.check_box :posttest, style: "display:inline-block", class: "postcheck" %>
+  </div>
+</div>
+  <div class="actions">
+    <%= f.submit "FINISH CALL", class: "button"%>
+  </div>
+<% end %>
+<style type="text/css">
+input[type="range"]::-ms-fill-lower {
+  background: transparent;
+}
+input[type='range']:focus {
+  outline: none;
+}
+  .start {
+  -webkit-appearance: none;
+  width: 375px;
+  margin: 4.5px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+.start::-webkit-slider-runnable-track {
+  width: 375px;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0), 0px 0px 5px rgba(13, 13, 13, 0);
+  background: #f2f2f2;
+  border-radius: 0px;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+  height: 15px;
+  width: 15px;
+  border-radius: 20px;
+  background: #45ef96;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -4.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #f7f7f7;
+}
+.start::-moz-range-track {
+  width: 375px;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0), 0px 0px 5px rgba(13, 13, 13, 0);
+  background: #f2f2f2;
+  border-radius: 0px;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+  height: 15px;
+  width: 15px;
+  border-radius: 20px;
+  background: #45ef96;
+  cursor: pointer;
+}
+.start::-ms-track {
+  width: 375px;
+  height: 10px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #f2f2f2;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0), 0px 0px 5px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-fill-upper {
+  background: #f2f2f2;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0), 0px 0px 5px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+  height: 15px;
+  width: 15px;
+  border-radius: 20px;
+  background: #45ef96;
+  cursor: pointer;
+  height: 6px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #f2f2f2;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #f7f7f7;
+}
+  .end {
+  -webkit-appearance: none;
+  width: 200px;
+  margin: 4.5px 0;
+}
+.end::-ms-track {
+  width: 200px;
+  height: 10px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.end::-moz-range-track {
+  width: 200px;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0), 0px 0px 5px rgba(13, 13, 13, 0);
+  background: #f2f2f2;
+  border-radius: 0px;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+.end::-webkit-slider-runnable-track {
+  width: 200px;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0), 0px 0px 5px rgba(13, 13, 13, 0);
+  background: #f2f2f2;
+  border-radius: 0px;
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+.field {
+    display: flex;
+  align-items: center;
+  position: relative;
+  width: 374px;
+  margin-left: -187px;
+  left: 50%;
+  line-height: 0;
+}
+input[type=text], input[type=number], input[type=checkbox], textarea{
+  background: #f2f2f2;
+  width: 145px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 0px;
+  border: none;
+  position: absolute;
+  right: 0;
+}
+  select {
+  background: #f2f2f2;
+  width: 200px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 0px;
+  border: none;
+      padding:0 25px 0 10px !important;
+    -webkit-padding-end: 25px !important;
+    -webkit-padding-start: 10px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+  right: 0;
+  background: url("https://d30y9cdsu7xlg0.cloudfront.net/png/10897-200.png") 96% / 10% no-repeat #f2f2f2;
+}
+input[type=number] {
+  width: 55px !important; 
+}
+input[type=checkbox] {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  padding: 9px;
+  right: -5px;
+}
+input[type=checkbox]:checked {
+  background-color: #45ef96;
+  color: #000;
+}
+input[type=checkbox]:checked:after {
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  color: #000;
+}
+input[type=checkbox]:focus {
+  outline: none;
+}
+textarea {
+  height: 70px;
+}
+h2 {
+  display: block;
+  width: 150px;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  bottom: 23px;
+  background-color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+h4 {
+  font-weight: 300;
+  font-style: italic;
+  position: relative;
+  width: 300px;
+  text-align: right;
+}
+h3{
+  font-weight: 500;
+  font-size: 19px;
+}
+.end {
+  position: relative;
+  left: 50%;
+  margin-left: -100px;
+}
+.calldetails, .material, .session {
+
+      border: 2px solid #45ef96;
+    width: 470px;
+    margin-left: -275px;
+    position: relative;
+    left: 50%;
+    padding-bottom: 20px;
+    margin-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.material > h2 {
+  width: 210px;
+}
+.session > h2 {
+  width: 230px;
+}
+.checks {
+  margin-top: -10px !important;
+}
+.checks > h4 {
+  width: 340px;
+  position: relative;
+  top: 3px;
+}
+  .button {
+  width: 170px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  padding: 10px 0;
+  letter-spacing: 2px;
+  color: #fff;
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: -85px;
+  left: 50%;
+  transition: all 150ms ease-in-out;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  }
+  .button:hover{ 
+    background-color:#5CDA89;
+  }
+  .understand {
+    font-size: 17px;
+    text-align: center;
+    width: auto;
+    margin-bottom: 35px;
+  }
+  .post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .post >h4 {
+    font-size: 20px;
+  }
+  .post > input {
+    position: relative;
+    margin-bottom: 8px;
+  }
+      .banner {
+      width: 100%;
+      text-align: center;
+      height: 75px;
+      background-color: #45ef96;
+      opacity: .8;
+      letter-spacing: 2px;
+      position: fixed;
+      top: -75px;
+      left: 0;
+      font-size: 20px;
+      color: white;
+      font-weight: 600;
+    }
+    .banner > a:hover {
+      background-color: transparent;
+    }
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+$('.hide').hide();
+$('#textbool').change(function(){
+if (document.getElementById('textbool').checked){
+  $('.hide').slideDown(200);
+}else{$('.hide').slideUp(200);}
+});
+  $('.start').on("change", function(){
+    var start = $(this).val();
+    if(start == -5){
+      $('.beginning').text('Obvious learning disabilities/special needs.');
+    }else if(start == -4){
+      $('.beginning').text('Behind grade level OR gets help in language other than english.');
+    }else if(start == -3){
+      $('.beginning').text('Deos not understand concept.');
+    }else if(start == -2){
+      $('.beginning').text('Many questions but partially understands the concept.');
+    }else if(start == -1){
+      $('.beginning').text('One or two questions but understands basic concept.');
+    }else if(start == 0){
+      $('.beginning').text('Homework check with no problems.');
+    }
+  });
+  $('.end').on("change", function(){
+    var end = $(this).val();
+    if(end == 0){
+      $('.ending').text('No progress.');
+      $('.postcheck').attr("checked", false);
+    }else if(end == 1){
+      $('.ending').text('Completed assignment, did not master material.');
+      $('.postcheck').attr("checked", false);
+    }else if(end == 2){
+      $('.ending').text('Mastered material and passed post test.');
+      $('.postcheck').attr("checked", true);
+    }
+  });
+});
+</script>

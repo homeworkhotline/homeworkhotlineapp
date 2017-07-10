@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi Adrianne,
+      <%= @principal.schoolsystem %> County has filled out their information.<br></h1>
+      <h2>Important Info:</h2>
+      <h3>
+      County Contact: <%= @principal.ccontactfirst %> <%= @principal.ccontactlast %><br><br>
+      Title: <%= @principal.ccontacttitle %><br><br>
+      School System: <%= @principal.schoolsystem %><br><br>
+      Mailing Address: <%= @principal.mailaddress %><br><br>
+      City, State, Zip: <%= @principal.city %>, <%= @principal.csz %>, <%= @principal.zip %><br><br>
+      Phone Number: <%= @principal.phonenumb %><br><br>
+      Email: <%= @principal.email %><br><br>
+      Textbook Contact: <%= @principal.textcontactfirst %> <%= @principal.textcontactlast %><br><br>
+      Textbook Contact's Email: <%= @principal.textcontactemail %><br><br>
+      Meeting Option One: <%= @principal.mone.strftime('%B %e, %Y at %l:%M %p') %><br><br>
+      Meeting Two Option: <%= @principal.mtwo.strftime('%B %e, %Y at %l:%M %p') %><br><br>
+      Completed By: <%= @principal.completedbyfirst %> <%= @principal.completedbylast %><br><br>
+      Title: <%= @principal.completedbytitle %><br><br>
+      A possible donor is <%= @principal.d1 %><br><br>
+      <% unless @principal.d2.nil? || @principal.d3 == "" %>
+      Another possible donor is <%= @principal.d2 %><br><br>
+      <% unless @principal.d3.nil? || @principal.d3 == "" %>
+      The last possible donor is <%= @principal.d3 %><br><br>
+      <% end %>
+      <% end %>
+      <%= link_to "Download School Names List", dlsnl_url(@principal.id) %><br><br>
+      <%= link_to "Download Newly Adopted Books List", dlnab_url(@principal.id) %><br><br>
+      <% unless @principal.nice_content.nil? %>
+      <%= link_to "Download Letter of Support", dlnice_url(@principal.id) %>
+      <% end %>
+    </h3>
+  </body>
+</html>

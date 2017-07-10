@@ -1,0 +1,128 @@
+<div class="parent">
+<%= form_for(school) do |f| %>
+  <% if school.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(school.errors.count, "error") %> prohibited this school from being saved:</h2>
+
+      <ul>
+      <% school.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <h4>School Name</h4>
+    <%= f.text_field :name, :required => true %>
+  </div>
+
+    <div class="field">
+    <h4>School Type</h4>
+    <%= f.select :schooltype, [["Elementary"], ["Middle School"], ["High School"], ["K-2"], ["Alternative"]] %>
+  </div>
+
+  <div class="field" style="display: inline-block;">
+    <h4>Address</h4>
+    <%= f.text_field :address, :required => true %>
+  </div>
+
+  <div class="field", style="display: inline-block; margin-left: 20px;">
+    <h4>City, State, Zip</h4>
+    <%= f.text_field :city, style: "width: 100px;", :required => true %> <b>,</b>
+  </div>
+
+  <div class="field", style="display: inline-block;">
+    <%= f.select :state, options_for_select([["TN", "TN"]]), :required => true %> <b>,</b>
+  </div>
+
+  <div class="field", style="display: inline-block;">
+    <%= f.number_field :zip, style: "width: 60px;", :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>County</h4>
+    <%= f.text_field :county, :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>Phone Number</h4>
+    <%= f.text_field :phone, :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>Principal Name</h4>
+    <%= f.text_field :principal, :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>Principal Email</h4>
+    <%= f.email_field :principalemail, :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>Percent of Economically Disabled Students</h4>
+    <%= f.number_field :peds, :required => true %> %
+  </div>
+
+  <div class="field">
+    <h4>Census</h4>
+    <%= f.number_field :census, :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>Predicted Number of Third Grade Students</h4>
+    <%= f.number_field :ptgs, :required => true %>
+  </div>
+
+    <div class="field">
+    <h4>School Board District</h4>
+    <%= f.number_field :sbdistrict, :required => true %>
+  </div>
+
+  <div class="field">
+    <h4>City Council District</h4>
+    <%= f.number_field :ccdistrict, :required => true %>
+  </div>
+
+  <div class="field">
+    <b>Sonic Partner?</b>
+    <%= f.check_box :sonic, class:"checkbox" %>
+  </div>
+
+  <div class="field">
+    <b>Title I School?</b><%= f.check_box :titlei, class:"checkbox" %>
+  </div>
+
+  <div class="field">
+    <b>In The Appalachain Region?</b>
+    <%= f.check_box :appalreg, class:"checkbox" %>
+  </div>
+
+<br>
+
+  <div class="actions">
+    <%= f.submit "Add School", class:"button" %>
+  </div>
+<% end %>
+</div>
+<style type="text/css">
+  .parent {
+    width: 600px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    margin-left: -300px;
+  }
+  .checkbox {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    top: 13px;
+    position: relative;
+    border-radius: 0%;
+  }
+  h4 {
+    text-align: center;
+  }
+</style>

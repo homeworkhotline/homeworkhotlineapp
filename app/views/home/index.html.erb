@@ -1,0 +1,145 @@
+  <% if current_user.administrator? %>
+  <% content_for :title, "Home" %>
+<% content_for :page, "Home" %>
+  <%= link_to'Logout', destroy_user_session_path, :method => :delete %>
+    <%= link_to "Time Clock", time_clocks_path %>
+  <h1>Welcome back, <%= current_user.firstname.capitalize %>.</h1><br><br>
+    <h3>Employees</h3>
+  <% User.where.not(id: current_user.id).each do |user| %>
+  <%= link_to "#{user.firstname} #{user.lastname}", user_path(user) %><br>
+  <% end %><br>
+ <div class="pay">
+  <%= form_for(@mnps_report) do |f| %>
+  <%= f.hidden_field :var, :value => 1 %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.hidden_field :billdate, :value => Date.today %>
+    <%= f.submit "Pay All Employees" %>
+    <% @users.where.not(role: :administrator).each do |user| %>
+      <% user.time_clocks.each do |time| %>
+        <% if time.clock_in && time.clock_out.nil? %>
+          <p style="color: red; display: inline-block;">A user has not clocked out!</p>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div><br>
+  <div class="pay">
+  <%= link_to home_timesheets_path do %>
+  <button>Employee Timesheets</button>
+  <% end %>
+  </div>
+  <br>
+  <% end %><hr width="20%" style="float: left;"><br>
+  <h2>Promote user to admin</h2>
+  <% @users =  User.where.not(role: "admin").to_a %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="field">
+    <%= f.select :district, options_for_select(@users.collect { | user | ["#{user.firstname} #{user.lastname}" , user.id] })%>
+    <%= f.submit "Promote!" %>
+  </div>
+  <% end %>
+  <br><hr width="20%" style="float: left;"><br>
+  <%= form_for(@search, :html=>{:class=>"searchform",:multipart => true,:remote=>true}) do |f| %>
+  <div class="field">
+    <h2>Search:</h2>
+    <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Principal Reports", "Principal"], ["Time Sheet Reports", "MnpsReport"]]) %>
+    <%= f.submit "Begin Search" %>
+    </div>
+<% end %>
+<style type="text/css">
+  .pay {
+    float: center;
+    display: inline-block;
+  }
+  .school {
+    font-size: 20px;
+  }
+</style>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.load').hide();
+    $('button').click(function() {
+      $('body > :not(.load)').hide(); 
+      $('.load').show();
+    });
+  });
+</script>
+<div class="one load">
+  <div class="two load">
+    <div class="three load"></div>
+  </div>
+</div>
+<% else %>
+<% content_for :title, "Home" %>
+<% content_for :page, "Dev Stats" %>
+<div class="allparent">
+<div class="leftparent">
+<div class="pieparent stats">
+<h3>DATABASE</h3>
+<h1 class="total"><%= User.all.size + TimeClock.all.size + Student.all.size + Search.all.size + School.all.size + Principal.all.size + MnpsReport.all.size + CallLog.all.size %></h1>
+<hr width="70%">
+<%= pie_chart [["Users",User.all.size],["Timesheets",TimeClock.all.size],["Students",Student.all.size],["Schools",School.all.size],["Searches",Search.all.size],["Principals",Principal.all.size],["Reports",MnpsReport.all.size],["Call Logs",@calllogs.count], ["Images", ImageShare.all.size]], legend: false, colors: ["#b9e3f8","#8bd1f4","#5dbeef", "#2eacea", "#1592d1", "#1072a2", "#0b5174", "#073045", "#021017"], width: "200px", id: "piedb" %>
+</div>
+</div>
+<div class="centerparent">
+<div class="onlineparent stats">
+<h3>USERS ONLINE</h3>
+<h1 class="online"><%= @onlineusers %></h1>
+</div>
+<div class="activeparent stats">
+  <h3>ACTIVE CALLS</h3>
+  <h1 class="activelogs"><%= @activecalls %></h1>
+</div>
+</div>
+</div>
+<style type="text/css">
+h1, h3 {
+  margin-left: 50px;
+}
+.stats {
+  border: 2px solid #45ef96;
+  width: 300px;
+  text-align: left;
+  margin-top: 40px;
+}
+.leftparent,.centerparent {
+  width: 300px;
+  display: inline-block;
+}
+.leftparent {
+  float: left;
+}
+h3 {
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 45px;
+  font-weight: 400;
+}
+.total {
+  margin-bottom: 60px;
+}
+
+.centerparent > div {
+  height: 206px;
+}
+.centerparent > div > h1{
+  font-size: 75px;
+  text-align: center;
+  margin-top: 65px;
+  margin-left: 0px;
+}
+.pieparent > #piedb {
+  position: relative;
+  margin-left: -100px;
+  left: 50%;
+}
+.centerparent {
+  margin-left: -150px;
+  left: 50%;
+  position: absolute;
+}
+</style>
+<% end %>

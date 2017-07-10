@@ -1,0 +1,109 @@
+  <%= content_for :page, "Call Log" %>
+  <div class="parent">
+  <%= form_for(@call_log,:html=>{:class=>"firstform",:multipart => true}) do |f| %>
+    <%= f.text_field :codename, :required => true, maxlength: 6, placeholder: "Codename", class: "input" %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :date, :value => Date.today %>
+    <p class="error">Codename not recognized. Please check spelling or register a new student <a class="link">here</a>.</p>
+    <%= f.submit "CONTINUE", class: "button" %>
+    <% end %>
+    </div>
+    <script type="text/javascript">
+      $('.error').hide();
+      $('.button').attr('disabled','disabled');
+      $('.input').change(function() {
+        var value = $('.input').val().toUpperCase();
+        if ((<% if Student.count == 0 %>false<% else %><% Student.all.each do |student| %>value == "<%= student.codename %>" <% if student.id + 1 > Student.last.id %><% else %>|| <% end %><% end %><% end %>) && value != ""){
+          $('.button').removeAttr('disabled');
+          $('.error').hide();
+          $('.input').css("border", "none");
+        }
+        else {
+          $('.input').css("border", "#ff4d4d 2px solid");
+          $('.error').show();
+          $('.button').attr('disabled','disabled');
+        }
+        $('.link').click(function() {
+          $('form').submit();
+        });
+      });
+    </script>
+    <style type="text/css">
+    .error {
+      color: #ff4d4d;
+      font-size:12px;
+      margin: 0;
+      margin-left: 10px;
+      position: relative;
+      bottom: 15px;
+    }
+    	  .input {
+    border: none;
+    background-color:#f2f2f2;
+    color:#333;
+    width: 279px;
+    height: 45px;
+    margin-bottom: 15px;
+    border-left: #f2f2f2 solid 3px;
+    border-right: #f2f2f2 solid 3px;
+    font-size: 22px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    padding-left: 12px;
+    letter-spacing: .5px;
+    transition: all 220ms ease-in-out
+  }
+  .input:active {
+    border:auto;
+  }
+  .parent {
+    width: 300px;
+    margin-left: -150px;
+    left: 50%;
+    position: relative;
+    top: 30px;
+  }
+  input[disabled="disabled"] {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+input[disabled="disabled"]:hover {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+  .button {
+  width: 150px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  padding: 10px 0;
+  letter-spacing: 2px;
+  color: #fff;
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: -75px;
+  left: 50%;
+  transition: all 150ms ease-in-out;
+  margin-bottom:50px;
+  }
+  .button:hover{ 
+    background-color:#5CDA89;
+  }
+  a:hover {
+    cursor: pointer;
+  }
+  ::-webkit-input-placeholder {
+    color: #ccc;
+    opacity: 1 !important;
+}
+input:focus{
+    outline: none;
+    border-left: #45ef96 solid 5px;
+    padding-left: 10px;
+}
+    </style>

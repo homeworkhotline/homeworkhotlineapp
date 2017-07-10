@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mnps Reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hours</th>
+      <th>Billdate</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mnps_reports.each do |mnps_report| %>
+      <tr>
+        <td><%= mnps_report.hours %></td>
+        <td><%= mnps_report.billdate %></td>
+        <td><%= link_to 'Show', mnps_report %></td>
+        <td><%= link_to 'Edit', edit_mnps_report_path(mnps_report) %></td>
+        <td><%= link_to 'Destroy', mnps_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mnps Report', new_mnps_report_path %>

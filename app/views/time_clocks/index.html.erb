@@ -1,0 +1,208 @@
+<%= link_to new_call_log_path do %>
+<div class="parent">
+<div class="arrow">TAKE A CALL</div>
+<div class="right arrow"></div>
+<div class="righter arrow"></div>
+</div>
+<% end %>
+<%= link_to destroy_user_session_path, method: :delete do %>
+<div class="button">LOG OUT</div>
+<% end %>
+<%= content_for :page, "Timesheets" %>
+<%= content_for :title, "Timesheets" %>
+<% if current_user.mnps_teacher? && current_user.men.nil? %>
+  <h2>Please finish filling the out the form below <%= current_user.firstname %></h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+  <div class="field">
+    <%= f.label :district %>
+    <%= f.select :district, [["MNPS"]], autofocus: true %>
+  </div>
+
+  <div class="field">
+    Metro Employee Number<br />
+    <%= f.number_field :men, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school %>
+    <%= f.text_field :school, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
+  <% end %>
+<table style="position:relative;display: inline-block;">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Clock in</th>
+      <th>Clock out</th>
+      <th>Hours</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_clocks.each do |time_clock| %>
+      <tr>
+      <td><%= time_clock.date.strftime("%-m/%-d/%Y") %></td>
+        <td><%= time_clock.clock_in.strftime("%l:%M %p") %></td>
+        <% if time_clock.clock_out.nil? %>
+        <td><%= time_clock.clock_out %></td>
+        <% else %>
+        <td><%= time_clock.clock_out.strftime("%l:%M %p") %></td>
+        <% end %>
+        <td><%= time_clock.hours %></td>
+      </tr>
+    <% end %>
+    <% for i in 1..(10 - @time_clocks.count) %>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="info">
+  <h3>TOTAL HOURS</h3>
+  <h1><%= @total_hours.round(2) %></h1>
+  <hr style="width: 50%; border:none; height: 2px; background-color: #45ef96;">
+  <h3>UNPAID HOURS</h3>
+  <h1><%= @unpaid_hours.round(2) %></h1>
+</div>
+
+<style type="text/css">
+  .button {
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 360px;
+  top: 70px;
+  transition: all 150ms ease-in-out;
+    text-decoration: none;
+  font-family: 'Lato', sans-serif;
+      height:40px;
+    color:#fff;
+    width:160px;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align:center;
+    line-height:40px;
+  }
+  .button:hover{ 
+    background-color:#5CDA89;
+  }
+table {
+  empty-cells: show;
+  top: 25px;
+  margin-left: 45px;
+}
+th {
+  background-color: #073045;
+  color: white;
+  width: 150px;
+  height: 30px;
+  font-weight: 300;
+  font-family: Lato;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: left;
+  padding-left: 10px;
+  letter-spacing: 1px;
+}
+table {
+  border-color: black !important;
+}
+.arrow{
+    height:40px;
+    color:#000;
+    position:absolute;
+    width:160px;
+    font-weight: 400;
+    font-size: 18px !important;
+    letter-spacing: 1px !important;
+    text-align:center;
+    line-height:40px;
+    background:#f2f2f2;
+}
+.arrow:after{
+    content:"";
+    position: absolute;
+    left: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:20px solid transparent;
+    border-left:15px solid #f2f2f2;
+    border-bottom:20px solid transparent;
+}
+.right {
+  left: 5px;
+  z-index: -10;
+  background-color:white;
+  transition: all 150ms ease-in-out;
+}
+.right:after {
+  border-left-color: white;
+}
+.arrow:hover ~ .right  {
+  left: 15px;
+}
+.arrow:hover ~ .righter  {
+  left: 20px;
+}
+.righter {
+  left: 10px;
+  z-index: -11;
+  background-color:#65ef96;
+  transition: all 150ms ease-in-out;
+}
+.righter:hover {
+  left: 20px;
+}
+.righter:after {
+  border-left-color: #45ef96
+}
+.parent {
+  width:120px;
+  position:absolute;
+  right: 220px;
+  top: 70px;
+}
+.info {
+  width: 230px;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  left: 50px;
+  display: inline-block;
+  bottom: 38px;
+}
+.info > h1 {
+  font-size: 55px;
+}
+.info > h3 {
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 25px
+}
+tr:nth-of-type(odd) {
+      background-color:#f2f2f2;
+    }
+tr:nth-of-type(even) {
+      background-color:#e6e6e6;
+    }
+    td {
+      font-weight: 400;
+      font-family: Lato;
+    }
+</style>

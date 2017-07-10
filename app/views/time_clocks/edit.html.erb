@@ -1,0 +1,6 @@
+<h1 style="text-align: center; font-weight: 400; font-size: 3em;">Editing Time Clock</h1>
+<h3 style="text-align: center; font-weight: 300; font-size: 2em;"><%= Date.today %></h3>
+<%= form_for(@time_clock) do |f| %>
+	<h4>Clock In</h4><%= f.time_select :clock_in, {ampm: true}%> - <h4>Clock Out</h4><%= f.time_select :clock_out, {ampm: true} %><br><br>
+	<%= f.submit "Submit" %>
+<% end %>

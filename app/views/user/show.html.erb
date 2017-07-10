@@ -1,0 +1,75 @@
+<h2><%= @user.firstname %> has worked <%= @total_hours %> hours, and has <%= @unpaid_hours %> unpaid hours.</h2>
+<% if @unpaid_hours > 0 %>
+<%= form_for(@mnps_report) do |f| %>
+  <%= f.hidden_field :user_id, :value => @user.id %>
+  <%= f.hidden_field :billdate, :value => Date.today %>
+  <%= f.hidden_field :hours, :value => @unpaid_hours %>
+  <div class="actions">
+    <%= f.submit "Pay and Generate Report", class: "submit" %>
+  </div>
+<% end %>
+<% end %>
+<h3>Other Reports for this Employee</h3>
+<% if @user.mnps_reports.exists? %>
+	<% @user.mnps_reports.each do |report| %>
+		<%= link_to report.billdate.strftime("%B %e, %Y"), mnps_report_path(report, format: 'pdf') %>
+	<% end %>
+<% end %>
+<div class="one load">
+	<div class="two load">
+		<div class="three load"></div>
+	</div>
+</div>
+<style type="text/css">
+	.three {
+		width: 20px;
+		height: 20px;
+		background-color: #45ef96;
+		-webkit-animation:spin 8s ease-in-out infinite;
+        -moz-animation:spin 8s ease-in-out infinite;
+    	animation:spin 8s ease-in-out infinite;
+	}
+	.two {
+		width: 40px;
+		height: 40px;
+		background-color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		-webkit-animation:spin 4s ease-in-out infinite;
+        -moz-animation:spin 4s ease-in-out infinite;
+    	animation:spin 4s ease-in-out infinite;
+	}
+	@-moz-keyframes back { 100% { -moz-transform: rotate(-180deg); } }
+@-webkit-keyframes back { 100% { -webkit-transform: rotate(-180deg); } }
+@keyframes back { 100% { -webkit-transform: rotate(-180deg); transform:rotate(-180deg); } }
+	.one {
+		width: 60px;
+		height: 60px;
+		background-color: #45ef96;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		-webkit-animation:spin 2s ease-in-out infinite;
+        -moz-animation:spin 2s ease-in-out infinite;
+    	animation:spin 2s ease-in-out infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(180deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(180deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(180deg); transform:rotate(180deg); } }
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.load').hide();
+		$('.submit').click(function() {
+			$('body > :not(.load)').hide(); 
+			$('.load').show();
+		});
+	});
+</script>

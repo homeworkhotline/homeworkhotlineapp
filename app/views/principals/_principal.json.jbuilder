@@ -1,0 +1,2 @@
+json.extract! principal, :id, :ccontactfirst, :ccontactlast, :ccontacttitle, :schoolsystem, :mailaddress, :csz, :phonenumb, :email, :textcontactfirst, :textcontactlast, :textcontactemail, :meetone, :meettwo, :completedbyfirst, :completedbylast, :completedbytitle, :schooltype, :peds, :census, :ptgs, :sonicpartner, :titlei, :appalachain, :districtnumb, :created_at, :updated_at
+json.url principal_url(principal, format: :json)

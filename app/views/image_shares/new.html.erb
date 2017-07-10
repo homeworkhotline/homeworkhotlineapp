@@ -1,0 +1,125 @@
+<div class="parent">
+<%= form_for(@image_share) do |f| %>
+  <% if @image_share.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image_share.errors.count, "error") %> prohibited this @image_share from being saved:</h2>
+
+      <ul>
+      <% @image_share.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="field">
+<%= f.text_field :codename, class: "input", required: true, maxlength: 6, placeholder: "Codename" %>
+<p class="error">Codename not recognized. Please check spelling.</p>
+</div>
+<div class="field upload">
+Upload image:
+<%= f.file_field :image, required: true, id: "uploader", onchange:"return ValidateFileUpload()" %><br><br>
+<p class="error2">Please only upload an image!</p>
+</div><br>
+<%= f.submit "Next", class: "button" %>
+<% end %>
+</div>
+<script type="text/javascript">
+$('.upload').hide();
+$('.button').attr('disabled','disabled');
+$('.error').hide();
+$('.error2').hide();
+$('.input').change(function() {
+	var value = $('.input').val().toUpperCase();
+        if ((<% Student.all.each do |student| %>value == "<%= student.codename %>" <% unless student.id + 1 > Student.last.id %>|| <% end %><% end %>) && value != ""){
+        	if (<% CallLog.where(duration: nil).each do |log|%>value == "<%= log.codename %>"<% unless log.id + 1 > CallLog.where(duration: nil).last.id %>|| <% end %><% end %>){
+          $('.input').css("border", "none");}
+          $('.error').hide();
+          $('.upload').slideDown();
+        }
+        else {
+          $('.input').css("border", "#ff4d4d 2px solid");
+          $('.button').attr('disabled','disabled');
+          $('.error').show();
+        }
+      });
+		function ValidateFileUpload() {
+        var fuData = document.getElementById('uploader');
+        var FileUploadPath = fuData.value;
+        var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+		if (Extension == "gif" || Extension == "png" || Extension == "bmp" || Extension == "jpeg" || Extension == "jpg") {
+			$('.button').removeAttr('disabled');
+			$('.error2').hide();
+		}
+		else {
+			$('.button').attr('disabled','disabled');
+			$('.error2').show();
+            }
+        }
+</script>
+<style type="text/css">
+	    	  .input {
+    border: none;
+    background-color:#f2f2f2;
+    color:#333;
+    width: 279px;
+    height: 45px;
+    margin-bottom: 15px;
+    border-left: #f2f2f2 solid 3px;
+    border-right: #f2f2f2 solid 3px;
+    font-size: 22px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    padding-left: 12px;
+    letter-spacing: .5px;
+    transition: all 220ms ease-in-out
+  }
+  .input:active {
+    border:auto;
+  }
+  .parent {
+    width: 300px;
+    margin-left: -150px;
+    left: 50%;
+    position: relative;
+    top: 30px;
+  }
+  input[disabled="disabled"] {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+input[disabled="disabled"]:hover {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+  .button {
+  width: 150px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  padding: 10px 0;
+  letter-spacing: 4px;
+  color: #fff;
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: -75px;
+  left: 50%;
+  transition: all 150ms ease-in-out;
+  margin-bottom:50px;
+  }
+  .button:hover{ 
+    background-color:#5CDA89;
+  }
+      .error, .error2 {
+      color: #ff4d4d;
+      font-size:12px;
+      margin: 0;
+      margin-left: 10px;
+      position: relative;
+      bottom: 15px;
+    }
+</style>

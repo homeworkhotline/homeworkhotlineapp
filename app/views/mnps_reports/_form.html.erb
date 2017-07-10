@@ -1,0 +1,27 @@
+<%= form_for(mnps_report) do |f| %>
+  <% if mnps_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mnps_report.errors.count, "error") %> prohibited this mnps_report from being saved:</h2>
+
+      <ul>
+      <% mnps_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :hours %>
+    <%= f.number_field :hours %>
+  </div>
+
+  <div class="field">
+    <%= f.label :billdate %>
+    <%= f.date_select :billdate %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

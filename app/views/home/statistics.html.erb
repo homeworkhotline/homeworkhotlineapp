@@ -1,0 +1,30 @@
+<h2>Last 28 Days<br><br>(<%= 29.days.ago.strftime('%B %d, %Y') %> - <%= 1.day.ago.strftime('%B %d, %Y') %>)</h2>
+<%= @sessions.count %>
+<% if (@sessions.size - @prevsessions.size) < 0 %>
+v
+<%else %>
+^
+<% end %>
+<%= (@sessions.size - @prevsessions.size).abs %><br>
+<%= line_chart CallLog.group_by_day(:created_at, format: "%B %d, %Y", range: 28.days.ago..Time.now).count, discrete: true, id: "sessions" %>
+<%= @hourstutored %>
+<% if (@hourstutored - @prevtutored) < 0 %>
+v
+<%else %>
+^
+<% end %>
+<%= (@hourstutored - @prevtutored).abs %><br>
+<%= @students %>
+<% if (@students - @prevstudents) < 0 %>
+v
+<%else %>
+^
+<% end %>
+<%= (@students - @prevstudents).abs %><br>
+<script type="text/javascript">
+	var chart = Chartkick.charts["sessions"]
+	chart.getChartObject()
+	    var options = {
+        scaleShowLabels : false
+    };
+</script>

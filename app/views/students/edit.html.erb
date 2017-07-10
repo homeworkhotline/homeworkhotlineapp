@@ -1,0 +1,203 @@
+<% content_for :page, "New Student Registration" %>
+<% content_for :title, "New Student Registration" %>
+<%= form_for(@student) do |f| %>
+<h2>STUDENT INFORMATION</h2>
+<div class="field">
+<h3 class="numbertext">Grade</h3>
+<%= f.number_field :grade, class: "number", required: true%>
+</div>
+<div class="field">
+<h3>Home Language</h3>
+<%= f.text_field :homelang, required: true%>
+</div>
+<div class="field">
+<h3>Internet?</h3>
+<%= f.check_box :internet, class: "checkbox"%>
+</div>
+<div class="field">
+<h3>School Name</h3>
+<%= f.select :school_id, options_for_select(@schools.collect { | school | ["#{school.name}" , school.id]}), {prompt: "School..."}, required: true%>
+</div>
+<div style="clear: both;"></div>
+<%= f.submit "Continue", class: "button" %>
+<% end %>
+<style type="text/css">
+input[disabled="disabled"] {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+input[disabled="disabled"]:hover {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+h3{
+	font-weight: 400;
+	font-size: 19px;
+}
+
+.field {
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: 374px;
+	margin-left: -187px;
+	left: 50%;
+	line-height: 0;
+}
+h2 {
+	display: block;
+	width: 240px;
+	text-align: center;
+	position: relative;
+	font-size: 17px;
+	bottom: 23px;
+	background-color: white;
+  letter-spacing: 1px;
+	font-weight: 600;
+}
+	form {
+		border: 2px solid #45ef96;
+		width: 470px;
+		margin-left: -275px;
+		position: relative;
+		left: 50%;
+		padding-bottom: 20px;
+		top: 20px;
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+	select {
+  background: #f2f2f2;
+  width: 200px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 0px;
+  border: none;
+      padding:0 25px 0 10px !important;
+    -webkit-padding-end: 25px !important;
+    -webkit-padding-start: 10px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+  right: 0;
+  background: url("https://d30y9cdsu7xlg0.cloudfront.net/png/10897-200.png") 96% / 10% no-repeat #f2f2f2;
+}
+input {
+  background: #f2f2f2;
+  width: 145px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 0px;
+  border: none;
+  position: absolute;
+  right: 0;
+}
+
+  .button {
+  width: 150px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  padding: 10px 0;
+  letter-spacing: 2px;
+  color: #fff;
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: -75px;
+  left: 50%;
+  transition: all 150ms ease-in-out;
+  }
+  .button:hover{ 
+    background-color:#5CDA89;
+  }
+.button {
+	margin-top:75px;
+	height: auto;
+	float: left;
+}
+.checkbox {
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
+	padding: 9px;
+	right: -5px;
+}
+.checkbox:checked {
+	background-color: #45ef96;
+	color: #000;
+}
+.checkbox:checked:after {
+	content: '\2714';
+	font-size: 14px;
+	position: absolute;
+	top: 1px;
+	left: 4px;
+	color: #000;
+}
+.number {
+	width: 55px !important; 
+}
+
+select::-ms-expand { 
+    display: none;
+}
+
+/* target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width:0\0) {
+    select {
+        background:none\9;
+        padding: 5px\9;
+    } 
+}
+input[type="text"], input[type="number"] {
+	border-left: #f2f2f2 solid 5px !important;
+}
+textarea:focus, input[type="text"]:focus, input[type="number"]:focus{
+    outline: none;
+    border-left: #45ef96 solid 5px;
+    padding-left: 10px;
+}
+</style>
+<!--<script type="text/javascript">
+	$(document).ready(function(){
+      $('.button').attr('disabled','disabled');
+      $('input[type=text]').change(function() {
+      	var number = $('input[type=number]').val();
+      var input = $('input[type=text]').val();
+        if (input == null || input == ""){
+          $('input[type=text').css("border", "#ff4d4d 2px solid");
+        }
+        else {
+          $('input[type=text').css("border", "none");
+        }
+              if ((input != null || input != "") && (number != null || number != "" || number < 12 || number > 0)) {
+      	$('.button').removeAttr('disabled');
+      }
+      else {
+      	$('.button').attr('disabled','disabled');
+      }
+        });
+      $('input[type=number]').change(function() {
+      	var number = $('input[type=number]').val();
+      var input = $('input[type=text]').val();
+        if (number == null || number == "" || number > 12 || number < 0){
+          $('input[type=number]').css("border", "#ff4d4d 2px solid");
+        }
+        else {
+          $('input[type=number]').css("border", "none");
+        }
+              if (input != null || input != "" && number != null || number != "" || number < 12 || number > 0) {
+      	$('.button').removeAttr('disabled');
+      }
+      else {
+      	$('.button').attr('disabled','disabled');
+      }
+        });
+      });
+</script>-->

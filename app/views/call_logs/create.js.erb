@@ -1,0 +1,9 @@
+<% @student = @students.where(id: @call_log.student_id).first %>
+<% if @student.school_id.nil? %>
+$('.firstform').hide().after('<%= j render 'studentform', student: @student %>')
+<% else %>
+$('.firstform').hide().after('<%= j render 'logform', call_log: @call_log %>')
+<% end %>
+<% unless @call_log.save %>
+alert('Incorrect Format!');
+<% end %>

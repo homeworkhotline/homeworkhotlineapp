@@ -1,0 +1,170 @@
+<%= form_for(principal) do |f| %>
+  <% if principal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(principal.errors.count, "error") %> prohibited this principal from being saved:</h2>
+
+      <ul>
+      <% principal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="parent">
+  <h3 class="begintext">For school year 2017-18, please complete this checklist and attach your school list by <strong>June 30, 2017</strong>.<br><br> <i>(We use this contract to send the correct amount of flashcards, rulers, and other Hotline materials to your school district.)</i></h3><br><br>
+  <div class="field", style="display: inline-block; margin-top: 0px;">
+    <h4>Contact for County</h4>
+    <%= f.text_field :ccontactfirst, :style => "width: 70px; margin-right: 10px;"  %>
+    <%= f.text_field :ccontactlast %>
+    </div>
+
+    <div class="field", style="display: inline-block; margin-left: 50px;">
+    <h4>Title</h4>
+    <%= f.text_field :ccontacttitle %>
+  </div>
+
+  <div class="field">
+    <b>School System</b> <%= f.text_field :schoolsystem, style: "margin-left:20px;" %>
+  </div>
+
+  <div class="field", style="display: inline-block;">
+    <h4>Mailing Address</h4>
+    <%= f.text_field :mailaddress %>
+  </div>
+
+  <div class="field", style="display: inline-block; margin-left: 50px;">
+    <h4>City, State, Zip</h4>
+    <%= f.text_field :city, style: "width: 100px;" %>
+  </div>
+
+  <div class="field", style="display: inline-block;">
+    <%= f.text_field :csz, style: "width: 40px;" %>
+  </div>
+
+  <div class="field", style="display: inline-block;">
+    <%= f.number_field :zip, style: "width: 60px;" %>
+  </div>
+
+  <div class="field">
+    <h4>Phone Number</h4><h5><i>(Please include Area Code)</i></h5>
+    <%= f.text_field :phonenumb %>
+  </div>
+
+  <div class="field">
+    <h4>Email</h4>
+    <%= f.email_field :email %>
+  </div><br><br>
+
+  <h3 class="begintext">Please attach a list of any newly adopted books (with title, publisher and edition).<br><br>
+
+(We may need your assistance in locating single copies of adopted textbooks in teacher edition. Hotline can contact publishers on your behalf to request free copies.  School systems are not expected to purchase books for Hotline use.)<br><br>
+
+This can be a pdf., word doc., or an excel spreadsheet.
+
+</h3>
+
+  <div class="field">
+  <h4>Newly Adopted Books</h4>
+    <%= f.file_field :nab %>
+  </div>
+
+  <div class="field", style="display: inline-block;">
+    <h4>Textbook Contact</h4>
+    <%= f.text_field :textcontactfirst, :style => "width: 70px; margin-right: 10px;" %>
+    <%= f.text_field :textcontactlast %>
+  </div>
+
+  <div class="field", style="display: inline-block; margin-left: 50px;">
+    <h4>Email</h4>
+    <%= f.text_field :textcontactemail %>
+  </div><br><br><br>
+
+  <h3 class="begintext"> Hotline likes to make a presentation at a principals’ meeting at least once every three years. Our presentation is under six minutes and explains how we work, what is available, and information we can provide to schools.  We like meetings anytime between <strong>Aug. 14</strong> and <strong>Nov. 30</strong>.  We would also welcome an opportunity to appear at a school board meeting.</h3>
+
+  <div class="field">
+    <h4>Meeting One Option:</h4>
+    <%= f.datetime_select :meetone, { ampm: true, order: [:month, :day, :year],minute_step: 15 }  %>
+  </div>
+
+  <div class="field", style="margin-bottom: 60px;">
+    <h4>Meeting Two Option:</h4>
+    <%= f.datetime_select :meettwo, { ampm: true, order: [:month, :day, :year],minute_step: 15 } %>
+  </div>
+
+  <h3 class="begintext">As a partnership agency, school districts agree to:<br><br>
+
+• Ask principals to place stickers inside textbooks or in student planners.<br>
+
+• Link Homework Hotline to the school district’s website or school websites.<br>
+
+• Provide information on schools and textbooks in a timely way.<br>
+
+• Write a thank-you letter to the donor who is underwriting your district (Hotline will let you know who).</h3>
+
+<div class="field", style="display: inline-block; margin-top: 0px;">
+    <h4>This contract was completed by</h4>
+    <%= f.text_field :completedbyfirst, :style => "width: 70px; margin-right: 10px;"  %>
+    <%= f.text_field :completedbylast %>
+    </div>
+
+    <div class="field", style="display: inline-block; margin-left: 50px;">
+    <h4>Title</h4>
+    <%= f.text_field :completedbytitle %>
+  </div><br><br><br><br>
+  <h3 class="begintext">Please <strong>download</strong>, <strong>fully complete</strong>, and <strong>upload</strong> the following list of all schools in your county.<br><br>
+
+  <a href="https://static1.squarespace.com/static/56291570e4b001a55c404980/t/573a0419c6fc087573303f36/1463419929571/School+Names+List+2016-17.pdf">SCHOOL NAMES LIST</a><br><br>
+
+This is used to send flashcards to your third grade students, to send reports to your principals and district, send incentives, etc.<br><br>
+
+You may also upload the file as a pdf, word doc, or excel spreadsheet with the required information as listed on the 'school names document' above.</h3>
+
+  <div class="field">
+  <h4>Upload School Names List</h4>
+    <%= f.file_field :snl %>
+  </div>
+
+    <%= f.submit "Submit", class:"button" %>
+  </div>
+<% end %>
+<style type="text/css">
+  .field {
+    margin-top: 40px;
+  }
+  .parent {
+    width: 600px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    margin-left: -300px;
+  }
+.button {
+  margin-top: 15px;
+  width: 180px;
+  text-align: center;
+  font-size: 16px;
+  font-family: Lato;
+  font-weight: 600;
+  padding: 12px 0;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  color: #fff;
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 150ms ease-in-out;
+}
+.button:hover{
+  background: #4cb371;
+}
+a {
+  color:#00b7ff !important;
+}
+a:hover {
+  background-color: white !important;
+  color: #0089bf !important;
+}
+</style>

@@ -1,0 +1,19 @@
+<%= form_for(student,:html=>{:class=>"studentform",:multipart => true,:remote=>true}) do |f| %>
+<div class="field">
+<h4>School Name:</h4>
+<%= f.select :school_id, options_for_select(@schools.collect { | school | ["#{school.name}" , school.id] })%>
+</div>
+<div class="field">
+<h4>Home Language:</h4>
+<%= f.text_field :homelang%>
+</div>
+<div class="field">
+<h4>Grade:</h4>
+<%= f.number_field :grade%>
+</div>
+<div class="field">
+Internet?
+<%= f.check_box :internet%>
+</div>
+<%= f.submit "Continue" %>
+<% end %>

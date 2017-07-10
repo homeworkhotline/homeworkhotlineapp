@@ -1,0 +1,53 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ccontactfirst: MyString
+  ccontactlast: MyString
+  ccontacttitle: MyString
+  schoolsystem: MyString
+  mailaddress: MyString
+  csz: MyString
+  phonenumb: MyString
+  email: 
+  textcontactfirst: MyString
+  textcontactlast: MyString
+  textcontactemail: 
+  meetone: 2017-04-04
+  meettwo: 2017-04-04
+  completedbyfirst: MyString
+  completedbylast: MyString
+  completedbytitle: MyString
+  schooltype: MyString
+  peds: 1
+  census: 1
+  ptgs: 1
+  sonicpartner: false
+  titlei: false
+  appalachain: false
+  districtnumb: 1
+
+two:
+  ccontactfirst: MyString
+  ccontactlast: MyString
+  ccontacttitle: MyString
+  schoolsystem: MyString
+  mailaddress: MyString
+  csz: MyString
+  phonenumb: MyString
+  email: 
+  textcontactfirst: MyString
+  textcontactlast: MyString
+  textcontactemail: 
+  meetone: 2017-04-04
+  meettwo: 2017-04-04
+  completedbyfirst: MyString
+  completedbylast: MyString
+  completedbytitle: MyString
+  schooltype: MyString
+  peds: 1
+  census: 1
+  ptgs: 1
+  sonicpartner: false
+  titlei: false
+  appalachain: false
+  districtnumb: 1

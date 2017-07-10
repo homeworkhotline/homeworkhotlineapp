@@ -1,0 +1,61 @@
+<%= form_for(call_log) do |f| %>
+
+  <div class="field">
+    <%= f.label :math %>
+    <%= f.check_box :math %>
+  </div>
+
+  <div class="field">
+    <%= f.label :worksheet %>
+    <%= f.check_box :worksheet %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stoodle %>
+    <%= f.check_box :stoodle %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image_share %>
+    <%= f.check_box :image_share %>
+  </div>
+
+  <div class="field">
+    <%= f.label :textbook %> - dropdown
+    <%= f.text_field :textbook %>
+  </div>
+
+  <div class="field">
+    <%= f.label :page %>
+    <%= f.number_field :page %>
+  </div>
+
+  <div class="field">
+    <%= f.label :chaptitle %>
+    <%= f.text_field :chaptitle %>
+  </div>
+
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :skill %> - dropdown
+    <%= f.text_field :skill %>
+  </div>
+
+  <div class="field">
+    <%= f.label :startknow %> - dropdown
+    <%= f.number_field :startknow %>
+  </div>
+
+  <div class="field">
+    <%= f.label :endknow %> - dropdown
+    <%= f.number_field :endknow %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Click when call is finished"%>
+  </div>
+<% end %>
