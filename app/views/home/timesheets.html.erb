@@ -1,6 +1,0 @@
-<% @users.each do |user| %>
-	<h1><%= user.firstname%>:</h1>
-	<% user.time_clocks.each do |time| %>
-		<%= link_to "#{time.date.strftime("%B %-d, %Y")}", edit_time_clock_path(time.id)%> <% if time.billed? %><b>PAID</b><% end %><br>
-	<% end %>
-<% end %>

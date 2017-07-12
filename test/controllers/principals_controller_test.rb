@@ -17,7 +17,11 @@ class PrincipalsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create principal" do
     assert_difference('Principal.count') do
+
       post principals_url, params: { principal: { appalachain: @principal.appalachain, ccontactfirst: @principal.ccontactfirst, ccontactlast: @principal.ccontactlast, ccontacttitle: @principal.ccontacttitle, census: @principal.census, completedbyfirst: @principal.completedbyfirst, completedbylast: @principal.completedbylast, completedbytitle: @principal.completedbytitle, csz: @principal.csz, districtnumb: @principal.districtnumb, email: @principal.email, mailaddress: @principal.mailaddress, meetone: @principal.meetone, meettwo: @principal.meettwo, peds: @principal.peds, phonenumb: @principal.phonenumb, ptgs: @principal.ptgs, schoolsystem: @principal.schoolsystem, schooltype: @principal.schooltype, sonicpartner: @principal.sonicpartner, textcontactemail: @principal.textcontactemail, textcontactfirst: @principal.textcontactfirst, textcontactlast: @principal.textcontactlast, titlei: @principal.titlei } }
+
+      post principals_url, params: { principal: { appalachain: @principal.appalachain, ccontactfirst: @principal.ccontactfirst, ccontactlast: @principal.ccontactlast, ccontacttitle: @principal.ccontacttitle, census: @principal.census, completedbyfirst: @principal.completedbyfirst, completedbylast: @principal.completedbylast, completedbytitle: @principal.completedbytitle, csz: @principal.csz, districtnumb: @principal.districtnumb, email: @principal.email, mailaddress: @principal.mailaddress, mone: @principal.mone, mtwo: @principal.mtwo, peds: @principal.peds, phonenumb: @principal.phonenumb, ptgs: @principal.ptgs, schoolsystem: @principal.schoolsystem, schooltype: @principal.schooltype, sonicpartner: @principal.sonicpartner, textcontactemail: @principal.textcontactemail, textcontactfirst: @principal.textcontactfirst, textcontactlast: @principal.textcontactlast, titlei: @principal.titlei } }
+
     end
 
     assert_redirected_to principal_url(Principal.last)

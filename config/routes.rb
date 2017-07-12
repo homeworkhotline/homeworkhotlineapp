@@ -13,9 +13,9 @@ resources :user, only: [:show]
   resources :time_clocks
   resources :mnps_reports
   resources :image_shares, only: [:new, :create, :show]
-  get 'home/index'
-  get 'home/timesheets'
-  get 'home/statistics', as: '/statistics'
+  get 'home/devstats'
+  get '/employees', to: 'home#employees', as: 'employees'
+  get '/statistics', to: 'home#statistics', as: 'statistics'
   get '/all_mnps_reports/:id', to: 'mnps_reports#all_reports', as: 'all_mnps_reports'
   get '/principals/dlnab/:id', to: 'principals#dlnab', as: 'dlnab'
   get '/principals/dlsnl/:id', to: 'principals#dlsnl', as: 'dlsnl'
@@ -24,6 +24,6 @@ resources :user, only: [:show]
 
 
 
-  root 'home#index'
+  root 'time_clocks#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

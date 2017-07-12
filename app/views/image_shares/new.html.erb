@@ -31,7 +31,11 @@ $('.error2').hide();
 $('.input').change(function() {
 	var value = $('.input').val().toUpperCase();
         if ((<% Student.all.each do |student| %>value == "<%= student.codename %>" <% unless student.id + 1 > Student.last.id %>|| <% end %><% end %>) && value != ""){
+
         	if (<% CallLog.where(duration: nil).each do |log|%>value == "<%= log.codename %>"<% unless log.id + 1 > CallLog.where(duration: nil).last.id %>|| <% end %><% end %>){
+
+        	if (<% CallLog.where(duration: nil).each do |log|%>value == "<%= log.codename %>"<% unless log.id + 1 > CallLog.where(duration: nil).last.id %>|| <% end %><% end %> && value != ""){
+
           $('.input').css("border", "none");}
           $('.error').hide();
           $('.upload').slideDown();

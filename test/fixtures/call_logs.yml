@@ -17,6 +17,10 @@ one:
   startknow: 1
   endknow: 1
 
+
+  codename: test
+
+
 two:
   entered_by: MyString
   date: 2017-06-12
@@ -33,3 +37,7 @@ two:
   skill: MyString
   startknow: 1
   endknow: 1
+
+
+  codename: tt1234
+

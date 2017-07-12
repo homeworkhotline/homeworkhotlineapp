@@ -1,0 +1,73 @@
+<% content_for :title, "Home" %>
+<% content_for :page, "Dev Stats" %>
+<div class="allparent">
+<div class="leftparent">
+<div class="pieparent stats">
+<h3>DATABASE</h3>
+<h1 class="total"><%= User.all.size + TimeClock.all.size + Student.all.size + Search.all.size + School.all.size + Principal.all.size + MnpsReport.all.size + CallLog.all.size %></h1>
+<hr width="70%">
+<%= pie_chart [["Users",User.all.size],["Timesheets",TimeClock.all.size],["Students",Student.all.size],["Schools",School.all.size],["Searches",Search.all.size],["Principals",Principal.all.size],["Reports",MnpsReport.all.size],["Call Logs",@calllogs.count], ["Images", ImageShare.all.size]], legend: false, colors: ["#b9e3f8","#8bd1f4","#5dbeef", "#2eacea", "#1592d1", "#1072a2", "#0b5174", "#073045", "#021017"], width: "200px", id: "piedb" %>
+</div>
+</div>
+<div class="centerparent">
+<div class="onlineparent stats">
+<h3>USERS ONLINE</h3>
+<h1 class="online"><%= @onlineusers %></h1>
+</div>
+<div class="activeparent stats">
+  <h3>ACTIVE CALLS</h3>
+  <h1 class="activelogs"><%= @activecalls %></h1>
+</div>
+</div>
+</div>
+<style type="text/css">
+h1, h3 {
+  margin-left: 50px;
+}
+.stats {
+  border: 2px solid #65ef96;
+  width: 300px;
+  text-align: left;
+  margin-top: 40px;
+}
+.leftparent,.centerparent {
+  width: 300px;
+  display: inline-block;
+}
+.leftparent {
+  float: left;
+}
+h3 {
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 45px;
+  font-weight: 400;
+}
+.total {
+  margin-bottom: 60px;
+}
+
+.centerparent > div {
+  height: 206px;
+}
+.centerparent > div > h1{
+  font-size: 75px;
+  text-align: center;
+  margin-top: 65px;
+  margin-left: 0px;
+}
+.pieparent > #piedb {
+  position: relative;
+  margin-left: -100px;
+  left: 50%;
+}
+.centerparent {
+  margin-left: -150px;
+  left: 50%;
+  position: absolute;
+}
+</style>

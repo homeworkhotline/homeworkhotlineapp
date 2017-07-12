@@ -13,11 +13,12 @@
 
   <body>
   <% if current_user %>
+  <div class="container">
   <div class="infoparent">
   <%= image_tag "hhcircle.png", style: "width:60px; display:inline-block" %><h1 style="display: inline-block; margin-left: 10px; position: relative;bottom: 18px;font-size: 30px;"><%= yield(:page) %></h1>
 <div class="name"><%= current_user.firstname.capitalize%> <%= current_user.lastname.capitalize%></div>
 <div class="title"><%= current_user.role.to_s.tr('_', ' ').upcase %></div>
-</div><br><br>
+</div></div><br><br>
 <% end %>
     <%= yield %>
     <style type="text/css">
@@ -48,7 +49,8 @@ p,h1,h2,h3,h4,h5,h6,li,a {
   margin-left: -80px;
 }
 .infoparent {
-  margin-left: 45px;
+  width: 934px;
+  margin-bottom: 10px;
 }
 html {
     position: relative;
@@ -57,10 +59,9 @@ html {
 body {
     margin-bottom: 48px;
     margin-left: 80px; /* bottom = footer height */
-    margin-left: 80px;
 }
 .name {
-  width: 260px;
+  width: 300px;
   background:#65ef96;
   font-size: 30px;
   font-family: Lato;
@@ -72,6 +73,11 @@ body {
   position: relative;
   top: 20px;
 }
+    .container {
+      display: flex;
+      justify-content: center;
+      margin-right: 80px;
+    }
 .title {
   width: 180px;
   background:#f2f2f2;
@@ -84,10 +90,41 @@ body {
   position: relative;
   top: 20px;
 }
+  .adminbar {
+      width: 934px;
+      height: 40px;
+      z-index: 100;
+      background: #f2f2f2;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .adminbar > a {
+      float: left;
+    display: block;
+    color: #333 !important;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 10px 0px;
+    width: 233.5px;
+    text-decoration: none;
+    font-size: 20px;
+    border-top: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    }
+    .adminbar > a:hover {
+      border-bottom:3px solid #65ef96;
+      color: #333 !important;
+    }
+    .adminbar > a.active {
+      border-bottom: 3px solid #65ef96;
+    }
   .three {
     width: 20px;
     height: 20px;
-    background-color: #45ef96;
+    background-color: #65ef96;
     -webkit-animation:spin 8s ease-in-out infinite;
         -moz-animation:spin 8s ease-in-out infinite;
       animation:spin 8s ease-in-out infinite;
@@ -109,7 +146,7 @@ body {
   .one {
     width: 60px;
     height: 60px;
-    background-color: #45ef96;
+    background-color: #65ef96;
     display: flex;
     justify-content: center;
     align-items: center;

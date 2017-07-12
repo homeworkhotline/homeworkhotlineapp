@@ -30,9 +30,13 @@
       <% end %>
       <%= link_to "Download School Names List", dlsnl_url(@principal.id) %><br><br>
       <%= link_to "Download Newly Adopted Books List", dlnab_url(@principal.id) %><br><br>
+
       <% unless @principal.nice_content.nil? %>
       <%= link_to "Download Letter of Support", dlnice_url(@principal.id) %>
       <% end %>
+
+      <%= link_to "Download Letter of Support", dlnice_url(@principal.id) %>
+
     </h3>
   </body>
 </html>
