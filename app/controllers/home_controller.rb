@@ -31,9 +31,9 @@ class HomeController < ApplicationController
   def devstats
     @users = User.all
     unless current_user.specialist?
-      redirect_to time_clocks_path
+      redirect_to root_path
     end
-    if current_user.speacialist?
+    if current_user.specialist?
       @calllogs = CallLog.all
     @activecalls = @calllogs.where(endtime: nil).count
     @onlineusers = @users.joins(:time_clocks).where(time_clocks: {clock_out: nil}).count
