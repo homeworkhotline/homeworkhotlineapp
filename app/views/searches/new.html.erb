@@ -17,16 +17,19 @@
 <% end %>
 <div class="adminbar">
     <%= link_to "TIMESHEET", root_path %>
-    <%= link_to "EMPLOYEES", employees_path, :class => "active" %>
-    <%= link_to "SEARCH", new_search_path %>
+    <%= link_to "EMPLOYEES", employees_path %>
+    <%= link_to "SEARCH", new_search_path, :class => "active" %>
     <%= link_to "ANALYTICS", statistics_path %>
   </div>
   </div>
+  <div class="container">
   <%= form_for(@search, :html=>{:class=>"searchform",:multipart => true,:remote=>true}) do |f| %>
   <div class="field">
-    <h2>Search:</h2>
     <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Principal Reports", "Principal"], ["Time Sheet Reports", "MnpsReport"]]) %>
-    <%= f.submit "Begin Search" %>
+    </div>
+    </div>
+    <div class="container">
+    <%= f.submit "BEGIN SEARCH", class: "submit" %>
     </div>
 <% end %>
 <style type="text/css">
@@ -118,4 +121,48 @@
   .button:hover{ 
     background-color:#5CDA89;
   }
+  	.submit {
+  width: 200px;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  padding: 10px 0;
+  letter-spacing: 2px;
+  color: #073045;
+  background-color: #fff;
+  border: #073045 3px solid;
+  text-shadow: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 150ms ease-in-out;
+  margin-top: 30px;
+	}
+	.submit:hover {
+		background-color: #073045;
+		color: white;
+		font-weight: 500;
+	}
+	  select {
+  width: 450px;
+  font-size: 18px;
+  height: 40px;
+  border-radius: 0px;
+  border: .5px solid #f2f2f2;
+    background: white;
+    box-shadow: 0px 1px 20px rgba(178, 178, 178, .2);
+      padding:0 25px 0 10px !important;
+    -webkit-padding-end: 25px !important;
+    -webkit-padding-start: 10px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("https://d30y9cdsu7xlg0.cloudfront.net/png/10897-200.png") 96% / 7% no-repeat;
+}
+select:active {
+	outline: none;
+}
+.field {
+	margin: 20px 0;
+}
 </style>
