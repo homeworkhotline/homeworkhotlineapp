@@ -10,7 +10,9 @@ class Users::SessionsController < Devise::SessionsController
    def create
      super
      if current_user.time_clocks.exists?(clock_out: nil)
-      TimeClock.delete(clock_out: nil)
+      TimeClock.where(clock_out: nil).each do |time|
+        time.delete
+      end
     end
    end
 

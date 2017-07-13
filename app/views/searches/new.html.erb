@@ -22,8 +22,8 @@
     <%= link_to "ANALYTICS", statistics_path %>
   </div>
   </div>
-  <div class="container">
   <%= form_for(@search, :html=>{:class=>"searchform",:multipart => true,:remote=>true}) do |f| %>
+  <div class="container">
   <div class="field">
     <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Principal Reports", "Principal"], ["Time Sheet Reports", "MnpsReport"]]) %>
     </div>

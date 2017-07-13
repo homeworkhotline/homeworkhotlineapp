@@ -1,5 +1,6 @@
 <% content_for :title, "Home" %>
 <% content_for :page, "Dev Stats" %>
+<%= link_to "GENERATE SCHOOLS", genschools_path, class:"button", method: :post %>
 <div class="allparent">
 <div class="leftparent">
 <div class="pieparent stats">
@@ -70,4 +71,25 @@ h1 {
   left: 50%;
   position: absolute;
 }
+  .button {
+  width: 250px;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  padding: 15px 0;
+  letter-spacing: 2px;
+  color: #073045 !important;
+  background-color: #fff;
+  border: #073045 3px solid;
+  text-shadow: none;
+  cursor: pointer;
+  float: right;
+  transition: all 150ms ease-in-out;
+  }
+  .button:hover {
+    background-color: #073045 !important;
+    color: white !important;
+    font-weight: 500;
+  }
 </style>
