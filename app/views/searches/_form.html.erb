@@ -3,9 +3,9 @@
   <div class="field">
     <%= f.select :select, options_for_select([["Percent of Economically Disabled Students", "peds"], ["Census", "census"], ["Projected Number of Third Grader Students", "ptgs"], ["Sonic Partner", "sonicpartner"], ["Title 1", "titlei"], ["Appalachain", "appalreg"]]) %>
     <%= f.text_field :search %>
-    <div class="container">
-    <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
+    <div class="container", style="margin-right: 0;">
+    <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
 <% end %>
  <% elsif @search.model == "Principal" %>
@@ -13,7 +13,7 @@
   <div class="field">
     <%= f.select :select, options_for_select([["Percent of Economically Disabled Students", "peds"], ["Census", "census"], ["Projected Number of Third Grader Students", "ptgs"], ["Sonic Partner", "sonicpartner"], ["Title 1", "titlei"], ["Appalachain", "appalreg"]]) %>
     <%= f.text_field :search %>
-    <div class="container">
+    <div class="container", style="margin-right: 0;">
     <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
     </div>
@@ -25,7 +25,7 @@
     <%= f.select :select, options_for_select([["Grade", "grade"], ["School", "school_id"]]), {}, { :class => 'select' } %>
     <%= f.select :search, options_for_select(@schools.collect { | school | ["#{school.name}", school.id] }), {:prompt => 'School...'}, { :class => 'schools' }%>
     <%= f.text_field :search, class: "text" %>
-    <div class="container">
+    <div class="container", style="margin-right: 0;">
     <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
     </div>
@@ -53,7 +53,7 @@
   <div class="field">
     <%= f.select :select, options_for_select([["Employee Role", "role"]]) %>
     <%= f.select :search, options_for_select([["Metro Teacher", 2], ["Hotline Teacher", 1], ["Volunteer", 0]]) %>
-    <div class="container">
+    <div class="container", style="margin-right: 0;">
     <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
     </div>

@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20170626180833) do
-
-ActiveRecord::Schema.define(version: 20170628154959) do
-
+ActiveRecord::Schema.define(version: 20170712235958) do
 
   create_table "call_logs", force: :cascade do |t|
     t.string   "entered_by"
@@ -157,8 +153,6 @@ ActiveRecord::Schema.define(version: 20170628154959) do
   end
 
   create_table "time_clocks", force: :cascade do |t|
-    t.time     "clock_in"
-    t.time     "clock_out"
     t.date     "date"
     t.decimal  "hours",          precision: 8, scale: 3
     t.integer  "user_id"
@@ -167,6 +161,8 @@ ActiveRecord::Schema.define(version: 20170628154959) do
     t.boolean  "billed"
     t.string   "activity"
     t.integer  "mnps_report_id"
+    t.datetime "clock_in"
+    t.datetime "clock_out"
     t.index ["user_id"], name: "index_time_clocks_on_user_id"
   end
 

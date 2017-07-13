@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 	before_action :authenticate_user!
 
   def statistics
-    unless current_user.administrator? || current_user.developer?
+    unless current_user.administrator? || current_user.specialist?
       redirect_to root_path
     end
     @prevtutored = 0

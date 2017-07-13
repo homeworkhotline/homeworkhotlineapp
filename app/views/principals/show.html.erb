@@ -1,5 +1,5 @@
 <body>
-<% if current_user.developer? %>
+<% if current_user.specialist? %>
 	<%= button_to "Send email", sendmail_path(@principal) %>
 <% end %>
 <h1>Thank you for filling out the form! Dr. Archie will reach out to your contact to let them know a date and time for a meeting.</h1>

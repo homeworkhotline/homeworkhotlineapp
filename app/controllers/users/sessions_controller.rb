@@ -9,17 +9,20 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
    def create
      super
+     if current_user.time_clocks.exists?(clock_out: nil)
+      TimeClock.delete(clock_out: nil)
+    end
    end
 
   # DELETE /resource/sign_out
    def destroy
     @time_clock = current_user.time_clocks.last
     if current_user.mnps_teacher?
-      @time_clock.clock_out = round_time(Time.now - 5.hours).strftime("%k:%M:%S")
+      @time_clock.clock_out = round_time(DateTime.now).strftime("%k:%M:%S")
       @time_clock.clock_out = @time_clock.clock_out
       @time_clock.save!
     else
-      @time_clock.clock_out = (Time.now - 5.hours).strftime("%k:%M:%S")
+      @time_clock.clock_out = (DateTime.now).strftime("%k:%M:%S")
       @time_clock.clock_out = @time_clock.clock_out
       @time_clock.save!
     end

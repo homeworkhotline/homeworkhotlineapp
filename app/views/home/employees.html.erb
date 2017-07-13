@@ -24,11 +24,15 @@
   </div>
   <div class="container">
   <div class="formparent">
+  <% if TimeClock.all.where.not(clock_out: nil, billed: true).present? %>
   <%= form_for(@report) do |f| %>
   <%= f.hidden_field :var, :value => 1 %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <%= f.hidden_field :billdate, :value => Date.today %>
     <%= f.submit "CONDUCT PAYROLL", class: "submit" %>
+    <% end %>
+    <% else %>
+    <div class="submit fakesub">CONDUCT PAYROLL</div>
     <% end %>
     </div>
     </div>
@@ -209,3 +213,10 @@ tr:nth-of-type(even) {
     background-color:#5CDA89;
   }
     </style>
+    <script type="text/javascript">
+  $(document).ready(function() {
+    $('.fakesub').click(function() {
+      alert('No users are ready for payroll.')
+    });
+  });
+</script>

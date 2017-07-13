@@ -9,7 +9,7 @@ class TimeClocksController < ApplicationController
     @time_clock = TimeClock.new
     @test_clock = current_user.time_clocks.last
     unless @test_clock && @test_clock.clock_out.nil?
-      @time = TimeClock.new(clock_in: Time.now, user_id: current_user.id, date: Date.today.to_s)
+      @time = TimeClock.new(clock_in: DateTime.now, user_id: current_user.id, date: Date.today.to_s)
       @time.save!
     end
     @total_hours = 0
@@ -57,11 +57,11 @@ class TimeClocksController < ApplicationController
     @time_clock.save!
 
     if current_user.mnps_teacher?
-      @time_clock.clock_in = round_time(Time.now - 5.hours).strftime("%k:%M:%S")
+      @time_clock.clock_in = round_time(DateTime.now).strftime("%k:%M:%S")
       @time_clock.clock_in = @time_clock.clock_in
       @time_clock.save!
     else
-      @time_clock.clock_in = (Time.now - 5.hours).strftime("%k:%M:%S")
+      @time_clock.clock_in = (DateTime.now).strftime("%k:%M:%S")
       @time_clock.clock_in = @time_clock.clock_in
       @time_clock.save!
     end
@@ -86,20 +86,19 @@ class TimeClocksController < ApplicationController
   def update
     @time_clock = TimeClock.find(params[:id])
     if current_user.hotline_teacher? || current_user.mnps_teacher?
-      @time_clock.clock_out = round_time(Time.now).strftime("%k:%M:%S")
+      @time_clock.clock_out = round_time(DateTime.now).strftime("%k:%M:%S")
       @time_clock.save!
     else
-      @time_clock.clock_out = Time.now.strftime("%k:%M:%S")
+      @time_clock.clock_out = DateTime.now.strftime("%k:%M:%S")
       @time_clock.save!
     end
-    @time_clock.hours = time_diff(@time_clock.clock_in, @time_clock.clock_out)
-    @time.save!
-    @time_clock.billed = 0
-    @time_clock.save!
     respond_to do |format|
       if @time_clock.update(time_clock_params)
-        format.html { redirect_to root_path }
+        format.html { redirect_to @time_clock.user }
         format.json { render :show, status: :ok, location: @time_clock }
+        @time_clock.hours = time_diff(@time_clock.clock_in, @time_clock.clock_out)
+    @time_clock.billed = 0
+    @time_clock.save!
       else
         format.html { render :edit }
         format.json { render json: @time_clock.errors, status: :unprocessable_entity }

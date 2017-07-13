@@ -1,6 +1,6 @@
 class DevstatsChannel < ApplicationCable::Channel
   def subscribed
-  	@developer = User.all.where(role: :developer).first
+  	@developer = User.all.where(role: :specialist).first
      stream_from "online_channel"
      stream_from "call_log_channel"
      stream_from "active_log_channel"
