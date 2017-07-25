@@ -1,30 +1,60 @@
-<h2>Last 28 Days<br><br>(<%= 29.days.ago.strftime('%B %d, %Y') %> - <%= 1.day.ago.strftime('%B %d, %Y') %>)</h2>
-<%= @sessions.count %>
-<% if (@sessions.size - @prevsessions.size) < 0 %>
-v
-<%else %>
-^
-<% end %>
-<%= (@sessions.size - @prevsessions.size).abs %><br>
-<%= line_chart CallLog.group_by_day(:created_at, format: "%B %d, %Y", range: 28.days.ago..Time.now).count, discrete: true, id: "sessions" %>
-<%= @hourstutored %>
-<% if (@hourstutored - @prevtutored) < 0 %>
-v
-<%else %>
-^
-<% end %>
-<%= (@hourstutored - @prevtutored).abs %><br>
-<%= @students %>
-<% if (@students - @prevstudents) < 0 %>
-v
-<%else %>
-^
-<% end %>
-<%= (@students - @prevstudents).abs %><br>
-<script type="text/javascript">
-	var chart = Chartkick.charts["sessions"]
-	chart.getChartObject()
-	    var options = {
-        scaleShowLabels : false
-    };
-</script>
+  <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Calls'],
+          <% (28.days.ago.to_date..2.days.ago.to_date).each do |date| %>
+          ['<%= date.strftime('%B %d, %Y') %>', <%= rand(100..300) %>],
+          <% end %>
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= rand(100..300) %>]
+        ]);
+
+        var options = {
+          smoothLine: 'true',
+          legend: 'none',
+          lineWidth: 5,
+          backgroundColor: { fill:'transparent' },
+          series: {
+            0: {color: '#ffffff'}
+          },
+          vAxis: {
+            gridlines: {
+              color: 'transparent'
+            },
+            textPosition: 'none'
+          },
+          hAxis: { gridlines: {
+              color: 'transparent'
+            },
+            textPosition: 'none' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('sessions'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+  <div class="sessions">
+  <h3>SESSIONS</h3>
+  <h1><%= @sessions.count %></h1>
+    <div id="sessions" style=" height: 200px"></div>
+    </div>
+    <style type="text/css">
+      body {
+        background-color: #00121b;
+      }
+      .sessions {
+        background-color: #1bc98e;
+        width: 400px;
+        padding: 0;
+      }
+    </style>
+  </body>
+</html>

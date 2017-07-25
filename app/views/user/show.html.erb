@@ -1,4 +1,217 @@
-<h2><%= @user.firstname %> has worked <%= @total_hours %> hours, and has <%= @unpaid_hours %> unpaid hours.</h2>
-<% @user.time_clocks.order('date ASC').each do |time| %>
-	<%= link_to "#{time.date}", edit_time_clock_path(time) %><br>
+<%= content_for :page, "#{@user.firstname}'s Info" %>
+<%= content_for :title, "Employee Info" %>
+<div class="container">
+<div class="buttonright">
+<div class="buttonparent">
+<%= link_to destroy_user_session_path, method: :delete do %>
+<div class="button">LOG OUT</div>
 <% end %>
+<%= link_to new_call_log_path do %>
+<div class="parent">
+<div class="arrow">TAKE A CALL</div>
+<div class="right arrow"></div>
+<div class="righter arrow"></div>
+</div>
+</div>
+</div>
+<% end %>
+<% if current_user.administrator? %>
+<div class="adminbar">
+    <%= link_to "TIMESHEET", root_path %>
+    <%= link_to "EMPLOYEES", employees_path, :class => "active" %>
+    <%= link_to "SEARCH", new_search_path %>
+    <%= link_to "ANALYTICS", statistics_path %>
+  </div>
+  </div>
+  <% end %>
+  <div class="container desc">
+  <table>
+  <thead>
+    <tr>
+      <th style="width: 350px;">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.time_clocks.order('date DESC').each do |time| %>
+      <tr>
+        <td><%= link_to(edit_time_clock_path(time)) do%><div class="clickbg"><%= time.date.strftime('%B %d, %Y') %></div><% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+  <div class="container asc">
+  <table>
+  <thead>
+    <tr>
+      <th style="width: 350px;">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.time_clocks.order('date ASC').each do |time| %>
+      <tr>
+        <td><%= link_to(edit_time_clock_path(time)) do%><div class="clickbg"><%= time.date.strftime('%B %d, %Y') %></div><% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div class="info">
+  <h3>TOTAL HOURS</h3>
+  <h1><%= @total_hours.round(2) %></h1>
+  <hr style="width: 50%; border:none; height: 3px; background-color: #65ef96;">
+  <h3>UNPAID HOURS</h3>
+  <h1><%= @unpaid_hours.round(2) %></h1>
+</div>
+  <style type="text/css">
+  .info {
+  width: 230px;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  left: 50px;
+  display: inline-block;
+}
+.info > h1 {
+  font-size: 55px;
+}
+.info > h3 {
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 25px
+}
+  	.arrow{
+    height:40px;
+    color:#000;
+    position:absolute;
+    width:160px;
+    font-weight: 400;
+    font-size: 18px !important;
+    letter-spacing: 1px !important;
+    text-align:center;
+    line-height:40px;
+    background:#f2f2f2;
+    margin-left: 25px; 
+}
+.arrow:after{
+    content:"";
+    position: absolute;
+    left: 100%;
+    top:0px;
+    width:0px;
+    height:0px;
+    border-top:20px solid transparent;
+    border-left:15px solid #f2f2f2;
+    border-bottom:20px solid transparent;
+}
+.right {
+  margin-left:30px;
+  z-index: -10;
+  background-color:white;
+  transition: all 150ms ease-in-out;
+}
+.right:after {
+  border-left-color: white;
+}
+.arrow:hover ~ .right  {
+  margin-left: 40px;
+}
+.arrow:hover ~ .righter  {
+  margin-left: 45px;
+}
+.righter {
+  margin-left:35px;
+  z-index: -11;
+  background-color:#65ef96;
+  transition: all 150ms ease-in-out;
+}
+.righter:hover {
+  left: 50px;
+}
+.righter:after {
+  border-left-color: #65ef96
+}
+    .buttonparent {
+      width: 370px;
+      display: inline-flex;
+      position: relative;
+      margin-right: 16px;
+    }
+        .buttonright {
+      width: 934px;
+      height: 40px;
+      left: 50%;
+      margin-left: -467px;
+      position: absolute;
+      display: flex;
+      justify-content: flex-end;
+      top:130px; 
+    }
+      .button {
+  background-color: #65ef96;
+  text-shadow: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+    text-decoration: none;
+  font-family: 'Lato', sans-serif;
+      height:40px;
+    color:#fff;
+    width:160px;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align:center;
+    line-height:40px;
+  }
+  .button:hover{ 
+    background-color:#5CDA89;
+  }
+  	th {
+  background-color: #65ef96;
+  color: #000;
+  width: 180px;
+  padding: 7px 0;
+  font-weight: 300;
+  font-family: Lato;
+  font-weight: 400;
+  font-size: 19px;
+  text-align: left;
+  padding-left: 10px;
+}
+tr:nth-of-type(odd) {
+      background-color:#f2f2f2;
+    }
+tr:nth-of-type(even) {
+      background-color:#e6e6e6;
+    }
+    td {
+    	font-size: 16px;
+      font-weight: 500;
+      font-family: Lato;
+      border: none !important;
+      padding:0;
+
+    }
+    .clickbg {
+    	color: #333;
+    	transition: all 150ms ease-in-out;
+    	padding: 7px 15px;
+    }
+    .clickbg:hover {
+    	color: #fff;
+    	background-color: #073045;
+    }
+    table {
+    	margin-top: 20px;
+    	margin-bottom: 100px;
+      empty-cells: show;
+    }
+  </style>
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$('.asc').hide();
+ 	});
+ </script>

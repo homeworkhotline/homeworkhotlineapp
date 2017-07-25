@@ -116,6 +116,10 @@ table, th, td {
 <% @results.each do |result| %>
   <%= link_to "#{result.codename}","/#{@search.model.downcase}s/#{result.id}" %><br>
   <% end %>
+  <% elsif @search.model == "CallLog" %>
+<% @results.each do |result| %>
+  <%= link_to "#{result.codename}","/#{@search.model.downcase}s/#{result.id}" %><br>
+  <% end %>
 <% else %>
 <% @results.each do |result| %>
   <%= link_to "#{result.schoolsystem}","/#{@search.model.downcase}s/#{result.id}" %><br>

@@ -10,11 +10,11 @@
     <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
 <% end %>
- <% elsif @search.model == "Principal" %>
+ <% elsif @search.model == "CallLog" %>
   <%= form_for(@search) do |f| %>
   <div class="container">
   <div class="field">
-    <%= f.select :select, options_for_select([["Percent of Economically Disabled Students", "peds"], ["Census", "census"], ["Projected Number of Third Grader Students", "ptgs"], ["Sonic Partner", "sonicpartner"], ["Title 1", "titlei"], ["Appalachain", "appalreg"]]) %>
+    <%= f.select :select, options_for_select([["Prize Sent", "prize_sent"], ["Prize Given", "prize_given"], ["Language Spoken", "lang"], ["Understand at End", "placehold"], ["Subject", "skills"], ["Textbook Used", "textbool"]]) %>
     <%= f.text_field :search %>
     </div>
     </div>

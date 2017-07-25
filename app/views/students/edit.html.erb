@@ -18,6 +18,10 @@
 <h3>School Name</h3>
 <%= f.select :school_id, options_for_select(@schools.order(:name).collect { | school | ["#{school.name}" , school.id]}), {prompt: "School..."}, required: true%>
 </div>
+<div class="field">
+<h3>Referred By</h3>
+<%= f.text_field :reffered_by%>
+</div>
 <div style="clear: both;"></div>
 <%= f.submit "Continue", class: "button" %>
 <% end %>
@@ -117,7 +121,7 @@ input {
     background-color:#5CDA89;
   }
 .button {
-	margin-top:75px;
+  margin-top: 45px;
 	height: auto;
 	float: left;
 }

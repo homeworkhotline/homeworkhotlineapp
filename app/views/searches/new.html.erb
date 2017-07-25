@@ -15,6 +15,7 @@
 </div>
 </div>
 <% end %>
+<% if current_user.administrator? %>
 <div class="adminbar">
     <%= link_to "TIMESHEET", root_path %>
     <%= link_to "EMPLOYEES", employees_path %>
@@ -22,10 +23,11 @@
     <%= link_to "ANALYTICS", statistics_path %>
   </div>
   </div>
+  <% end %>
   <%= form_for(@search, :html=>{:class=>"searchform",:multipart => true,:remote=>true}) do |f| %>
   <div class="container">
   <div class="field">
-    <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Principal Reports", "Principal"], ["Time Sheet Reports", "MnpsReport"]]) %>
+    <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Time Sheet Reports", "MnpsReport"], ["Call Logs", "CallLog"]]) %>
     </div>
     </div>
     <div class="container">

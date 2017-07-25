@@ -22,7 +22,7 @@ class CallLogsController < ApplicationController
     @call_log = CallLog.find(params[:id])
     @students = Student.all
     @schools = School.all
-    @student = @students.where(id: @call_log.student_id).first
+    @student = @call_log.student
   end
 
   # POST /call_logs
@@ -75,7 +75,7 @@ class CallLogsController < ApplicationController
       end
     end
       @call_log.endtime = Time.now.strftime("%k:%M:%S")
-      @call_log.duration = time_diff(@call_log.starttime, @call_log.endtime)
+      @call_log.duration = 20
       @call_log.save!
   ActionCable.server.broadcast "active_log_channel",{activelogs: CallLog.all.where(endtime: nil).count}
   end
@@ -99,6 +99,6 @@ class CallLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def call_log_params
-      params.require(:call_log).permit(:entered_by, :date, :starttime, :endtime, :user_id, :math, :worksheet, :stoodle, :image_share, :textbook, :page, :chaptitle, :notes, :skill, :startknow, :endknow, :codename, :student_id, :parent, :lang, :duration)
+      params.require(:call_log).permit(:entered_by, :date, :starttime, :endtime, :user_id, :math, :worksheet, :stoodle, :image_share, :textbook, :page, :chaptitle, :notes, :skill, :startknow, :endknow, :codename, :student_id, :parent, :lang, :duration, :teacher_name, :prize_sent, :prize_type, :name, :skillsassessed, :referral_prize, :prize_given)
     end
 end

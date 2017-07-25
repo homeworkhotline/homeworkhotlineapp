@@ -9,7 +9,7 @@ class TimeClocksController < ApplicationController
     @time_clock = TimeClock.new
     @test_clock = current_user.time_clocks.last
     unless @test_clock && @test_clock.clock_out.nil?
-      @time = TimeClock.new(clock_in: DateTime.now, user_id: current_user.id, date: Date.today.to_s)
+      @time = TimeClock.new(clock_in: DateTime.now.strftime("%k:%M:%S"), user_id: current_user.id, date: Date.today.to_s)
       @time.save!
     end
     @total_hours = 0
@@ -125,6 +125,6 @@ class TimeClocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_clock_params
-      params.require(:time_clock).permit(:clock_in, :clock_out, :date, :hours, :billed, :mnps_report_id)
+      params.require(:time_clock).permit(:clock_in, :clock_out, :date, :hours, :billed, :mnps_report_id, :clockinhour, :clockinmin, :clockinmeridiem, :clockouthour, :clockoutmin, :clockoutmeridiem)
     end
 end

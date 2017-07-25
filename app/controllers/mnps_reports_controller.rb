@@ -26,7 +26,7 @@ class MnpsReportsController < ApplicationController
 
   def all_reports
     @mnps_report = MnpsReport.find(params[:id])
-    @mnps_reports = MnpsReport.where(var: @mnps_report.id, billdate: @mnps_report.billdate).joins(:user).where.not(users: {role: :admin})
+    @mnps_reports = MnpsReport.where(var: @mnps_report.id, billdate: @mnps_report.billdate)
     @thisyear = Date.today.strftime("%Y").to_i
     @totalhours = 0
     render :layout => 'report'
@@ -48,18 +48,10 @@ class MnpsReportsController < ApplicationController
     @mnps_report = MnpsReport.new(mnps_report_params)
     @user = @mnps_report.user
     respond_to do |format|
-      if @mnps_report.save && !@user.administrator?
-        @user.time_clocks.where(billed: false).each do |time|
-          time.mnps_report_id = @mnps_report.id
-          time.billed = true
-          time.save!
-        end
-        format.html { redirect_to mnps_report_path(@mnps_report, format: 'pdf'), notice: 'Mnps report was successfully created.' }
-        format.json { render :show, status: :created, location: @mnps_report }
-      elsif @mnps_report.save && @user.administrator?
+      if @mnps_report.save
           @users = User.all
           @unpaid_hours = 0
-          @users.each do |user|
+          @users.joins(:time_clocks).where.not(time_clocks: {clock_out: nil}).each do |user|
       user.time_clocks.where(billed: false).each do |time|
         @unpaid_hours += time.hours
       end
@@ -69,7 +61,7 @@ class MnpsReportsController < ApplicationController
           time.billed = true
           time.save!
         end
-    end
+      end
         format.html { redirect_to all_mnps_reports_path(@mnps_report, format: 'pdf'), notice: 'Mnps report was successfully created.' }
         format.json { render :show, status: :created, location: @mnps_report }
       else

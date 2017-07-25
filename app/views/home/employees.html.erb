@@ -15,6 +15,7 @@
 </div>
 </div>
 <% end %>
+<% if current_user.administrator? %>
 <div class="adminbar">
     <%= link_to "TIMESHEET", root_path %>
     <%= link_to "EMPLOYEES", employees_path, :class => "active" %>
@@ -22,6 +23,7 @@
     <%= link_to "ANALYTICS", statistics_path %>
   </div>
   </div>
+  <% end %>
   <div class="container">
   <div class="formparent">
   <% if TimeClock.all.where.not(clock_out: nil, billed: true).present? %>

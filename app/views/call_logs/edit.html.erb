@@ -4,10 +4,6 @@
 <%= form_for(@call_log) do |f| %>
   <div class="calldetails">
   <h2>CALL DETAILS</h2>
-  <div class="field">
-  <h3>Times dialed</h3>
-    <%= f.number_field :timesdialed %>
-  </div>
 
   <div class="field">
   <h3>Language spoken</h3>
@@ -58,14 +54,14 @@
 
   <div class="field" style="margin-top: 30px; margin-bottom: 30px;">
   <h3>Skill assessed</h3>
-    <%= f.text_area :notes %>
+    <%= f.text_area :skillassessed %>
   </div>
 </div>
 <div class="session">
 <h2>SESSION EVALUATION</h2>
 <h3>Understanding at the start of session:</h3>
   <div class="field">
-    <%= f.range_field :startknow, :min=>-5, :max=>0, class: "start", value: 0 %>
+    <%= f.range_field :startknow, :min=>0, :max=>5, class: "start", value: 0 %>
 </div>
 <h4 class="understand beginning">Homework check with no problems.</h4>
 <h3>Understanding at the end of session:</h3>
@@ -77,7 +73,39 @@
   <h4 class="understand" style="display: inline-block;">Post-test given.</h4>
     <%= f.check_box :posttest, style: "display:inline-block", class: "postcheck" %>
   </div>
+    <div class="field" style="margin-top: 30px; margin-bottom: 30px;">
+  <h3>Notes</h3>
+    <%= f.text_area :notes %>
+  </div>
 </div>
+    <div class="prize">
+  <h2>PRIZE</h2>
+  <% if @student.call_logs.exists?(prize_given: true) %>
+  <div class="prizegiven"><span class="icon-alert"></span> This student has recieved a prize already.</div>
+  <% end %>
+  <% if @students.where(reffered_by: @student.codename).size > @student.call_logs.where(prize_given: true, referral_prize:true).size%>
+  <div class="referralprize"><span class="icon-alert"></span> This student has referred another student.</div>
+  <%= f.hidden_field :referral_prize, value: true %>
+  <% end %>
+  <div class="field">
+  <h3>Students name</h3>
+    <%= f.text_field :name, placeholder: "e.g. Tim S" %>
+  </div>
+
+  <div class="field">
+  <h3>Teacher name</h3>
+    <%= f.text_field :teacher_name, placeholder: "e.g. Mrs. Sockel" %>
+  </div>
+
+  <div class="field">
+  <h3>Prize given?</h3>
+    <%= f.check_box :prize_given %>
+  </div>
+    <div class="field">
+  <h3>Prize type</h3>
+    <%= f.select :prize_type, options_for_select(School.all.order(:name).collect { | school | ["#{school.name}" , school.id]}), {prompt: "School..."} %>
+  </div>
+  </div>
   <div class="actions">
     <%= f.submit "FINISH CALL", class: "button"%>
   </div>
@@ -223,6 +251,7 @@ input[type=text], input[type=number], input[type=checkbox], textarea{
   border: none;
   position: absolute;
   right: 0;
+  padding-left: 15px;
 }
   select {
   background: #f2f2f2;
@@ -296,7 +325,7 @@ h3{
   left: 50%;
   margin-left: -100px;
 }
-.calldetails, .material, .session {
+.calldetails, .material, .session, .prize {
 
       border: 2px solid #65ef96;
     width: 470px;
@@ -313,6 +342,9 @@ h3{
 }
 .session > h2 {
   width: 230px;
+}
+.prize > h2{
+  width: 80px;
 }
 .checks {
   margin-top: -10px !important;
@@ -381,6 +413,26 @@ h3{
     .banner > a:hover {
       background-color: transparent;
     }
+    .prizegiven, .referralprize {
+      width: 460px;
+      margin-left: -230px;
+      left: 50%;
+      position: relative;
+      padding: 5px 0;
+    font-size: 17px;
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    background-color: #65ef96;
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .icon-alert {
+      font-size: 35px;
+      margin-right: 5px;
+    }
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -392,16 +444,16 @@ if (document.getElementById('textbool').checked){
 });
   $('.start').on("change", function(){
     var start = $(this).val();
-    if(start == -5){
+    if(start == 5){
       $('.beginning').text('Obvious learning disabilities/special needs.');
-    }else if(start == -4){
-      $('.beginning').text('Behind grade level OR gets help in language other than english.');
-    }else if(start == -3){
+    }else if(start == 4){
+      $('.beginning').text('Behind grade level.');
+    }else if(start == 3){
       $('.beginning').text('Deos not understand concept.');
-    }else if(start == -2){
-      $('.beginning').text('Many questions but partially understands the concept.');
-    }else if(start == -1){
-      $('.beginning').text('One or two questions but understands basic concept.');
+    }else if(start == 2){
+      $('.beginning').text('Partially understands the concept.');
+    }else if(start == 1){
+      $('.beginning').text('Understands basic concept.');
     }else if(start == 0){
       $('.beginning').text('Homework check with no problems.');
     }

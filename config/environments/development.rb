@@ -39,6 +39,8 @@ config.action_mailer.smtp_settings = {
 config.action_mailer.default_url_options = { host: 'localhost:3000' }
 config.action_mailer.perform_deliveries = true
 
+config.assets.enabled = true
+config.assets.paths << Rails.root.join('/app/assets/fonts')
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
 

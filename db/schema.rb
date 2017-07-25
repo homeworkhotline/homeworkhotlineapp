@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712235958) do
+ActiveRecord::Schema.define(version: 20170719185413) do
 
   create_table "call_logs", force: :cascade do |t|
     t.string   "entered_by"
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20170712235958) do
     t.integer  "startknow"
     t.integer  "endknow"
     t.string   "codename"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "student_id"
     t.boolean  "parent"
     t.string   "lang"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20170712235958) do
     t.integer  "timesdialed"
     t.boolean  "posttest"
     t.boolean  "textbool"
+    t.text     "skillassessed"
+    t.boolean  "prize_given"
+    t.string   "name"
+    t.string   "prize_type"
+    t.boolean  "referral_prize"
+    t.boolean  "prize_sent"
+    t.string   "teacher_name"
   end
 
   create_table "image_shares", force: :cascade do |t|
@@ -148,8 +155,9 @@ ActiveRecord::Schema.define(version: 20170712235958) do
     t.string   "homelang"
     t.boolean  "internet"
     t.integer  "school_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "reffered_by"
   end
 
   create_table "time_clocks", force: :cascade do |t|

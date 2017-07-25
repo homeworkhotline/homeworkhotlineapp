@@ -38,7 +38,7 @@
     <%= f.submit "Submit" %>
   </div>
 <% end %>
-  <% end %>
+  <% else %>
   <div class="timeparent">
   <% if current_user.administrator? %>
   <div class="adminbar">
@@ -230,3 +230,4 @@ tr:nth-of-type(even) {
       top:130px; 
     }
 </style>
+<% end %>
