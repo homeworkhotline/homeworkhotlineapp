@@ -4,7 +4,7 @@
 <h2>STUDENT INFORMATION</h2>
 <div class="field">
 <h3 class="numbertext">Grade</h3>
-<%= f.number_field :grade, class: "number", required: true%>
+<%= f.number_field :grade, class: "number", required: true, min: 0, max: 13%>
 </div>
 <div class="field">
 <h3>Home Language</h3>

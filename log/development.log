@@ -51034,3 +51034,315 @@ ImageshareChannel stopped streaming from image_channel
 DevstatsChannel stopped streaming from online_channel
 DevstatsChannel stopped streaming from call_log_channel
 DevstatsChannel stopped streaming from active_log_channel
+Started GET "/" for ::1 at 2017-07-25 12:35:05 -0500
+Processing by TimeClocksController#index as HTML
+  [1m[36mUser Load (223.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (0.8ms)[0m  [1m[34mSELECT  "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? ORDER BY "time_clocks"."id" DESC LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (0.2ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTimeClock Load (0.5ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? AND "time_clocks"."billed" = ?[0m  [["user_id", 2], ["billed", false]]
+  Rendering time_clocks/index.html.erb within layouts/application
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  Rendered time_clocks/index.html.erb within layouts/application (41.5ms)
+Completed 200 OK in 1649ms (Views: 1114.2ms | ActiveRecord: 226.9ms)
+
+
+Started GET "/cable" for ::1 at 2017-07-25 12:35:08 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 12:35:08 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+DevstatsChannel is streaming from online_channel
+DevstatsChannel is streaming from active_log_channel
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is transmitting the subscription confirmation
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from call_log_channel
+Started GET "/call_logs/new" for ::1 at 2017-07-25 12:35:29 -0500
+Processing by CallLogsController#new as HTML
+  Rendering call_logs/new.html.erb within layouts/application
+  [1m[36mUser Load (73.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered call_logs/new.html.erb within layouts/application (250.0ms)
+Completed 200 OK in 561ms (Views: 425.9ms | ActiveRecord: 76.4ms)
+
+
+Started POST "/call_logs" for ::1 at 2017-07-25 12:36:29 -0500
+Processing by CallLogsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5k6Z7a+/C9bipdGSKGFHxL67LALM1Bsz3k2+jGcMMc01C00XzG29TZ48KVMEXZNOhLWiBUwndU9UALjyEg3tUg==", "call_log"=>{"codename"=>"HH5453", "user_id"=>"2", "date"=>"2017-07-25"}}
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."codename" = ? LIMIT ?[0m  [["codename", "HH5453"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (68.7ms)[0m  [1m[32mINSERT INTO "students" ("codename", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["codename", "HH5453"], ["created_at", 2017-07-25 17:36:29 UTC], ["updated_at", 2017-07-25 17:36:29 UTC]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."codename" = ?[0m  [["codename", "HH5453"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (28.2ms)[0m  [1m[32mINSERT INTO "call_logs" ("date", "user_id", "codename", "created_at", "updated_at", "student_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["date", Tue, 25 Jul 2017], ["user_id", 2], ["codename", "HH5453"], ["created_at", 2017-07-25 17:36:29 UTC], ["updated_at", 2017-07-25 17:36:29 UTC], ["student_id", 5]]
+  [1m[35m (29.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."codename" = ? ORDER BY "students"."id" DESC LIMIT ?[0m  [["codename", "HH5453"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "call_logs" SET "entered_by" = ?, "updated_at" = ? WHERE "call_logs"."id" = ?[0m  [["entered_by", "Admin Account"], ["updated_at", 2017-07-25 17:36:29 UTC], ["id", 15]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/students/5/edit
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "call_logs" SET "starttime" = ?, "updated_at" = ? WHERE "call_logs"."id" = ?[0m  [["starttime", 2000-01-01 12:36:29 UTC], ["updated_at", 2017-07-25 17:36:29 UTC], ["id", 15]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs" WHERE "call_logs"."endtime" IS NULL[0m
+[ActionCable] Broadcasting to active_log_channel: {:activelogs=>6}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs"[0m
+  [1m[35m (14.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (15.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "mnps_reports"[0m
+DevstatsChannel transmitting {"activelogs"=>6} (via streamed from active_log_channel)
+  [1m[35m (16.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "schools"[0m
+  [1m[35m (39.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "principals"[0m
+  [1m[35m (10.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "searches"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[35m (20.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "time_clocks"[0m
+  [1m[35m (18.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "image_shares"[0m
+[ActionCable] Broadcasting to call_log_channel: {:calllogs=>7, :user=>6, :reports=>27, :schools=>89, :principals=>9, :searches=>50, :students=>4, :timesheets=>8, :images=>0}
+Completed 302 Found in 806ms (ActiveRecord: 272.5ms)
+
+
+DevstatsChannel transmitting {"calllogs"=>7, "user"=>6, "reports"=>27, "schools"=>89, "principals"=>9, "searches"=>50, "students"=>4, "timesheets"=>8, "images"=>0} (via streamed from call_log_channel)
+Started GET "/students/5/edit" for ::1 at 2017-07-25 12:36:30 -0500
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  [1m[36mSchool Load (1.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools" ORDER BY "schools"."name" ASC[0m
+  Rendered students/edit.html.erb within layouts/application (101.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Completed 200 OK in 217ms (Views: 184.5ms | ActiveRecord: 2.8ms)
+
+
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 12:36:30 -0500
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
+ImageshareChannel stopped streaming from image_channel
+Started GET "/cable" for ::1 at 2017-07-25 12:36:30 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 12:36:30 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+DevstatsChannel is streaming from call_log_channel
+ImageshareChannel is transmitting the subscription confirmation
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from online_channel
+DevstatsChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from active_log_channel
+Started PATCH "/students/5" for ::1 at 2017-07-25 12:37:04 -0500
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SEUCG2UqnI5h7/2CPdVav4g9DrAb32dUwZgCq7/KPkpXb4bLupAz54WOBlrbuXulxx01aozqO6B8JQjtQ14/cA==", "student"=>{"grade"=>"13", "homelang"=>"hrthrh", "internet"=>"0", "school_id"=>"6", "reffered_by"=>"HH1234"}, "commit"=>"Continue", "id"=>"5"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCallLog Load (0.6ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."student_id" = ? ORDER BY "call_logs"."id" DESC LIMIT ?[0m  [["student_id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "students" SET "grade" = ?, "internet" = ?, "homelang" = ?, "school_id" = ?, "reffered_by" = ?, "updated_at" = ? WHERE "students"."id" = ?[0m  [["grade", 13], ["internet", false], ["homelang", "hrthrh"], ["school_id", 6], ["reffered_by", "HH1234"], ["updated_at", 2017-07-25 17:37:04 UTC], ["id", 5]]
+  [1m[35m (11.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/call_logs/15/edit
+Completed 302 Found in 20ms (ActiveRecord: 12.7ms)
+
+
+Started GET "/call_logs/15/edit" for ::1 at 2017-07-25 12:37:04 -0500
+Processing by CallLogsController#edit as HTML
+  Parameters: {"id"=>"15"}
+  [1m[36mCallLog Load (0.4ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering call_logs/edit.html.erb within layouts/application
+  [1m[36mCallLog Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "call_logs" WHERE "call_logs"."student_id" = ? AND "call_logs"."prize_given" = ? LIMIT ?[0m  [["student_id", 5], ["prize_given", true], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."reffered_by" = ?[0m  [["reffered_by", "HH5453"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs" WHERE "call_logs"."student_id" = ? AND "call_logs"."prize_given" = ? AND "call_logs"."referral_prize" = ?[0m  [["student_id", 5], ["prize_given", true], ["referral_prize", true]]
+  [1m[36mSchool Load (1.2ms)[0m  [1m[34mSELECT "schools".* FROM "schools" ORDER BY "schools"."name" ASC[0m
+  Rendered call_logs/edit.html.erb within layouts/application (75.5ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Completed 200 OK in 219ms (Views: 183.9ms | ActiveRecord: 3.3ms)
+
+
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:04 -0500
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
+ImageshareChannel stopped streaming from image_channel
+Started GET "/cable" for ::1 at 2017-07-25 12:37:04 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:04 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+DevstatsChannel is streaming from active_log_channel
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from online_channel
+DevstatsChannel is transmitting the subscription confirmation
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from call_log_channel
+Started GET "/" for ::1 at 2017-07-25 12:37:09 -0500
+Processing by TimeClocksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (26.1ms)[0m  [1m[34mSELECT  "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? ORDER BY "time_clocks"."id" DESC LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (0.5ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTimeClock Load (0.3ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? AND "time_clocks"."billed" = ?[0m  [["user_id", 2], ["billed", false]]
+  Rendering time_clocks/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  Rendered time_clocks/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 212ms (Views: 114.8ms | ActiveRecord: 28.2ms)
+
+
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:09 -0500
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
+ImageshareChannel stopped streaming from image_channel
+Started GET "/cable" for ::1 at 2017-07-25 12:37:09 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:09 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+DevstatsChannel is streaming from call_log_channel
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from active_log_channel
+DevstatsChannel is transmitting the subscription confirmation
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from online_channel
+Started GET "/call_logs/new" for ::1 at 2017-07-25 12:37:10 -0500
+Processing by CallLogsController#new as HTML
+  Rendering call_logs/new.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "students".* FROM "students" ORDER BY "students"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered call_logs/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 112ms (Views: 106.5ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/call_logs" for ::1 at 2017-07-25 12:37:13 -0500
+Processing by CallLogsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"77qbUakhq5pHWw6jjhMx2weqVpYFXK3swY+TcPLSWik8/0+ryvMdATvC9mKiL+VRPaTYkYWvw5BLwpUOh9OGtg==", "call_log"=>{"codename"=>"HH1234", "user_id"=>"2", "date"=>"2017-07-25"}, "commit"=>"CONTINUE"}
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."codename" = ? LIMIT ?[0m  [["codename", "HH1234"], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."codename" = ?[0m  [["codename", "HH1234"]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "call_logs" ("date", "user_id", "codename", "created_at", "updated_at", "student_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["date", Tue, 25 Jul 2017], ["user_id", 2], ["codename", "HH1234"], ["created_at", 2017-07-25 17:37:13 UTC], ["updated_at", 2017-07-25 17:37:13 UTC], ["student_id", 1]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."codename" = ? ORDER BY "students"."id" DESC LIMIT ?[0m  [["codename", "HH1234"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "call_logs" SET "entered_by" = ?, "updated_at" = ? WHERE "call_logs"."id" = ?[0m  [["entered_by", "Admin Account"], ["updated_at", 2017-07-25 17:37:13 UTC], ["id", 16]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/call_logs/16/edit
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "call_logs" SET "starttime" = ?, "updated_at" = ? WHERE "call_logs"."id" = ?[0m  [["starttime", 2000-01-01 12:37:13 UTC], ["updated_at", 2017-07-25 17:37:13 UTC], ["id", 16]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs" WHERE "call_logs"."endtime" IS NULL[0m
+[ActionCable] Broadcasting to active_log_channel: {:activelogs=>7}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs"[0m
+DevstatsChannel transmitting {"activelogs"=>7} (via streamed from active_log_channel)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "mnps_reports"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "schools"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "principals"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "searches"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "time_clocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "image_shares"[0m
+[ActionCable] Broadcasting to call_log_channel: {:calllogs=>8, :user=>6, :reports=>27, :schools=>89, :principals=>9, :searches=>50, :students=>4, :timesheets=>8, :images=>0}
+Completed 302 Found in 37ms (ActiveRecord: 8.7ms)
+
+
+DevstatsChannel transmitting {"calllogs"=>8, "user"=>6, "reports"=>27, "schools"=>89, "principals"=>9, "searches"=>50, "students"=>4, "timesheets"=>8, "images"=>0} (via streamed from call_log_channel)
+Started GET "/call_logs/16/edit" for ::1 at 2017-07-25 12:37:13 -0500
+Processing by CallLogsController#edit as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mCallLog Load (0.3ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering call_logs/edit.html.erb within layouts/application
+  [1m[36mCallLog Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "call_logs" WHERE "call_logs"."student_id" = ? AND "call_logs"."prize_given" = ? LIMIT ?[0m  [["student_id", 1], ["prize_given", true], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."reffered_by" = ?[0m  [["reffered_by", "HH1234"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs" WHERE "call_logs"."student_id" = ? AND "call_logs"."prize_given" = ? AND "call_logs"."referral_prize" = ?[0m  [["student_id", 1], ["prize_given", true], ["referral_prize", true]]
+  [1m[36mSchool Load (0.9ms)[0m  [1m[34mSELECT "schools".* FROM "schools" ORDER BY "schools"."name" ASC[0m
+  Rendered call_logs/edit.html.erb within layouts/application (20.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Completed 200 OK in 113ms (Views: 107.0ms | ActiveRecord: 2.1ms)
+
+
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:13 -0500
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
+ImageshareChannel stopped streaming from image_channel
+Started GET "/cable" for ::1 at 2017-07-25 12:37:13 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:13 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from active_log_channel
+DevstatsChannel is streaming from call_log_channel
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from online_channel
+Started GET "/call_logs/16/edit" for ::1 at 2017-07-25 12:37:49 -0500
+Processing by CallLogsController#edit as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mCallLog Load (0.4ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "call_logs".* FROM "call_logs" WHERE "call_logs"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering call_logs/edit.html.erb within layouts/application
+  [1m[36mCallLog Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "call_logs" WHERE "call_logs"."student_id" = ? AND "call_logs"."prize_given" = ? LIMIT ?[0m  [["student_id", 1], ["prize_given", true], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."reffered_by" = ?[0m  [["reffered_by", "HH1234"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs" WHERE "call_logs"."student_id" = ? AND "call_logs"."prize_given" = ? AND "call_logs"."referral_prize" = ?[0m  [["student_id", 1], ["prize_given", true], ["referral_prize", true]]
+  [1m[36mSchool Load (1.1ms)[0m  [1m[34mSELECT "schools".* FROM "schools" ORDER BY "schools"."name" ASC[0m
+  Rendered call_logs/edit.html.erb within layouts/application (44.5ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Completed 200 OK in 122ms (Views: 115.0ms | ActiveRecord: 2.6ms)
+
+
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:49 -0500
+ImageshareChannel stopped streaming from image_channel
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
+Started GET "/cable" for ::1 at 2017-07-25 12:37:50 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 12:37:50 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from online_channel
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from call_log_channel
+DevstatsChannel is transmitting the subscription confirmation
+DevstatsChannel is streaming from active_log_channel
