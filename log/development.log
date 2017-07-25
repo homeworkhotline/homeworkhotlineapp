@@ -50914,3 +50914,123 @@ ImageshareChannel stopped streaming from image_channel
 DevstatsChannel stopped streaming from online_channel
 DevstatsChannel stopped streaming from call_log_channel
 DevstatsChannel stopped streaming from active_log_channel
+Started GET "/" for ::1 at 2017-07-25 10:25:29 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (18.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TimeClocksController#index as HTML
+  [1m[36mUser Load (24.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (19.7ms)[0m  [1m[34mSELECT  "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? ORDER BY "time_clocks"."id" DESC LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (0.4ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTimeClock Load (0.3ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? AND "time_clocks"."billed" = ?[0m  [["user_id", 2], ["billed", false]]
+  Rendering time_clocks/index.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  Rendered time_clocks/index.html.erb within layouts/application (234.6ms)
+Completed 200 OK in 5870ms (Views: 5081.0ms | ActiveRecord: 48.5ms)
+
+
+Started GET "/cable" for ::1 at 2017-07-25 10:25:37 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 10:25:38 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+DevstatsChannel is streaming from online_channel
+DevstatsChannel is streaming from active_log_channel
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is transmitting the subscription confirmation
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from call_log_channel
+Started GET "/statistics" for ::1 at 2017-07-25 10:25:41 -0500
+Processing by HomeController#statistics as HTML
+  [1m[36mUser Load (29.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCallLog Load (0.7ms)[0m  [1m[34mSELECT "call_logs".* FROM "call_logs" WHERE ("call_logs"."duration" IS NOT NULL) AND (created_at BETWEEN '2017-06-27 00:00:00' AND '2017-07-25 23:59:59.999999')[0m
+DEPRECATION WARNING: Time columns will become time zone aware in Rails 5.1. This
+still causes `String`s to be parsed as if they were in `Time.zone`,
+and `Time`s to be converted to `Time.zone`.
+
+To keep the old behavior, you must add the following to your initializer:
+
+    config.active_record.time_zone_aware_types = [:datetime]
+
+To silence this deprecation warning, add the following:
+
+    config.active_record.time_zone_aware_types = [:datetime, :time]
+ (called from statistics at /Users/Xavier/Desktop/HomeworkHotline/app/controllers/home_controller.rb:13)
+DEPRECATION WARNING: Time columns will become time zone aware in Rails 5.1. This
+still causes `String`s to be parsed as if they were in `Time.zone`,
+and `Time`s to be converted to `Time.zone`.
+
+To keep the old behavior, you must add the following to your initializer:
+
+    config.active_record.time_zone_aware_types = [:datetime]
+
+To silence this deprecation warning, add the following:
+
+    config.active_record.time_zone_aware_types = [:datetime, :time]
+ (called from statistics at /Users/Xavier/Desktop/HomeworkHotline/app/controllers/home_controller.rb:13)
+  [1m[36mCallLog Load (0.2ms)[0m  [1m[34mSELECT "call_logs".* FROM "call_logs" WHERE ("call_logs"."duration" IS NOT NULL) AND (created_at BETWEEN '2017-05-30 00:00:00' AND '2017-06-27 23:59:59.999999')[0m
+  [1m[35m (76.5ms)[0m  [1m[34mSELECT DISTINCT "call_logs"."codename" FROM "call_logs" WHERE ("call_logs"."duration" IS NOT NULL) AND (created_at BETWEEN '2017-06-27 00:00:00' AND '2017-07-25 23:59:59.999999')[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT DISTINCT "call_logs"."codename" FROM "call_logs" WHERE ("call_logs"."duration" IS NOT NULL) AND (created_at BETWEEN '2017-05-30 00:00:00' AND '2017-06-27 23:59:59.999999')[0m
+  Rendering home/statistics.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "call_logs" WHERE ("call_logs"."duration" IS NOT NULL) AND (created_at BETWEEN '2017-06-27 00:00:00' AND '2017-07-25 23:59:59.999999')[0m
+  Rendered home/statistics.html.erb within layouts/application (30.1ms)
+Completed 200 OK in 397ms (Views: 150.9ms | ActiveRecord: 109.2ms)
+
+
+Started GET "/" for ::1 at 2017-07-25 10:36:57 -0500
+Processing by TimeClocksController#index as HTML
+  [1m[36mUser Load (39.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (0.7ms)[0m  [1m[34mSELECT  "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? ORDER BY "time_clocks"."id" DESC LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[36mTimeClock Load (0.3ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTimeClock Load (0.2ms)[0m  [1m[34mSELECT "time_clocks".* FROM "time_clocks" WHERE "time_clocks"."user_id" = ? AND "time_clocks"."billed" = ?[0m  [["user_id", 2], ["billed", false]]
+  Rendering time_clocks/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "time_clocks" WHERE "time_clocks"."user_id" = ?[0m  [["user_id", 2]]
+  Rendered time_clocks/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 858ms (Views: 697.4ms | ActiveRecord: 41.5ms)
+
+
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 10:36:58 -0500
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
+ImageshareChannel stopped streaming from image_channel
+Started GET "/cable" for ::1 at 2017-07-25 10:36:58 -0500
+Started GET "/cable/" [WebSocket] for ::1 at 2017-07-25 10:36:58 -0500
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."role" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["role", 6], ["LIMIT", 1]]
+DevstatsChannel is streaming from call_log_channel
+DevstatsChannel is streaming from active_log_channel
+ImageshareChannel is transmitting the subscription confirmation
+DevstatsChannel is transmitting the subscription confirmation
+ImageshareChannel is streaming from image_channel
+DevstatsChannel is streaming from online_channel
+Finished "/cable/" [WebSocket] for ::1 at 2017-07-25 10:41:18 -0500
+ImageshareChannel stopped streaming from image_channel
+DevstatsChannel stopped streaming from online_channel
+DevstatsChannel stopped streaming from call_log_channel
+DevstatsChannel stopped streaming from active_log_channel
