@@ -74,6 +74,7 @@ config.action_mailer.smtp_settings = {
 
  config.assets.paths << Rails.root.join("app", "assets", "fonts")
   config.assets.enabled = true
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
