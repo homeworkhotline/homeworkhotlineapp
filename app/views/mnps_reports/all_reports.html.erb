@@ -1,51 +1,65 @@
-<% @mnps_reports.each do |report| %>
-<% @user = report.user%>
-    <% @user.mnps_reports.each do |lilreport| %>
-    <% end %>
-    <% @timeclocks = report.time_clocks %>
-    <% @yearwork = @timeclocks.find_by_date(@thisyear) %>
-	<h3 class="district"><%= @user.district %></h3>
+<% @mnps_reports.each do |bigreport| %>
+<% @user = bigreport.user %>
+<% @totalhours = 0 %>
+<% @user.time_clocks.where.not(billed: false).each do |total| %>
+  <% @totalhours += total.hours %>
+<% end %>
+<% if @user.mnps_teacher? %>
+<h3 class="district"><%= @user.district %></h3>
+<% end %>
 <h4 class="heading">Metro Nashville Extended Contract<br>
 Session Accountability Form for Teachers</h4>
 <div class="topdiv">
-	<p class="name"><strong><%= @user.lastname %>, <%= @user.firstname %></strong></p>
-	<p class="men"><strong>Metro Employee #: <u><%= @user.men %></u></strong></p>
+  <p class="name"><strong><%= @user.lastname %>, <%= @user.firstname %></strong></p>
+  <p class="men"><strong>Metro Employee #: <u><%= @user.men %></u></strong></p>
 </div>
-<table class="maintable" style="width:70%">
+<table class="prevtable">
+  <tr>
+    <th style="width: 70px;">Date</th>
+    <th style="width: 40px;">Hours</th> 
+  </tr>
+  <% @user.mnps_reports.where.not(var: -1).each do |report| %>
+  <tr>
+    <td style="width: 70px;"><%= report.billdate.strftime("%-m/%-d/%y") %></td>
+    <td style="width: 40px;"><%= report.hours %></td>
+  </tr>
+  <% end %>
+</table>
+<h4>Hours Worked:<br><br><%= @totalhours %></h4>
+<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
+<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
+<table class="maintable" style="width:350px;">
   <tr>
     <th>Date</th>
     <th>Time In</th> 
     <th>Time Out</th>
     <th># of Hours</th>
   </tr>
-  <% @user.mnps_reports.each do |metareport| %>
-  <% metareport.time_clocks.each do |report| %>
+  <% @user.time_clocks.where.not(clock_out: nil).each do |timesheet| %>
   <tr>
-    <td><%= report.date.strftime("%-m/%-d/%y") %></td>
-    <td><%= report.clock_in.strftime("%l:%M") %></td>
-    <td><%= report.clock_out.strftime("%l:%M") %></td>
-    <td><%= report.hours %></td>
+    <td><%= timesheet.date.strftime("%-m/%-d/%y") %></td>
+    <td><%= timesheet.clock_in.strftime("%l:%M") %></td>
+    <td><%= timesheet.clock_out.strftime("%l:%M") %></td>
+    <td><%= timesheet.hours %></td>
   </tr>
   <% end %>
-  <% end %>
+  <% for i in 1..(20 - @user.time_clocks.where.not(clock_out: nil).count) %>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <% end %>
 </table>
-<%= @yearwork %>
-<table class="prevtable" style="width:30%">
-  <tr>
-    <th>Date</th>
-    <th>Hours</th> 
-  </tr>
-  <h3 class="right">Previously Billed</h3>
-  <% @user.mnps_reports.each do |report| %>
-  <tr>
-    <td><%= report.billdate.strftime("%-m/%-d/%y") %></td>
-    <td><%= report.hours %></td>
-  </tr>
-  <% end %>
-</table>
-<h4>Hours Worked:<br><br><%= @totalhours %></h4>
-<h4>Amount Billed:<br><br><%= report.hours %></h4>
-<h4>Previously Billed:<br><br><%= @prevbill %></h4>
+<div class="bottomdiv">
+<%= image_tag "gth54bt3kj4j5jk4b3.png", width: "250px" %>
+<b style="float: right;"><%= @mnps_report.billdate %></b>
+</div>
+<% if User.find_by_id(@user.id + 1) %>
+<div class="page-break"></div>
+<% end %>
+<% end %>
 <style>
 table, th, td {
     border: .5px solid black;
@@ -54,51 +68,51 @@ table, th, td {
 
 }
 .maintable{
-	position: relative;
-    margin-left: -40%;
-    left: 36%;
-    top: 10px
-}
-.right {
-	float: right;
-	position: relative;
-	margin-right: 20px;
-	bottom: 50px;
+  position: relative;
+    margin-left: -175px;
+    left: 50%;
+    bottom: 220px;
 }
 .prevtable {
-	position: relative;
-	left: 70%;
-	top: 0px;
+  position: relative;
+  left: 80%;
+  top: 60px;
 }
 .heading {
-	text-align: center;
+  text-align: center;
 }
 .topdiv {
-	width: 550px;
-	height: 50px;
-	border: 1px solid black;
-	position: relative;
-	left: 0px;
+  width: 550px;
+  height: 50px;
+  border: 1px solid black;
+  position: relative;
+  left: 50%;
+  margin-left: -275px;
+}
+.bottomdiv {
+  width: 550px;
+  height: 80px;
+  border: 1px solid black;
+  position: relative;
+  left: 50%;
+  margin-left: -275px;
+  bottom: 200px;
+  margin-bottom: 0px;
 }
 .name {
-	position: relative;
-	bottom: 20px;
+  position: relative;
+  bottom: 20px;
 }
 .men {
-	position: relative;
-	bottom: 70px;
-	left: 200px;
+  position: relative;
+  bottom: 70px;
+  left: 200px;
 }
 .district {
-	border: 1px solid black;
-	margin-right: 550px;
-	text-align: left;
-	margin-top:10px;
+  border: 1px solid black;
+  margin-right: 550px;
+  text-align: left;
+  margin-top:10px;
 }
 .page-break { display:block; clear:both; page-break-after:always; }
 </style>
-<% if User.where(id: @user.id + 1).exists? %>
-<div class="page-break"></div>
-<% else %>
-<% end %>
-<% end %>
