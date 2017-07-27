@@ -28,6 +28,7 @@ class Users::SessionsController < Devise::SessionsController
       @time_clock.clock_out = @time_clock.clock_out
       @time_clock.save!
     end
+    @time_clock.hours = time_diff(@time_clock.clock_in, @time_clock.clock_out)
     @time_clock.billed = 0
     @time_clock.save!
     super

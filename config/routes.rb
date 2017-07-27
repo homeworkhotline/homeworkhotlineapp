@@ -13,9 +13,10 @@ resources :user, only: [:show]
   resources :time_clocks
   resources :mnps_reports
   resources :image_shares, only: [:new, :create, :show]
-  get 'home/devstats'
+  get '/devstats', to: 'home#devstats', as: 'devstats'
   get '/employees', to: 'home#employees', as: 'employees'
   get '/statistics', to: 'home#statistics', as: 'statistics'
+  get '/sessioninfo/:id', to: 'home#sessioninfo', as: 'sessioninfo'
   get '/all_mnps_reports/:id', to: 'mnps_reports#all_reports', as: 'all_mnps_reports'
   get '/principals/dlnab/:id', to: 'principals#dlnab', as: 'dlnab'
   get '/principals/dlsnl/:id', to: 'principals#dlsnl', as: 'dlsnl'

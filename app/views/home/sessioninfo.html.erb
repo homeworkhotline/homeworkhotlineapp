@@ -1,0 +1,67 @@
+<div class="container">
+<%= image_tag "hhcircle.png", width: '100px', height: '100px', class: 'image' %>
+</div>
+<div class="container">
+<div class="info">
+<h2 class="name"><%= @user.firstname %> <%= @user.lastname %></h2>
+<h2 class="session">SESSION SUMMARY</h2>
+<div class="hours">
+<h1><%= @time_clock.hours.round(2) %></h1><h3>HOURS</h3></div>
+<div class="calls">
+<h1><%= @user.call_logs.where(starttime: (@time_clock.clock_in)..(@time_clock.clock_out)).count %></h1><h3>CALLS</h3></div>
+</div>
+</div>
+<style type="text/css">
+.info {
+  width: 430px;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  margin-top: 20px;
+  top: 80px;
+}
+.hours, .calls {
+	display: inline-block;
+	width: 210px;
+	text-align: center;
+	margin-bottom: 30px;
+	height: 130px;
+}
+.hours {
+	border-right: 2px solid #ddd;
+}
+h1 {
+	font-size: 80px;
+	margin-bottom: 40px;
+	position: relative;
+	bottom: 20px;
+}
+h3 {
+font-size: 20px;
+position: relative;
+	bottom: 20px;
+	font-weight: 400;
+}
+.name {
+	width: 250px;
+	margin-left: -125px;
+	left: 50%;
+	position: relative;
+	padding: 10px 0;
+	border: solid 2px #65ef96;
+	font-weight: 400;
+	letter-spacing: 1px;
+}
+h2 {
+	font-size: 23px;
+}
+.session {
+	margin-bottom: 30px;
+	letter-spacing: 2px;
+}
+.image {
+	position: relative;
+	top: 80px;
+}
+</style>

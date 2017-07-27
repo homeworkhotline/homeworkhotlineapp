@@ -39,6 +39,8 @@ class TimeClocksController < ApplicationController
   # GET /time_clocks/new
   def new
     @time_clock = TimeClock.new
+    @delete = current_user.time_clocks.where(clock_out: nil)
+    @delete.delete_all
     render :layout => 'report'
   end
 

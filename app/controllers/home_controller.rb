@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:sessioninfo]
 
   def statistics
     unless current_user.administrator? || current_user.specialist?
@@ -18,6 +18,12 @@ class HomeController < ApplicationController
     end
     @students = @sessions.distinct.pluck(:codename).count
     @prevstudents = @prevsessions.distinct.pluck(:codename).count
+  end
+
+  def sessioninfo
+    @user = User.find(params[:id])
+    @time_clock = @user.time_clocks.order('updated_at').last
+      render :layout => 'report'
   end
 
   def employees

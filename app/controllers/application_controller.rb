@@ -31,6 +31,11 @@ end
     new_time_clock_path
   end
 
+  def after_sign_out_path_for(resource)
+    @lastuser = TimeClock.order('updated_at').last.user
+    sessioninfo_path(@lastuser)
+  end
+
   protected
   	def configure_permitted_parameters
   		devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :password_confirmation, :firstname, :lastname, :token])

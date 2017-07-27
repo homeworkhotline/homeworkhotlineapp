@@ -31,7 +31,7 @@
   <%= f.hidden_field :var, :value => -1 %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <%= f.hidden_field :billdate, :value => Date.today %>
-    <%= f.submit "CONDUCT PAYROLL", class: "submit" %>
+    <%= f.submit "CONDUCT PAYROLL", class: "submit click" %>
     <% end %>
     <% else %>
     <div class="submit fakesub">CONDUCT PAYROLL</div>
@@ -226,7 +226,7 @@ tr:nth-of-type(even) {
     $('.fakesub').click(function() {
       alert('No users are ready for payroll.')
     });
-    $('.submit').click(function() {
+    $('.click').click(function() {
       $('body > :not(.load)').hide(); 
       $('.load').show();
     });

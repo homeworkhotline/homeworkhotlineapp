@@ -10,13 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719185413) do
+ActiveRecord::Schema.define(version: 20170727022103) do
 
   create_table "call_logs", force: :cascade do |t|
     t.string   "entered_by"
     t.date     "date"
-    t.time     "starttime"
-    t.time     "endtime"
     t.integer  "user_id"
     t.boolean  "math"
     t.boolean  "worksheet"
@@ -46,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170719185413) do
     t.boolean  "referral_prize"
     t.boolean  "prize_sent"
     t.string   "teacher_name"
+    t.datetime "starttime"
+    t.datetime "endtime"
   end
 
   create_table "image_shares", force: :cascade do |t|
