@@ -16,9 +16,8 @@ gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'devise'
 gem "chartkick"
-gem "whenever"
 gem "redis"
-gem 'groupdate'
+gem 'progressive_render'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

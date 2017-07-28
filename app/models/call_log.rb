@@ -7,6 +7,5 @@ class CallLog < ApplicationRecord
     message: "must be less than 6 characters!"}
 
 
-    scope :created_between, -> (start_date, end_date) {where('created_at BETWEEN ? AND ?', start_date.beginning_of_day, end_date.end_of_day)}
 
 end

@@ -2,23 +2,36 @@
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    $(document).ready(function(){
+      google.charts.load('current', {
+      'callback': function () {
+        drawCount();
+        drawHours();
+      },
+      'packages': ['corechart'],
+    });
 
-      function drawChart() {
+      function drawCount() {
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Calls'],
-          <% (28.days.ago.to_date..2.days.ago.to_date).each do |date| %>
-          ['<%= date.strftime('%B %d, %Y') %>', <%= rand(100..300) %>],
+          <% (28.days.ago.beginning_of_day.to_date..1.day.ago.end_of_day.to_date).each do |date| %>
+          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
           <% end %>
-          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= rand(100..300) %>]
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).size %>]
         ]);
-
         var options = {
-          smoothLine: 'true',
           legend: 'none',
-          lineWidth: 5,
-          backgroundColor: { fill:'transparent' },
+          lineWidth: 2,
+          animation:{
+        duration: 500,
+        easing: 'inAndOut',
+        startup: true
+      },
+          chartArea: {
+            height: '100%',
+            width: '100%',
+          },
+          backgroundColor: { fill:'#3c3e47' },
           series: {
             0: {color: '#ffffff'}
           },
@@ -26,6 +39,7 @@
             gridlines: {
               color: 'transparent'
             },
+            baselineColor: 'transparent',
             textPosition: 'none'
           },
           hAxis: { gridlines: {
@@ -34,26 +48,355 @@
             textPosition: 'none' }
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('sessions'));
+        var chart = new google.visualization.AreaChart(document.getElementById('sessions'));
 
         chart.draw(data, options);
       }
+
+      function drawHours() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Hours'],
+          <% (28.days.ago.beginning_of_day.to_date..1.day.ago.end_of_day.to_date).each do |date| %>
+          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration).to_d %>],
+          <% end %>
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration).to_d %>]
+        ]);
+        var options = {
+          legend: 'none',
+          lineWidth: 2,
+          animation:{
+        duration: 100,
+        easing: 'inAndOut',
+        startup: true
+      },
+          chartArea: {
+            height: '100%',
+            width: '100%',
+          },
+          backgroundColor: { fill:'#3c3e47' },
+          series: {
+            0: {color: '#ffffff'}
+          },
+          vAxis: {
+            gridlines: {
+              color: 'transparent'
+            },
+            baselineColor: 'transparent',
+            textPosition: 'none'
+          },
+          hAxis: { gridlines: {
+              color: 'transparent'
+            },
+            textPosition: 'none' }
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('hours'));
+
+        chart.draw(data, options);
+      }
+    });
     </script>
   </head>
   <body>
-  <div class="sessions">
-  <h3>SESSIONS</h3>
-  <h1><%= @sessions.count %></h1>
-    <div id="sessions" style=" height: 200px"></div>
+  <div class="topbar">Search data for analysis</div>
+  <div class="topleft"><h1>Analytics</h1><h3>v1.0</h3></div>
+  <div class="left">
+  <div class="list active"><p>Dashboard</p></div>
+    <div class="bottomleft"><%= image_tag "logo.png", width: '45px', height: '45px' %></div>
+  </div>
+  <%= progressive_render do %>
+  <div class="datediv"><h3 class="date">Last 28 Days<br>(<%= 28.days.ago.strftime('%B %d, %Y') %> &ndash; <%= Date.today.strftime('%B %d, %Y') %>)</h3></div>
+  <div class="container top">
+  <div class="sessions block">
+  <h2>SESSIONS</h2>
+  <h1><%= @sessions %></h1>
+  <% if (@sessions - @prevsessions) > 0 %>
+  <span class="icon-up-arrow"></span>
+  <% elsif (@sessions - @prevsessions) < 0 %>
+  <span class="icon-down-arrow"></span>
+  <% else %>
+  <span class="icon-equal-dash"></span>
+  <% end %>
+  <h4><%= (@sessions - @prevsessions).abs %></h4>
+    <div id="sessions" style="width: 415px; height: 50px"></div>
     </div>
+    <div class="images block">
+  <h1><%= @images %></h1>
+  <% if (@images - @previmages) > 0 %>
+  <span class="icon-up-arrow"></span>
+  <% elsif (@images - @previmages) < 0 %>
+  <span class="icon-down-arrow"></span>
+  <% else %>
+  <span class="icon-equal-dash"></span>
+  <% end %>
+  <h4><%= (@images - @previmages).abs %></h4>
+  <h2>IMAGES SHARED</h2>
+  </div>
+  <div class="stoodle block">
+  <h1><%= @stoodle %></h1>
+  <% if (@stoodle - @prevstoodle) > 0 %>
+  <span class="icon-up-arrow"></span>
+  <% elsif (@stoodle - @prevstoodle) < 0 %>
+  <span class="icon-down-arrow"></span>
+  <% else %>
+  <span class="icon-equal-dash"></span>
+  <% end %>
+  <h4><%= (@stoodle - @prevstoodle).abs %></h4>
+  <h2>STOODLE SESSIONS</h2>
+  </div>
+  </div>
+  <div class="container second">
+  <div class="second">
+    <div class="complete block">
+  <h1><%= (@complete * 100).round%>%</h1>
+  <% if (@complete - @prevcomplete) > 0 %>
+  <span class="icon-up-arrow"></span>
+  <% elsif (@complete - @prevcomplete) < 0 %>
+  <span class="icon-down-arrow"></span>
+  <% else %>
+  <span class="icon-equal-dash"></span>
+  <% end %>
+  <h4><%= ((@complete - @prevcomplete).abs * 100).round %>%</h4>
+  <h2>COMPLETED ASSIGNMENT</h2>
+  </div>
+      <div class="complete block">
+  <h1><%= (@master * 100).round %>%</h1>
+  <% if (@master - @prevmaster) > 0 %>
+  <span class="icon-up-arrow"></span>
+  <% elsif (@master - @prevmaster) < 0 %>
+  <span class="icon-down-arrow"></span>
+  <% else %>
+  <span class="icon-equal-dash"></span>
+  <% end %>
+  <h4><%= ((@master - @prevmaster).abs  * 100).round%>%</h4>
+  <h2>PROVED MASTERY</h2>
+  </div>
+  </div>
+  <div class="hours block">
+  <h2>HOURS TUTORED</h2>
+  <h1><%= @hours.round(3) %></h1>
+  <% if (@hours - @prevhours) > 0 %>
+  <span class="icon-up-arrow"></span>
+  <% elsif (@hours - @prevhours) < 0 %>
+  <span class="icon-down-arrow"></span>
+  <% else %>
+  <span class="icon-equal-dash"></span>
+  <% end %>
+  <h4><%= (@hours - @prevhours).abs.round(3)%></h4>
+  <div id="hours" style="width: 770px; height: 190px"></div>
+  </div>
+  </div>
+  <% end %>
     <style type="text/css">
       body {
-        background-color: #00121b;
+        background: #32353e;
+      }
+      .block {
+        margin-right: 20px;
       }
       .sessions {
-        background-color: #1bc98e;
-        width: 400px;
+        color: white;
+        background-color: #3c3e47;
+        height: 158px;
+        width: 415px;
+        display: table-cell;
+        vertical-align: bottom;
+        position: relative;
+      }
+      .hours {
+        color: white;
+        background-color: #3c3e47;
+        height: 296px;
+        width: 770px;
+        display: table-cell;
+        vertical-align: bottom;
+        position: relative;
+      }
+      .block > h2 {
+        font-weight: 300;
+        letter-spacing: 2px;
+        position: absolute;
+        margin-left: 30px;
+        opacity: .75;
+        margin-top: 25px;
+      }
+      .complete > h2 {
+        font-weight: 300;
+        letter-spacing: 2px;
+        position: absolute;
+        margin-left: 30px;
+        opacity: .75;
+        margin-top: 0px;
+        line-height: 25px;
+      }
+      .block > span {
+        margin-left: 20px;
+        display: inline-block;
+        font-size: 5px;
+      }
+      .block > h1 {
+        font-weight: 300;
+        margin-left: 30px;
+        font-size: 40px;
+        margin-top: 60px;
+        display: inline-block;
+      }
+      .complete > h1 {
+        font-weight: 300;
+        margin-left: 20px;
+        font-size: 40px;
+        margin-top: 30px;
+        display: inline-block;
+      }
+      .complete > span {
+        margin-left: 10px;
+      }
+      .block > h4 {
+        display: inline-block;
+        font-size: 15px;
+        font-weight: 200;
+      }
+      .images {
+        width: 270px;
+        height: 158px;
+        background-color: #3c3e47;
+        position: relative;
+        display: inline-block;
+        color: white;
+      }
+      .stoodle {
+        width: 270px;
+        height: 158px;
+        background-color: #3c3e47;
+        position: relative;
+        color: white;
+        display: inline-block;
+      }
+      .complete {
+        width: 205px;
+        height: 138px;
+        background-color: #3c3e47;
+        position: relative;
+        display: block;
+        color: white;
+        margin-bottom: 20px;
+      }
+      .images > h2, .stoodle > h2 {
+        position: relative !important;
+        bottom: 30px;
+      }
+      .images > span, .stoodle > span {
+        margin-left: 50px;
+      }
+      .topleft {
+        color: white;
+        width: 200px;
+        height: 60px;
+        background-color: #65ef96;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin-bottom: 100px;
+        display: flex;
+        align-items: center;
+      }
+      .topleft > h1 {
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-left: 20px;
+        font-size: 22px;
+      }
+      .topleft > h3 {
+        margin-left: 30px;
+        font-size: 10px;
+        font-weight: 300;
+      }
+      .left {
+        position: fixed;
+        top: 60px;
+        left: 0px;
+        background-color: #2a2d37;
+        width: 200px;
+        height: 100%;
+      }
+      .topbar {
+        width: 100%;
+        position: fixed;
+        left: 200px;
+        top: 0px;
+        height: 60px;
+        color: #aaa;
+        font-family: Lato;
+        font-weight: 300;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        background-color: white;
+        box-shadow: 0px 1px 20px rgba(0, 0, 0, .1);
+      }
+      .bottomleft {
+        background-color: #24262d;
+        height: 100px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .list {
+        margin-top: 20px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+      }
+      .list > p {
+        font-weight: 300;
+        font-size: 15px;
+        color: white;
+        letter-spacing: 1px;
+        margin: 15px !important;
+      }
+      .active {
+        border-left: 4px #45ef96 solid;
+      }
+      .date {
+        position: fixed;
+        top: 74px;
+        right: 45px;
+        color: white;
+        text-align: right;
+        font-weight: 300;
+        color: #949ba2;
+        line-height: 20px;
+        letter-spacing: 1.5px;
+      }
+      .datediv {
+        width: 100%;
+        height: 85px;
+        position: fixed;
+        top: 60px;
+        border-bottom: 1px solid #3c3e47;
+        z-index: -1;
+      }
+      #sessions, #hours {
+        margin: 0;
         padding: 0;
+      }
+
+      .container {
+        position: absolute;
+        left: 243px;
+      }
+      .top {
+        top: 180px;
+      }
+      .second {
+        top: 358px;
       }
     </style>
   </body>
