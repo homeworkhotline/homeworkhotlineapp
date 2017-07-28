@@ -57,9 +57,9 @@
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Hours'],
           <% (28.days.ago.beginning_of_day.to_date..1.day.ago.end_of_day.to_date).each do |date| %>
-          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration) %>],
+          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration).to_d.round(3) %>],
           <% end %>
-          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration) %>]
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration).to_d.round(3) %>]
         ]);
         var options = {
           legend: 'none',
