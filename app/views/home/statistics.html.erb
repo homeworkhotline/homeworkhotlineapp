@@ -3,18 +3,21 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
+      setTimeout(function() {
       google.charts.load('current', {
       'callback': function () {
         drawCount();
         drawHours();
+        drawSubject();
       },
       'packages': ['corechart'],
     });
+    }, 1000);
 
       function drawCount() {
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Calls'],
-          <% (28.days.ago.beginning_of_day.to_date..1.day.ago.end_of_day.to_date).each do |date| %>
+          <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).to_date).each do |date| %>
           ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
           <% end %>
           ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).size %>]
@@ -56,10 +59,10 @@
       function drawHours() {
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Hours'],
-          <% (28.days.ago.beginning_of_day.to_date..1.day.ago.end_of_day.to_date).each do |date| %>
-          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration).to_i %>],
+          <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).end_of_day.to_date).each do |date| %>
+          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration).to_d.round(3) %>],
           <% end %>
-          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration).to_i %>]
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration).to_d.round(3) %>]
         ]);
         var options = {
           legend: 'none',
@@ -95,6 +98,34 @@
         chart.draw(data, options);
       }
     });
+    function drawSubject() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+        var options = {
+          legend: 'none',
+          lineWidth: 2,
+          animation:{
+        duration: 100,
+        easing: 'inAndOut',
+        startup: true
+      },
+          chartArea: {
+            height: '100%',
+            width: '100%',
+          },
+          backgroundColor: { fill:'#3c3e47' },
+          pieHole: 0.6,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
     </script>
   </head>
   <body>
@@ -318,6 +349,7 @@
         background-color: #2a2d37;
         width: 200px;
         height: 100%;
+        z-index: 1;
       }
       .topbar {
         width: 100%;
@@ -345,6 +377,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 2;
       }
       .list {
         margin-top: 20px;
