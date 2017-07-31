@@ -205,7 +205,7 @@
   </div>
   <div class="hours block">
   <h2>HOURS TUTORED</h2>
-  <h1><%= @hours.round(3) %></h1>
+  <h1><%= @hours%></h1>
   <% if (@hours - @prevhours) > 0 %>
   <span class="icon-up-arrow"></span>
   <% elsif (@hours - @prevhours) < 0 %>
@@ -213,7 +213,7 @@
   <% else %>
   <span class="icon-equal-dash"></span>
   <% end %>
-  <h4><%= (@hours - @prevhours).abs.round(3)%></h4>
+  <h4><%= (@hours - @prevhours).abs%></h4>
   <div id="hours" style="width: 770px; height: 190px"></div>
   </div>
   </div>

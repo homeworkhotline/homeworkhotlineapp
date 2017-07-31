@@ -76,7 +76,7 @@ class CallLogsController < ApplicationController
     end
       @call_log.endtime = DateTime.now
       @call_log.save!
-      @call_log.duration = time_diff(@call_log.starttime, @call_log.endtime).to_d.round(3)
+      @call_log.duration = time_diff(@call_log.starttime, @call_log.endtime).to_d
       @call_log.save!
   ActionCable.server.broadcast "active_log_channel",{activelogs: CallLog.all.where(endtime: nil).count}
   end
