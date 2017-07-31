@@ -55,7 +55,7 @@ class CallLogsController < ApplicationController
     @call_log.entered_by = "#{@call_log.user.firstname} #{@call_log.user.lastname}"
     @call_log.save!
     end
-    @call_log.starttime = DateTime.now
+    @call_log.starttime = DateTime.now.strftime("%k:%M:%S")
     @call_log.save!
     ActionCable.server.broadcast "active_log_channel",{activelogs: CallLog.all.where(endtime: nil).count}
     ActionCable.server.broadcast "call_log_channel",{calllogs: CallLog.all.size, user: User.all.size, reports: MnpsReport.all.size,schools: School.all.size, principals: Principal.all.size, searches: Search.all.size, students:Student.all.size, timesheets: TimeClock.all.size, images: ImageShare.all.size}
@@ -74,7 +74,7 @@ class CallLogsController < ApplicationController
         format.json { render json: @call_log.errors, status: :unprocessable_entity }
       end
     end
-      @call_log.endtime = DateTime.now
+      @call_log.endtime = DateTime.now.strftime("%k:%M:%S")
       @call_log.save!
       @call_log.duration = time_diff(@call_log.starttime, @call_log.endtime).to_d
       @call_log.save!

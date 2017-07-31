@@ -8,7 +8,7 @@
 <div class="hours">
 <h1><%= @time_clock.hours.round(2) %></h1><h3>HOURS</h3></div>
 <div class="calls">
-<h1><%= @user.call_logs.where(starttime: (@time_clock.clock_in)..(@time_clock.clock_out)).count %></h1><h3>CALLS</h3></div>
+<h1><%= @user.call_logs.where(created_at: (@time_clock.clock_in)..(@time_clock.clock_out)).count %></h1><h3>CALLS</h3></div>
 </div>
 </div>
 <style type="text/css">
