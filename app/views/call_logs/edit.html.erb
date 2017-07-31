@@ -462,13 +462,13 @@ if (document.getElementById('textbool').checked){
     var end = $(this).val();
     if(end == 0){
       $('.ending').text('No progress.');
-      $('.postcheck').attr("checked", false);
+      $('.postcheck').prop("checked", false);
     }else if(end == 1){
       $('.ending').text('Completed assignment, did not master material.');
-      $('.postcheck').attr("checked", false);
+      $('.postcheck').prop("checked", false);
     }else if(end == 2){
       $('.ending').text('Mastered material and passed post test.');
-      $('.postcheck').attr("checked", true);
+      $('.postcheck').prop("checked", true);
     }
   });
 });
