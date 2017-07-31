@@ -278,9 +278,6 @@
         border-left: 4px #45ef96 solid;
       }
       .date {
-        position: fixed;
-        top: 74px;
-        right: 45px;
         color: white;
         text-align: right;
         font-weight: 300;
@@ -294,6 +291,9 @@
         position: fixed;
         top: 60px;
         border-bottom: 1px solid #3c3e47;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
         z-index: 2;
         background-color: #32353e;
       }
@@ -308,6 +308,7 @@
         width: -webkit-calc(100% - 200px);
         width:    -moz-calc(100% - 200px);
         width:         calc(100% - 200px);
+        height: 100%;
       }
       .top {
         top: 140px;
