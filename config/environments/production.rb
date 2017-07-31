@@ -40,7 +40,6 @@ config.action_mailer.smtp_settings = {
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
   config.serve_static_assests = true
-  config.timezone = "Central Time (US & Canada)"
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.

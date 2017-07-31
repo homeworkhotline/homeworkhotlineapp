@@ -13,7 +13,6 @@ module HomeworkHotline
     # -- all .rb files in that directory are automatically loaded.
 
     config.time_zone = 'Central Time (US & Canada)'
- config.active_record.default_timezone = 'Central Time (US & Canada)'
 
     require 'pdfkit'
 		config.middleware.use PDFKit::Middleware

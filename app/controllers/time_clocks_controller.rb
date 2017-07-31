@@ -9,7 +9,7 @@ class TimeClocksController < ApplicationController
     @time_clock = TimeClock.new
     @test_clock = current_user.time_clocks.last
     unless @test_clock && @test_clock.clock_out.nil?
-      @time = TimeClock.new(clock_in: DateTime.now.strftime("%k:%M:%S"), user_id: current_user.id, date: Date.today.to_s)
+      @time = TimeClock.new(clock_in: DateTime.now, user_id: current_user.id, date: Date.today.to_s)
       @time.save!
     end
     @total_hours = 0
@@ -39,8 +39,6 @@ class TimeClocksController < ApplicationController
   # GET /time_clocks/new
   def new
     @time_clock = TimeClock.new
-    @delete = current_user.time_clocks.where(clock_out: nil)
-    @delete.delete_all
     render :layout => 'report'
   end
 
@@ -59,12 +57,10 @@ class TimeClocksController < ApplicationController
     @time_clock.save!
 
     if current_user.mnps_teacher?
-      @time_clock.clock_in = round_time(DateTime.now).strftime("%k:%M:%S")
-      @time_clock.clock_in = @time_clock.clock_in
+      @time_clock.clock_in = round_time(DateTime.now)
       @time_clock.save!
     else
-      @time_clock.clock_in = (DateTime.now).strftime("%k:%M:%S")
-      @time_clock.clock_in = @time_clock.clock_in
+      @time_clock.clock_in = (DateTime.now)
       @time_clock.save!
     end
 
@@ -88,10 +84,10 @@ class TimeClocksController < ApplicationController
   def update
     @time_clock = TimeClock.find(params[:id])
     if current_user.hotline_teacher? || current_user.mnps_teacher?
-      @time_clock.clock_out = round_time(DateTime.now).strftime("%k:%M:%S")
+      @time_clock.clock_out = round_time(DateTime.now)
       @time_clock.save!
     else
-      @time_clock.clock_out = DateTime.now.strftime("%k:%M:%S")
+      @time_clock.clock_out = DateTime.now
       @time_clock.save!
     end
     respond_to do |format|
