@@ -17,7 +17,7 @@ class TimeClocksController < ApplicationController
     @time_clocks.each do |time|
       if time.clock_out.nil?
       else
-        time.hours = time_diff(time.clock_in, time.clock_out)
+        time.hours = time_diff(time.clock_in, time.clock_out).to_d
         time.save!
         @total_hours += time.hours
       end

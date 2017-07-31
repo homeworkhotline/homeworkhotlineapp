@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 end
 
     def time_diff(start_time, end_time)
-  seconds_diff = (end_time.to_i - start_time.to_i) / 3600
+  seconds_diff = (end_time - start_time).to_d / 3600
 	"#{seconds_diff}"
 	end
 
