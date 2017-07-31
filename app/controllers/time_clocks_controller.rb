@@ -38,6 +38,8 @@ class TimeClocksController < ApplicationController
 
   # GET /time_clocks/new
   def new
+    @delete = current_user.time_clocks.where(clock_out: nil)
+    @delete.delete_all
     @time_clock = TimeClock.new
     render :layout => 'report'
   end
@@ -49,8 +51,30 @@ class TimeClocksController < ApplicationController
   # POST /time_clocks
   # POST /time_clocks.json
   def create
-    if current_user.time_clocks.last && current_user.time_clocks.last.clock_out.nil?
+    if (current_user.time_clocks.last && current_user.time_clocks.last.clock_out.nil?) &! current_user.administrator?
       redirect_to root_path
+    elsif current_user.administrator?
+      @time_clock = TimeClock.new(time_clock_params)
+      @time_clock.date = Date.today
+      @time_clock.save!
+
+    if current_user.mnps_teacher?
+      @time_clock.clock_in = round_time(DateTime.now)
+      @time_clock.save!
+    else
+      @time_clock.clock_in = (DateTime.now)
+      @time_clock.save!
+    end
+
+    respond_to do |format|
+      if @time_clock.save
+        format.html { redirect_to edit_time_clock_path(@time_clock), notice: 'Time clock was successfully created.' }
+        format.json { render :show, status: :created, location: @time_clock }
+      else
+        format.html { render :new }
+        format.json { render json: @time_clock.errors, status: :unprocessable_entity }
+      end
+    end
     else
     @time_clock = TimeClock.new(time_clock_params)
     @time_clock.user_id = current_user.id
@@ -123,6 +147,6 @@ class TimeClocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_clock_params
-      params.require(:time_clock).permit(:clock_in, :clock_out, :date, :hours, :billed, :mnps_report_id, :clockinhour, :clockinmin, :clockinmeridiem, :clockouthour, :clockoutmin, :clockoutmeridiem)
+      params.require(:time_clock).permit(:clock_in, :clock_out, :date, :hours, :billed, :mnps_report_id, :user_id, :clockinhour, :clockinmin, :clockinmeridiem, :clockouthour, :clockoutmin, :clockoutmeridiem)
     end
 end

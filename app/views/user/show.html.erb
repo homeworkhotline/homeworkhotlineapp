@@ -56,7 +56,36 @@
   </tbody>
 </table>
 </div>
+<div class="container">
+<%= form_for(@time_clock) do |f| %>
+<%= f.hidden_field :user_id, value: @user.id %>
+<%= f.submit "NEW TIMESHEET", class: "submit" %>
+<% end %>
+</div>
   <style type="text/css">
+      .submit {
+  width: 210px;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  padding: 10px 0;
+  letter-spacing: 2px;
+  color: #073045;
+  background-color: #fff;
+  border: #073045 3px solid;
+  text-shadow: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 150ms ease-in-out;
+  margin-top: -600px;
+  margin-bottom: 20px;
+  }
+    .submit:hover {
+    background-color: #073045;
+    color: white;
+    font-weight: 500;
+  }
   .info {
   width: 230px;
   background-color: #f2f2f2;
@@ -199,7 +228,7 @@ tr:nth-of-type(even) {
     }
     table {
     	margin-top: 20px;
-    	margin-bottom: 100px;
+    	margin-bottom: 50px;
       empty-cells: show;
     }
   </style>
