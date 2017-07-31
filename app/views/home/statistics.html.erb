@@ -1,132 +1,6 @@
   <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-      setTimeout(function() {
-      google.charts.load('current', {
-      'callback': function () {
-        drawCount();
-        drawHours();
-        drawSubject();
-      },
-      'packages': ['corechart'],
-    });
-    }, 1000);
-
-      function drawCount() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'Calls'],
-          <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).to_date).each do |date| %>
-          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
-          <% end %>
-          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).size %>]
-        ]);
-        var options = {
-          legend: 'none',
-          lineWidth: 2,
-          animation:{
-        duration: 500,
-        easing: 'inAndOut',
-        startup: true
-      },
-          chartArea: {
-            height: '100%',
-            width: '100%',
-          },
-          backgroundColor: { fill:'#3c3e47' },
-          series: {
-            0: {color: '#ffffff'}
-          },
-          vAxis: {
-            gridlines: {
-              color: 'transparent'
-            },
-            baselineColor: 'transparent',
-            textPosition: 'none'
-          },
-          hAxis: { gridlines: {
-              color: 'transparent'
-            },
-            textPosition: 'none' }
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('sessions'));
-
-        chart.draw(data, options);
-      }
-
-      function drawHours() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'Hours'],
-          <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).end_of_day.to_date).each do |date| %>
-          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration).to_d.round(3) %>],
-          <% end %>
-          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration).to_d.round(3) %>]
-        ]);
-        var options = {
-          legend: 'none',
-          lineWidth: 2,
-          animation:{
-        duration: 100,
-        easing: 'inAndOut',
-        startup: true
-      },
-          chartArea: {
-            height: '100%',
-            width: '100%',
-          },
-          backgroundColor: { fill:'#3c3e47' },
-          series: {
-            0: {color: '#ffffff'}
-          },
-          vAxis: {
-            gridlines: {
-              color: 'transparent'
-            },
-            baselineColor: 'transparent',
-            textPosition: 'none'
-          },
-          hAxis: { gridlines: {
-              color: 'transparent'
-            },
-            textPosition: 'none' }
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('hours'));
-
-        chart.draw(data, options);
-      }
-    });
-    function drawSubject() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
-        var options = {
-          legend: 'none',
-          lineWidth: 2,
-          animation:{
-        duration: 100,
-        easing: 'inAndOut',
-        startup: true
-      },
-          chartArea: {
-            height: '100%',
-            width: '100%',
-          },
-          backgroundColor: { fill:'#3c3e47' },
-          pieHole: 0.6,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-    </script>
   </head>
   <body>
   <div class="topbar">Search data for analysis</div>
@@ -136,6 +10,7 @@
     <div class="bottomleft"><%= image_tag "logo.png", width: '45px', height: '45px' %></div>
   </div>
   <%= progressive_render do %>
+  <% sleep 2 %>
   <div class="datediv"><h3 class="date">Last 28 Days<br>(<%= 28.days.ago.strftime('%B %d, %Y') %> &ndash; <%= Date.today.strftime('%B %d, %Y') %>)</h3></div>
   <div class="container top">
   <div class="sessions block">
@@ -432,5 +307,131 @@
         top: 358px;
       }
     </style>
+        <script type="text/javascript">
+    $(document).ready(function(){
+      setTimeout(function() {
+      google.charts.load('current', {
+      'callback': function () {
+        drawCount();
+        drawHours();
+        drawSubject();
+      },
+      'packages': ['corechart'],
+    });
+    }, 1000);
+
+      function drawCount() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Calls'],
+          <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).to_date).each do |date| %>
+          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
+          <% end %>
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).size %>]
+        ]);
+        var options = {
+          legend: 'none',
+          lineWidth: 2,
+          animation:{
+        duration: 500,
+        easing: 'inAndOut',
+        startup: true
+      },
+          chartArea: {
+            height: '100%',
+            width: '100%',
+          },
+          backgroundColor: { fill:'#3c3e47' },
+          series: {
+            0: {color: '#ffffff'}
+          },
+          vAxis: {
+            gridlines: {
+              color: 'transparent'
+            },
+            baselineColor: 'transparent',
+            textPosition: 'none'
+          },
+          hAxis: { gridlines: {
+              color: 'transparent'
+            },
+            textPosition: 'none' }
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('sessions'));
+
+        chart.draw(data, options);
+      }
+
+      function drawHours() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Hours'],
+          <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).end_of_day.to_date).each do |date| %>
+          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).sum(:duration).to_d.round(3) %>],
+          <% end %>
+          ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).sum(:duration).to_d.round(3) %>]
+        ]);
+        var options = {
+          legend: 'none',
+          lineWidth: 2,
+          animation:{
+        duration: 100,
+        easing: 'inAndOut',
+        startup: true
+      },
+          chartArea: {
+            height: '100%',
+            width: '100%',
+          },
+          backgroundColor: { fill:'#3c3e47' },
+          series: {
+            0: {color: '#ffffff'}
+          },
+          vAxis: {
+            gridlines: {
+              color: 'transparent'
+            },
+            baselineColor: 'transparent',
+            textPosition: 'none'
+          },
+          hAxis: { gridlines: {
+              color: 'transparent'
+            },
+            textPosition: 'none' }
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('hours'));
+
+        chart.draw(data, options);
+      }
+    });
+    function drawSubject() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+        var options = {
+          legend: 'none',
+          lineWidth: 2,
+          animation:{
+        duration: 100,
+        easing: 'inAndOut',
+        startup: true
+      },
+          chartArea: {
+            height: '100%',
+            width: '100%',
+          },
+          backgroundColor: { fill:'#3c3e47' },
+          pieHole: 0.6,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
   </body>
 </html>
