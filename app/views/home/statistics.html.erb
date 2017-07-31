@@ -11,6 +11,7 @@
   </div>
   <%= progressive_render do %>
   <% sleep 1 %>
+  <div class="container parent">
   <div class="datediv"><h3 class="date">Last 28 Days<br>(<%= 28.days.ago.strftime('%B %d, %Y') %> &ndash; <%= Date.today.strftime('%B %d, %Y') %>)</h3></div>
   <div class="container top">
   <div class="sessions block">
@@ -51,7 +52,6 @@
   <h2>STOODLE SESSIONS</h2>
   </div>
   </div>
-  <div class="container second">
   <div class="second">
     <div class="complete block">
   <h1><%= (@complete * 100).round%>%</h1>
@@ -78,6 +78,7 @@
   <h2>PROVED MASTERY</h2>
   </div>
   </div>
+  <div class="second right">
   <div class="hours block">
   <h2>HOURS TUTORED</h2>
   <h1><%= @hours%></h1>
@@ -90,6 +91,7 @@
   <% end %>
   <h4><%= (@hours - @prevhours).abs%></h4>
   <div id="hours" style="width: 770px; height: 190px"></div>
+  </div>
   </div>
   </div>
   <% end %>
@@ -112,7 +114,7 @@
       .hours {
         color: white;
         background-color: #3c3e47;
-        height: 296px;
+        height: 280px;
         width: 770px;
         display: table-cell;
         vertical-align: bottom;
@@ -177,11 +179,13 @@
         position: relative;
         color: white;
         display: inline-block;
+        margin-right: 0px;
       }
       .complete {
         width: 205px;
         height: 138px;
         background-color: #3c3e47;
+        clear: both;
         position: relative;
         display: block;
         color: white;
@@ -224,7 +228,7 @@
         background-color: #2a2d37;
         width: 200px;
         height: 100%;
-        z-index: 1;
+        z-index: 3;
       }
       .topbar {
         width: 100%;
@@ -241,6 +245,7 @@
         padding-left: 20px;
         background-color: white;
         box-shadow: 0px 1px 20px rgba(0, 0, 0, .1);
+        z-index: 3
       }
       .bottomleft {
         background-color: #24262d;
@@ -289,22 +294,29 @@
         position: fixed;
         top: 60px;
         border-bottom: 1px solid #3c3e47;
-        z-index: -1;
+        z-index: 2;
+        background-color: #32353e;
       }
       #sessions, #hours {
         margin: 0;
         padding: 0;
       }
 
-      .container {
+      .parent {
+        left: 200px;
         position: absolute;
-        left: 243px;
+        width: -webkit-calc(100% - 200px);
+        width:    -moz-calc(100% - 200px);
+        width:         calc(100% - 200px);
+        height: 100%;
       }
       .top {
         top: 180px;
+        position: absolute;
       }
       .second {
         top: 358px;
+        position: relative;
       }
     </style>
         <script type="text/javascript">
