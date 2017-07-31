@@ -19,6 +19,7 @@ class PrincipalsController < ApplicationController
   def sendmail
     @principal = Principal.find(params[:id])
     PrincipalMailer.email(@principal).deliver
+    redirect_to :back
   end
 
   def dlnab
