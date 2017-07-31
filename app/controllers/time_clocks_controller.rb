@@ -55,7 +55,6 @@ class TimeClocksController < ApplicationController
       redirect_to root_path
     elsif current_user.administrator?
       @time_clock = TimeClock.new(time_clock_params)
-      @time_clock.date = Date.today
       @time_clock.save!
 
     if current_user.mnps_teacher?
@@ -133,7 +132,7 @@ class TimeClocksController < ApplicationController
   def destroy
     @time_clock.destroy
     respond_to do |format|
-      format.html { redirect_to time_clocks_url, notice: 'Time clock was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Time clock was successfully destroyed.' }
       format.json { head :no_content }
     end
     ActionCable.server.broadcast "call_log_channel",{calllogs: CallLog.all.size, user: User.all.size, reports: MnpsReport.all.size,schools: School.all.size, principals: Principal.all.size, searches: Search.all.size, students:Student.all.size, timesheets: TimeClock.all.size}
