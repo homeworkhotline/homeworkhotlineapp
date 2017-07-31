@@ -318,6 +318,7 @@
       },
       'packages': ['corechart'],
     });
+    }, 3000);
 
       function drawCount() {
         var data = google.visualization.arrayToDataTable([
@@ -431,7 +432,6 @@
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
-    }, 2000);
     </script>
   </body>
 </html>
