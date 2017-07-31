@@ -7,7 +7,7 @@ class TimeClocksController < ApplicationController
   def index
     @time_clocks = current_user.time_clocks
     @time_clock = TimeClock.new
-    @test_clock = current_user.time_clocks.last
+    @test_clock = current_user.time_clocks.order('clock_in').last
     unless @test_clock && @test_clock.clock_out.nil?
       @time = TimeClock.new(clock_in: DateTime.now, user_id: current_user.id, date: Date.today.to_s)
       @time.save!
@@ -46,25 +46,30 @@ class TimeClocksController < ApplicationController
 
   # GET /time_clocks/1/edit
   def edit
+    unless current_user.administrator?
+      redirect_to root_path
+    end
   end
 
   # POST /time_clocks
   # POST /time_clocks.json
   def create
+    @time_clock = TimeClock.new(time_clock_params)
     if (current_user.time_clocks.last && current_user.time_clocks.last.clock_out.nil?) &! current_user.administrator?
       redirect_to root_path
-    elsif current_user.administrator?
-      @time_clock = TimeClock.new(time_clock_params)
-      @time_clock.save!
-
+    else
+      if @time_clock.user_id.nil?
+    @time_clock.user_id = current_user.id
+    @time_clock.save!
+  end
     if current_user.mnps_teacher?
       @time_clock.clock_in = round_time(DateTime.now)
       @time_clock.save!
     else
       @time_clock.clock_in = (DateTime.now)
       @time_clock.save!
-    end
-
+  end
+    if @time_clock.date != Date.today
     respond_to do |format|
       if @time_clock.save
         format.html { redirect_to edit_time_clock_path(@time_clock), notice: 'Time clock was successfully created.' }
@@ -74,19 +79,7 @@ class TimeClocksController < ApplicationController
         format.json { render json: @time_clock.errors, status: :unprocessable_entity }
       end
     end
-    else
-    @time_clock = TimeClock.new(time_clock_params)
-    @time_clock.user_id = current_user.id
-    @time_clock.save!
-
-    if current_user.mnps_teacher?
-      @time_clock.clock_in = round_time(DateTime.now)
-      @time_clock.save!
-    else
-      @time_clock.clock_in = (DateTime.now)
-      @time_clock.save!
-    end
-
+  else
     respond_to do |format|
       if @time_clock.save
         format.html { redirect_to root_path, notice: 'Time clock was successfully created.' }
@@ -96,6 +89,7 @@ class TimeClocksController < ApplicationController
         format.json { render json: @time_clock.errors, status: :unprocessable_entity }
       end
     end
+  end
   end
   @users = User.all.joins(:time_clocks).where(time_clocks: {clock_out: nil}).count
      ActionCable.server.broadcast "online_channel",{users: @users}
