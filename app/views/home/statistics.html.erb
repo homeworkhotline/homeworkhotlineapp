@@ -10,7 +10,7 @@
     <div class="bottomleft"><%= image_tag "logo.png", width: '45px', height: '45px' %></div>
   </div>
   <%= progressive_render do %>
-  <% sleep 2 %>
+  <% sleep 1 %>
   <div class="datediv"><h3 class="date">Last 28 Days<br>(<%= 28.days.ago.strftime('%B %d, %Y') %> &ndash; <%= Date.today.strftime('%B %d, %Y') %>)</h3></div>
   <div class="container top">
   <div class="sessions block">
@@ -318,7 +318,6 @@
       },
       'packages': ['corechart'],
     });
-    }, 1000);
 
       function drawCount() {
         var data = google.visualization.arrayToDataTable([
@@ -432,6 +431,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
+    }, 2000);
     </script>
   </body>
 </html>
