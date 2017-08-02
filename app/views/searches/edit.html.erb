@@ -14,6 +14,13 @@
     <%= f.submit "Finish Search" %>
     </div>
 <% end %>
+ <% elsif @search.model == "Prize" %>
+  <%= form_for(@search) do |f| %>
+  <div class="field">
+    <%= f.select :select, options_for_select([["Student Letter", "student"], ["Teacher Letter", "teacher"]]) %>
+    <%= f.submit "Finish Search" %>
+    </div>
+<% end %>
  <% elsif @search.model == "Student" %>
     <% @schools = School.all %>
   <%= form_for(@search) do |f| %>

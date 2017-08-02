@@ -89,7 +89,11 @@
   <% end %>
   <div class="field">
   <h3>Students name</h3>
+  <% if @student.call_logs.exists?(prize_given: true) %>
+  <%= f.text_field :name, value: "#{@student.call_logs.first.name}", readonly: true %>
+  <% else %>
     <%= f.text_field :name, placeholder: "e.g. Tim S" %>
+    <% end %>
   </div>
 
   <div class="field">
@@ -101,6 +105,7 @@
   <h3>Prize given?</h3>
     <%= f.check_box :prize_given %>
   </div>
+  <%=f.hidden_field :prize_sent, value: false %>
     <div class="field">
   <h3>Prize type</h3>
     <%= f.select :prize_type, options_for_select(School.all.order(:name).collect { | school | ["#{school.name}" , school.id]}), {prompt: "School..."} %>

@@ -27,7 +27,7 @@
   <%= form_for(@search, :html=>{:class=>"searchform",:multipart => true,:remote=>true}) do |f| %>
   <div class="container">
   <div class="field">
-    <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Time Sheet Reports", "MnpsReport"], ["Call Logs", "CallLog"]]) %>
+    <%= f.select :model, options_for_select([["Schools", "School"], ["Students", "Student"], ["Time Sheet Reports", "MnpsReport"], ["Call Logs", "CallLog"], ["Prizes", "Prize"]]) %>
     </div>
     </div>
     <div class="container">

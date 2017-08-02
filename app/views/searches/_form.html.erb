@@ -22,6 +22,18 @@
     <%= f.submit "FINISH SEARCH", class: "submit" %>
     </div>
 <% end %>
+ <% elsif @search.model == "Prize" %>
+  <%= form_for(@search) do |f| %>
+  <%= f.hidden_field :select, value: "letter" %>
+    <div class="container">
+    <%= f.submit "GENERATE LETTERS", class: "submit" %>
+    </div>
+    <style type="text/css">
+      .submit {
+        width: 220px !important;
+      }
+    </style>
+<% end %>
  <% elsif @search.model == "Student" %>
     <% @schools = School.all %>
   <%= form_for(@search) do |f| %>

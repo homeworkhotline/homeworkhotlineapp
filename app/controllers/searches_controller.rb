@@ -11,9 +11,11 @@ class SearchesController < ApplicationController
   # GET /searches/1
   # GET /searches/1.json
   def show
+    render :layout => 'report'
     @principals = Principal.all
     @reports = MnpsReport.all
     @search = Search.find(params[:id])
+    unless @search.model == "Prize"
     @model = @search.model.constantize
     @param = @search.select
       @results = @model.where("#{@param}": @search.search)
@@ -42,6 +44,7 @@ class SearchesController < ApplicationController
     elsif @search.model == "MnpsReport"
       @results = User.where(role: @search.search)
     end
+  end
   end
 
   # GET /searches/new
@@ -76,8 +79,13 @@ class SearchesController < ApplicationController
   def update
     respond_to do |format|
       if @search.update(search_params)
+        if @search.model == "MnpsReport" || @search.model == "Prize"
+        format.html { redirect_to search_path(@search, format: 'pdf'), notice: 'Search Results:' }
+        format.json { render :show, status: :ok, location: @search }
+      else
         format.html { redirect_to @search, notice: 'Search Results:' }
         format.json { render :show, status: :ok, location: @search }
+      end
       else
         format.html { render :edit }
         format.json { render json: @search.errors, status: :unprocessable_entity }
