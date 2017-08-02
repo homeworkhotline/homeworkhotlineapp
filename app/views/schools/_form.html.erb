@@ -19,7 +19,7 @@
 
     <div class="field">
     <h4>School Type</h4>
-    <%= f.select :schooltype, [["Elementary"], ["Middle School"], ["High School"], ["K-2"], ["Alternative"]] %>
+    <%= f.select :schooltype, [["Elementary"], ["Middle School"], ["High School"], ["K-12"], ["Alternative"]] %>
   </div>
 
   <div class="field" style="display: inline-block;">
@@ -42,7 +42,7 @@
 
   <div class="field">
     <h4>County</h4>
-    <%= f.text_field :county, :required => true %>
+    <%= f.select :county, options_for_select(Principal.all.collect { | prin | ["#{prin.schoolsystem}", "#{prin.schoolsystem}"] }), {:prompt => 'County...'}%>
   </div>
 
   <div class="field">
