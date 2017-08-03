@@ -13,22 +13,7 @@ Session Accountability Form for Teachers</h4>
   <p class="name"><strong><%= @user.lastname %>, <%= @user.firstname %></strong></p>
   <p class="men"><strong>Metro Employee #: <u><%= @user.men %></u></strong></p>
 </div>
-<table class="prevtable">
-  <tr>
-    <th style="width: 70px;">Date</th>
-    <th style="width: 40px;">Hours</th> 
-  </tr>
-  <% @user.mnps_reports.where.not(var: -1).each do |report| %>
-  <tr>
-    <td style="width: 70px;"><%= report.billdate.strftime("%-m/%-d/%y") %></td>
-    <td style="width: 40px;"><%= report.hours %></td>
-  </tr>
-  <% end %>
-</table>
-<h4>Hours Worked:<br><br><%= @totalhours %></h4>
-<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
-<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
-<table class="maintable" style="width:350px;">
+<table class="maintable" style="width:350px; display: inline-block;">
   <tr>
     <th>Date</th>
     <th>Time In</th> 
@@ -52,6 +37,21 @@ Session Accountability Form for Teachers</h4>
     </tr>
     <% end %>
 </table>
+<table class="prevtable" style="display: inline-block;">
+  <tr>
+    <th style="width: 70px;">Date</th>
+    <th style="width: 40px;">Hours</th> 
+  </tr>
+  <% @user.mnps_reports.where.not(var: -1).each do |report| %>
+  <tr>
+    <td style="width: 70px;"><%= report.billdate.strftime("%-m/%-d/%y") %></td>
+    <td style="width: 40px;"><%= report.hours %></td>
+  </tr>
+  <% end %>
+</table>
+<h4>Hours Worked:<br><br><%= @totalhours %></h4>
+<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
+<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
 <div class="bottomdiv">
 <%= image_tag "gth54bt3kj4j5jk4b3.png", width: "250px" %>
 <b style="float: right;"><%= @mnps_report.billdate %></b>

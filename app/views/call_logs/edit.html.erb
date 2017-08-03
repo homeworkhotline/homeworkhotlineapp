@@ -7,7 +7,7 @@
 
   <div class="field">
   <h3>Language spoken</h3>
-    <%= f.text_field :lang %>
+    <%= f.select :lang, options_for_select(["English", "Acholi", "Amarhic", "Arabic", "Bengali", "Burmese", "Cambodian", "Cantonese", "Chinese","Creole", "Dutch", "Ethiopian", "Farsi", "French", "Gujarati", "Harari", "Haitian", "Ibibio", "Igbo", "Jola","Janapanese", "Karen", "Korean", "Krundi", "Kurdish"]), required: true %>
   </div>
 
   <div class="field">

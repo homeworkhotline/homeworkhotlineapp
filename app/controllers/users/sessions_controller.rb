@@ -18,7 +18,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
    def destroy
-    @time_clock = current_user.time_clocks.last
+    @time_clock = current_user.time_clocks.where(clock_out: nil).last
     if current_user.mnps_teacher?
       @time_clock.clock_out = round_time(DateTime.now).strftime("%k:%M:%S")
       @time_clock.clock_out = @time_clock.clock_out

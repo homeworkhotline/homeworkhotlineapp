@@ -42,7 +42,7 @@
 
   <div class="field">
     <h4>County</h4>
-    <%= f.select :county, options_for_select(Principal.all.collect { | prin | ["#{prin.schoolsystem}", "#{prin.schoolsystem}"] }), {:prompt => 'County...'}%>
+    <%= f.select :county, options_for_select(Principal.all.order('schoolsystem').collect { | prin | ["#{prin.schoolsystem}", "#{prin.schoolsystem}"] }), {:prompt => 'County...'}%>
   </div>
 
   <div class="field">

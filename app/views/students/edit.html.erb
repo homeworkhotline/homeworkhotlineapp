@@ -15,7 +15,7 @@
 <%= f.check_box :internet, class: "checkbox"%>
 </div>
 <div class="field">
-<h3>School Name</h3>
+<h3>School</h3>
 <%= f.select :school_id, options_for_select(@schools.order(:name).collect { | school | ["#{school.name}" , school.id]}), {prompt: "School..."}, required: true%>
 </div>
 <div class="field">
