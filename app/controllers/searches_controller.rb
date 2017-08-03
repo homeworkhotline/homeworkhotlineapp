@@ -79,7 +79,7 @@ class SearchesController < ApplicationController
   def update
     respond_to do |format|
       if @search.update(search_params)
-        if @search.model == "MnpsReport" || @search.model == "Prize"
+        if (@search.model == "MnpsReport" and not User.where(role: @search.search).nil?) || @search.model == "Prize"
         format.html { redirect_to search_path(@search, format: 'pdf'), notice: 'Search Results:' }
         format.json { render :show, status: :ok, location: @search }
       else

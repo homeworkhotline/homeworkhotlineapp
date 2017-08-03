@@ -1,8 +1,5 @@
 class ImageSharesController < ApplicationController
   def new
-  	if current_user
-  		redirect_to root_path
-  	end
   	@image_share = ImageShare.new
   end
 

@@ -1,5 +1,138 @@
 <% if @search.model == "MnpsReport" || @search.model == "Prize" || @model.exists?("#{@param}": @search.search)%>
   <% if @search.model == "MnpsReport" %>
+  <% unless @results.nil? %>
+  <% @results.each do |user| %>
+  <% user.call_logs.each do |bigreport| %>
+<% @user = bigreport.user %>
+<% @totalhours = 0 %>
+<% @user.time_clocks.where.not(billed: false).each do |total| %>
+  <% @totalhours += total.hours %>
+<% end %>
+<div class="parent" style="display: block;">
+<% if @user.mnps_teacher? %>
+<h3 class="district"><%= @user.district %></h3>
+<% end %>
+<h3 class="heading">Metro Nashville Extended Contract<br>
+Session Accountability Form for Teachers</h3>
+<div class="topdiv">
+  <p class="name"><strong><%= @user.lastname %>, <%= @user.firstname %></strong></p>
+  <p class="men"><strong>Metro Employee #: <u><%= @user.men %></u></strong></p>
+</div>
+<h4>Hours Worked:<br><br><%= @totalhours %></h4>
+<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
+<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
+<div class="middleparent">
+<table class="maintable" style="width:350px;">
+  <tr>
+    <th>Date</th>
+    <th>Time In</th> 
+    <th>Time Out</th>
+    <th># of Hours</th>
+  </tr>
+  <% @user.time_clocks.where.not(clock_out: nil).each do |timesheet| %>
+  <tr>
+    <td><%= timesheet.date.strftime("%-m/%-d/%y") %></td>
+    <td><%= timesheet.clock_in.strftime("%l:%M") %></td>
+    <td><%= timesheet.clock_out.strftime("%l:%M") %></td>
+    <td><%= timesheet.hours %></td>
+  </tr>
+  <% end %>
+  <% for i in 1..(20 - @user.time_clocks.where.not(clock_out: nil).count) %>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <% end %>
+</table>
+<div class="bottomdiv">
+<%= image_tag "gth54bt3kj4j5jk4b3.png", width: "250px" %>
+<b style="float: right;"><%= @mnps_report.billdate %></b>
+</div>
+</div>
+<table class="prevtable">
+  <tr>
+    <th style="width: 70px;">Date</th>
+    <th style="width: 40px;">Hours</th> 
+  </tr>
+  <% @user.mnps_reports.where.not(var: -1).each do |report| %>
+  <tr>
+    <td style="width: 70px;"><%= report.billdate.strftime("%-m/%-d/%y") %></td>
+    <td style="width: 40px;"><%= report.hours %></td>
+  </tr>
+  <% end %>
+</table>
+</div>
+<% end %>
+<% end %>
+<style>
+.middleparent {
+  position: relative;
+  bottom: 200px;
+  margin-bottom: 0;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+
+}
+h4 {
+  position: relative;
+  top: 200px;
+}
+.maintable{
+  position: relative;
+    margin-left: -175px;
+    left: 50%;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+.prevtable {
+  position: relative;
+  left: 80%;
+  bottom: 800px;
+}
+.heading {
+  text-align: center;
+}
+.topdiv {
+  width: 550px;
+  height: 50px;
+  border: 1px solid black;
+  position: relative;
+  left: 50%;
+  margin-left: -275px;
+}
+.bottomdiv {
+  width: 550px;
+  height: 80px;
+  border: 1px solid black;
+  position: relative;
+  left: 50%;
+  margin-left: -275px;
+}
+.name {
+  position: relative;
+  bottom: 20px;
+}
+.men {
+  position: relative;
+  bottom: 70px;
+  left: 200px;
+}
+.district {
+  border: 1px solid black;
+  margin-right: 550px;
+  text-align: left;
+  margin-top:10px;
+}
+.page-break { display:block; clear:both; page-break-after:always; }
+</style>
+<% else %>
+<h1>No records match that search!</h1>
+<% end %>
   <% elsif @search.model == "School" %>
     <% @results.each do |result| %>
       <% @count = Student.all.where(school_id: result.id).count %>

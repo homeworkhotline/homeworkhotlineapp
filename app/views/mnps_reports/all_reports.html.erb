@@ -4,16 +4,21 @@
 <% @user.time_clocks.where.not(billed: false).each do |total| %>
   <% @totalhours += total.hours %>
 <% end %>
+<div class="parent" style="display: block;">
 <% if @user.mnps_teacher? %>
 <h3 class="district"><%= @user.district %></h3>
 <% end %>
-<h4 class="heading">Metro Nashville Extended Contract<br>
-Session Accountability Form for Teachers</h4>
+<h3 class="heading">Metro Nashville Extended Contract<br>
+Session Accountability Form for Teachers</h3>
 <div class="topdiv">
   <p class="name"><strong><%= @user.lastname %>, <%= @user.firstname %></strong></p>
   <p class="men"><strong>Metro Employee #: <u><%= @user.men %></u></strong></p>
 </div>
-<table class="maintable" style="width:350px; display: inline-block;">
+<h4>Hours Worked:<br><br><%= @totalhours %></h4>
+<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
+<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
+<div class="middleparent">
+<table class="maintable" style="width:350px;">
   <tr>
     <th>Date</th>
     <th>Time In</th> 
@@ -37,7 +42,12 @@ Session Accountability Form for Teachers</h4>
     </tr>
     <% end %>
 </table>
-<table class="prevtable" style="display: inline-block;">
+<div class="bottomdiv">
+<%= image_tag "gth54bt3kj4j5jk4b3.png", width: "250px" %>
+<b style="float: right;"><%= @mnps_report.billdate %></b>
+</div>
+</div>
+<table class="prevtable">
   <tr>
     <th style="width: 70px;">Date</th>
     <th style="width: 40px;">Hours</th> 
@@ -49,36 +59,35 @@ Session Accountability Form for Teachers</h4>
   </tr>
   <% end %>
 </table>
-<h4>Hours Worked:<br><br><%= @totalhours %></h4>
-<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
-<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
-<div class="bottomdiv">
-<%= image_tag "gth54bt3kj4j5jk4b3.png", width: "250px" %>
-<b style="float: right;"><%= @mnps_report.billdate %></b>
 </div>
-<% if User.find_by_id(@user.id + 1) %>
-<div class="page-break"></div>
-<% end %>
 <% end %>
 <style>
+.middleparent {
+  position: relative;
+  bottom: 200px;
+  margin-bottom: 0;
+}
 table, th, td {
-    border: .5px solid black;
+    border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
 
 }
 h4 {
   position: relative;
+  top: 200px;
 }
 .maintable{
   position: relative;
     margin-left: -175px;
     left: 50%;
+    margin-top: 30px;
+    margin-bottom: 0px;
 }
 .prevtable {
   position: relative;
   left: 80%;
-  top: 60px;
+  bottom: 800px;
 }
 .heading {
   text-align: center;
@@ -98,8 +107,6 @@ h4 {
   position: relative;
   left: 50%;
   margin-left: -275px;
-  bottom: 200px;
-  margin-bottom: 0px;
 }
 .name {
   position: relative;

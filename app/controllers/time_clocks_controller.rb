@@ -7,8 +7,7 @@ class TimeClocksController < ApplicationController
   def index
     @time_clocks = current_user.time_clocks
     @time_clock = TimeClock.new
-    @test_clock = current_user.time_clocks.order('clock_in').last
-    unless @test_clock && @test_clock.clock_out.nil?
+    unless @time_clocks.exists?(clock_out: nil)
       @time = TimeClock.new(clock_in: DateTime.now, user_id: current_user.id, date: Date.today.to_s)
       @time.save!
     end
