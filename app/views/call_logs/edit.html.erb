@@ -108,7 +108,7 @@
   <%=f.hidden_field :prize_sent, value: false %>
     <div class="field">
   <h3>Prize type</h3>
-    <%= f.select :prize_type, options_for_select(School.all.order(:name).collect { | school | ["#{school.name}" , school.id]}), {prompt: "School..."} %>
+    <%= f.select :prize_type, options_for_select(["School Material", "Fun Toy", "Something else"]) %>
   </div>
   </div>
   <div class="actions">
