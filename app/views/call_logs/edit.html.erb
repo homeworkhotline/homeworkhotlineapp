@@ -80,6 +80,13 @@
 </div>
     <div class="prize">
   <h2>PRIZE</h2>
+  <% if @student.call_logs.count >= 4 %>
+  <div class="prizegiven"><span class="icon-alert"></span> This student has called 4 times. Please give prize.</div>
+  <% @student.call_logs.limit(4).each do |log| %>
+  <% log.referral_prize = true %>
+  <% log.save! %>
+  <% end %>
+  <% end %>
   <% if @student.call_logs.exists?(prize_given: true) %>
   <div class="prizegiven"><span class="icon-alert"></span> This student has recieved a prize already.</div>
   <% end %>
