@@ -1,26 +1,32 @@
   <%= content_for :page, "Call Log" %>
+  <div class="container">
   <div class="parent">
   <%= form_for(@call_log,:html=>{:class=>"firstform",:multipart => true}) do |f| %>
-    <%= f.text_field :codename, :required => true, maxlength: 6, placeholder: "Codename", class: "input" %>
+    <%= f.text_field :codename, :required => true, maxlength: 7, placeholder: "Codename", class: "input" %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :date, :value => Date.today %>
     <p class="error">Codename not recognized. Please check spelling or register a new student <a class="link">here</a>.</p>
+    <p class="correct">Codename in use! If the caller has not called Homework Hotline before, please include their middle initial in the codename.</p>
     <%= f.submit "CONTINUE", class: "button" %>
     <% end %>
     </div>
+    </div>
     <script type="text/javascript">
       $('.error').hide();
+      $('.correct').hide();
       $('.button').attr('disabled','disabled');
       $('.input').change(function() {
         var value = $('.input').val().toUpperCase();
         if ((<% if Student.count == 0 %>false<% else %><% Student.all.each do |student| %>value == "<%= student.codename %>" <% if student.id + 1 > Student.last.id %><% else %>|| <% end %><% end %><% end %>) && value != ""){
           $('.button').removeAttr('disabled');
           $('.error').hide();
+          $('.correct').show();
           $('.input').css("border", "none");
         }
         else {
           $('.input').css("border", "#ff4d4d 2px solid");
           $('.error').show();
+          $('.correct').hide();
           $('.button').attr('disabled','disabled');
         }
         $('.link').click(function() {
@@ -36,6 +42,15 @@
       margin-left: 10px;
       position: relative;
       bottom: 15px;
+    }
+    .correct {
+      color: black;
+      margin: 0;
+      line-height: 18px;
+      margin-left: 10px;
+      position: relative;
+      bottom: 15px;
+      font-size: 15px;
     }
     	  .input {
     border: none;
@@ -58,8 +73,6 @@
   }
   .parent {
     width: 300px;
-    margin-left: -150px;
-    left: 50%;
     position: relative;
     top: 30px;
   }
