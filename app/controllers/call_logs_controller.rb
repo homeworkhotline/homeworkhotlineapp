@@ -64,6 +64,7 @@ class CallLogsController < ApplicationController
   # PATCH/PUT /call_logs/1
   # PATCH/PUT /call_logs/1.json
   def update
+    @student = @call_log.student
     respond_to do |format|
       if @call_log.update(call_log_params)
         format.html { redirect_to root_path, notice: 'Call log was successfully updated.' }
