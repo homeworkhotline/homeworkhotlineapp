@@ -20,8 +20,8 @@ config.action_mailer.smtp_settings = {
 :address => 'smtpout.secureserver.net',
 :domain  => 'www.homeworkhotline.info',
 :port      => 80,
-:user_name => 'volunteer@homeworkhotline.info',
-:password => 'Read34@Hh',
+:user_name => ENV['gmail_username'],
+:password => ENV['gmail_password'],
 :enable_starttls_auto => true,
 :authentication => :plain
 }
