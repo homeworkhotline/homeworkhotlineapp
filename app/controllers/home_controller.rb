@@ -51,7 +51,6 @@ class HomeController < ApplicationController
       redirect_to root_path
     end
     @users = User.all
-    @report = MnpsReport.new
   end
 
   def devstats

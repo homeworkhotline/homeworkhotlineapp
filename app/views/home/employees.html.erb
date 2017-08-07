@@ -27,11 +27,8 @@
   <div class="container">
   <div class="formparent">
   <% if TimeClock.all.where.not(clock_out: nil, billed: true).present? %>
-  <%= form_for(@report) do |f| %>
-  <%= f.hidden_field :var, :value => -1 %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <%= f.hidden_field :billdate, :value => Date.today %>
-    <%= f.submit "CONDUCT PAYROLL", class: "submit click" %>
+    <%= link_to mnps_reports_path do %>
+    <div class="submit click">CONDUCT PAYROLL</div>
     <% end %>
     <% else %>
     <div class="submit fakesub">CONDUCT PAYROLL</div>

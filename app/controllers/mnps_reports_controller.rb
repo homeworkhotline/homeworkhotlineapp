@@ -6,6 +6,7 @@ class MnpsReportsController < ApplicationController
   # GET /mnps_reports.json
   def index
     @mnps_reports = MnpsReport.all
+    @report = MnpsReport.new
   end
 
   # GET /mnps_reports/1
