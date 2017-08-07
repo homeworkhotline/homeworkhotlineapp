@@ -40,7 +40,7 @@
 <% end %>
   <% else %>
   <div class="timeparent">
-  <% if current_user.administrator? %>
+  <% if current_user.administrator? || current_user.administrator? %>
   <div class="adminbar">
     <%= link_to "TIMESHEET", root_path, class: "active" %>
     <%= link_to "EMPLOYEES", employees_path %>

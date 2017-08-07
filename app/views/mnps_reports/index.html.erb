@@ -21,7 +21,7 @@
         <td><%= time.clock_out.strftime('%l:%M %p') %></td>
         <td><%= time.hours %></td>
         <td><%= link_to 'Edit', edit_time_clock_path(time) %></td>
-        <td><%= link_to 'Destroy', time, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', time, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <% end %>

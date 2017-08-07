@@ -47,9 +47,6 @@ class HomeController < ApplicationController
   end
 
   def employees
-    unless current_user.administrator?
-      redirect_to root_path
-    end
     @users = User.all
   end
 

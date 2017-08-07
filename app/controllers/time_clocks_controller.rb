@@ -45,9 +45,6 @@ class TimeClocksController < ApplicationController
 
   # GET /time_clocks/1/edit
   def edit
-    unless current_user.administrator?
-      redirect_to root_path
-    end
   end
 
   # POST /time_clocks
