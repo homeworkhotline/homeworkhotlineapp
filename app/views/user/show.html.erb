@@ -15,7 +15,7 @@
 </div>
 </div>
 <% end %>
-<% if current_user.administrator? || current_user.administrator? %>
+<% if current_user.administrator? || current_user.specialist? %>
 <div class="adminbar">
     <%= link_to "TIMESHEET", root_path %>
     <%= link_to "EMPLOYEES", employees_path, :class => "active" %>
