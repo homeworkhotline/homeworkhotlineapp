@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730153036) do
+ActiveRecord::Schema.define(version: 20170807220423) do
 
   create_table "call_logs", force: :cascade do |t|
     t.string   "entered_by"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20170730153036) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "schooltype"
+    t.boolean  "private"
   end
 
   create_table "searches", force: :cascade do |t|

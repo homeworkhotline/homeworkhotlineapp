@@ -19,7 +19,7 @@
 
     <div class="field">
     <h4>School Type</h4>
-    <%= f.select :schooltype, [["Elementary"], ["Middle School"], ["High School"], ["K-12"], ["Alternative"],["Private"]] %>
+    <%= f.select :schooltype, [["Pre-K"],["K"],["Elem 1 - 5"],["Elem 1 - 6"], ["Middle 5 - 8"],["Middle/High 5-9"], ["High 9 - 12"], ["K-12"], ["Alternative"],["Community Agency"], ["Home School"], ["GED"]] %>
   </div>
 
   <div class="field" style="display: inline-block;">
@@ -33,7 +33,7 @@
   </div>
 
   <div class="field", style="display: inline-block;">
-    <%= f.select :state, options_for_select([["TN", "TN"]]), :required => true %> <b>,</b>
+    <%= f.select :state, options_for_select([["TN", "TN"],["KY", "KY"]]), :required => true %> <b>,</b>
   </div>
 
   <div class="field", style="display: inline-block;">
