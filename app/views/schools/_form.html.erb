@@ -19,7 +19,12 @@
 
     <div class="field">
     <h4>School Type</h4>
-    <%= f.select :schooltype, [["Pre-K"],["K"],["Elem 1 - 5"],["Elem 1 - 6"], ["Middle 5 - 8"],["Middle/High 5-9"], ["High 9 - 12"], ["K-12"], ["Alternative"],["Community Agency"], ["Home School"], ["GED"]] %>
+    <%= f.select :schooltype, [["Pre-K"],["K"],["Elem K - 5"],["Elem K - 6"], ["Middle 5 - 8"],["Middle/High 5-9"], ["High 9 - 12"],["K-8"], ["K-12"], ["Alternative"],["Community Agency"], ["Home School"], ["GED"]] %>
+  </div>
+
+  <div class="field">
+    <b>In The Appalachain Region?</b>
+    <%= f.check_box :private, class:"checkbox" %>
   </div>
 
   <div class="field" style="display: inline-block;">
@@ -35,6 +40,7 @@
   <div class="field", style="display: inline-block;">
     <%= f.select :state, options_for_select([["TN", "TN"],["KY", "KY"]]), :required => true %> <b>,</b>
   </div>
+
 
   <div class="field", style="display: inline-block;">
     <%= f.number_field :zip, style: "width: 60px;", :required => true %>
