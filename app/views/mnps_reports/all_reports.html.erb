@@ -25,7 +25,7 @@ Session Accountability Form for Teachers</h3>
     <th>Time Out</th>
     <th># of Hours</th>
   </tr>
-  <% @user.time_clocks.where.not(clock_out: nil).each do |timesheet| %>
+  <% @user.time_clocks.where.not(clock_out: nil).order('date').each do |timesheet| %>
   <tr>
     <td><%= timesheet.date.strftime("%-m/%-d/%y") %></td>
     <td><%= timesheet.clock_in.strftime("%l:%M") %></td>
