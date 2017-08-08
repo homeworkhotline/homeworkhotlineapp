@@ -24,6 +24,7 @@ resources :user, only: [:show]
   post '/principals/email/:id', to: 'principals#sendmail', as: 'sendmail'
   post '/genschools', to: 'home#genschools', as: 'genschools'
   post '/sendlocmail', to: 'home#sendlocmail', as: 'sendlocmail'
+  get '/mnpssummary', to: 'home#mnpssummary', as: 'mnpssummary'
 
 
 

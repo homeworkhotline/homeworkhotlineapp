@@ -81,4 +81,9 @@ class HomeController < ApplicationController
         LocMailer.send_loc_notice(user).deliver!
       end
     end
+
+    def mnpssummary
+      
+    end
+
   end
