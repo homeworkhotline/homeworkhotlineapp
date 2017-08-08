@@ -1,0 +1,9 @@
+I"Ì(function() {
+  App.statistics = App.cable.subscriptions.create("StatisticsChannel", {
+    connected: function() {},
+    disconnected: function() {},
+    received: function(data) {}
+  });
+
+}).call(this);
+:ET

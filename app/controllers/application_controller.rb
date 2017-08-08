@@ -39,7 +39,7 @@ end
   protected
   	def configure_permitted_parameters
   		devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :password_confirmation, :firstname, :lastname, :token])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :firstname, :men, :district, :school])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :firstname, :men, :district, :school, :loc])
 	end
 
 end
