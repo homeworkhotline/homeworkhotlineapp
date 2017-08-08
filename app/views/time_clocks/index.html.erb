@@ -1,18 +1,3 @@
-<div class="container">
-<div class="buttonright">
-<div class="buttonparent">
-<%= link_to destroy_user_session_path, method: :delete do %>
-<div class="button">LOG OUT</div>
-<% end %>
-<%= link_to new_call_log_path do %>
-<div class="parent">
-<div class="arrow">TAKE A CALL</div>
-<div class="right arrow"></div>
-<div class="righter arrow"></div>
-</div>
-</div>
-</div>
-<% end %>
 <%= content_for :page, "Timesheets" %>
 <%= content_for :title, "Timesheets" %>
 <% if current_user.mnps_teacher? && current_user.men.nil? %>
@@ -38,7 +23,40 @@
     <%= f.submit "Submit" %>
   </div>
 <% end %>
+<% elsif current_user.mnps_teacher? && current_user.loc.nil? %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+  <div class="field">
+    Location Code<br />
+    <%= f.number_field :loc, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
+<style type="text/css">
+  input {
+    width: 200px;
+    height: 30px;
+  }
+</style>
   <% else %>
+  <div class="container">
+<div class="buttonright">
+<div class="buttonparent">
+<%= link_to destroy_user_session_path, method: :delete do %>
+<div class="button">LOG OUT</div>
+<% end %>
+<%= link_to new_call_log_path do %>
+<div class="parent">
+<div class="arrow">TAKE A CALL</div>
+<div class="right arrow"></div>
+<div class="righter arrow"></div>
+</div>
+</div>
+</div>
+<% end %>
   <div class="timeparent">
   <% if current_user.administrator? || current_user.specialist? %>
   <div class="adminbar">

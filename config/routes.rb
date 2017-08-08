@@ -23,6 +23,7 @@ resources :user, only: [:show]
   get '/principals/dlnice/:id', to: 'principals#dlnice', as: 'dlnice'
   post '/principals/email/:id', to: 'principals#sendmail', as: 'sendmail'
   post '/genschools', to: 'home#genschools', as: 'genschools'
+  post '/sendlocmail', to: 'home#sendlocmail', as: 'sendlocmail'
 
 
 

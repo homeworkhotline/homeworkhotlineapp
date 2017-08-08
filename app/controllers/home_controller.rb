@@ -76,4 +76,9 @@ class HomeController < ApplicationController
       end
       ActionCable.server.broadcast "call_log_channel",{calllogs: CallLog.all.size, user: User.all.size, reports: MnpsReport.all.size,schools: School.all.size, principals: Principal.all.size, searches: Search.all.size, students:Student.all.size, timesheets: TimeClock.all.size}
     end
+    def sendlocmail
+      User.all.where(role: 4).each do |user|
+        LocMailer.send_loc_notice(user).deliver!
+      end
+    end
   end
