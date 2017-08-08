@@ -51,7 +51,7 @@ class TimeClocksController < ApplicationController
   # POST /time_clocks.json
   def create
     @time_clock = TimeClock.new(time_clock_params)
-    if (current_user.time_clocks.last && current_user.time_clocks.last.clock_out.nil?) &! current_user.administrator?
+    if (current_user.time_clocks.last && current_user.time_clocks.last.clock_out.nil?) &! (current_user.administrator? || current_user.specialist?)
       redirect_to root_path
     else
       if @time_clock.user_id.nil?
