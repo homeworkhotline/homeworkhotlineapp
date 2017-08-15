@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>Pay Code</th>
+      <th>Employee Number</th>
+      <th>Employee Name</th>
+      <th>Dates Worked</th>
+      <th>Total Hours</th>
+      <th>Rate Hourly</th>
+      <th>LOC</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @allreport = MnpsReport.where(var: -1).last %>
+    <% User.where(role: 4).includes(:mnps_reports).where(mnps_reports: {var: MnpsReport.where(var: -1).last.id}).each do |user| %>
+      <% @report = user.mnps_reports.last %>
+      <tr>
+        <td>70</td>
+        <td><%= user.men %></td>
+        <td><%= user.lastname %>, <%= user.firstname %></td>
+        <td><%= @report.billdate %></td>
+        <td><%= @report.hours %></td>
+        <td>25.00</td>
+        <td><%= user.loc %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

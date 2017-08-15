@@ -9,6 +9,8 @@
     <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "input pass" %>
   </div>
 
+  <%= f.hidden_field :remember_me, value: "true" %>
+
   <div class="actions">
     <%= link_to new_user_registration_path do %>
       <div class="signup">SIGN UP</div>
