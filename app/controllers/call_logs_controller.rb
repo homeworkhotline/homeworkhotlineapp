@@ -23,6 +23,7 @@ class CallLogsController < ApplicationController
     @students = Student.all
     @schools = School.all
     @student = @call_log.student
+    @school = School.find_by_id(@student.school_id)
   end
 
   # POST /call_logs

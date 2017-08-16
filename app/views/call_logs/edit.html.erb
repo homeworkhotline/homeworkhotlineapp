@@ -1,7 +1,9 @@
 <% content_for :page, "Call Log" %>
 <% content_for :title, "Call Log" %>
 <div class="banner"></div>
-<h1 style="position: fixed;">Codename: <%= @call_log.codename %></h1>
+<h1 style="position: fixed;">Codename: <%= @call_log.codename %></h1><br><br>
+<h1 style="position: fixed;">Student Grade: <%= @student.grade %></h1><br><br>
+<h1 style="position: fixed;">County: <%= Principal.find_by_id(@school.county).schoolsystem %></h1>
 <%= form_for(@call_log) do |f| %>
   <div class="calldetails">
   <h2>CALL DETAILS</h2>
@@ -19,7 +21,7 @@
 <div class="material">
 <h2>MATERIAL COVERED</h2>
   <div class="field">
-    <h3>Subject</h3><%= f.select :skill, grouped_options_for_select([["Math", ["K - 8", "Pre-Aglebra", "Integrated Math 1", "Aglebra 1", "Integrated Math 2", "Geometry", "Integrated Math 3", "Algbera 2", "Bridge Math", "Pre-Cal/Trig", "Calculus", "Economics", "Statistics", "College"]],["Science",["K - 8", "Physical Science", "Health", "Chemistry", "Forensic", "Biology", "Physics"]], ['Other', ["ACT Prep / Freshman Seminar", "Foreign Language - Spanish", "Language Arts / Reading / Vocabulary", "SS/ Geography / History / Govt.", "Music"]],["Non-Academic", ["Hotline info"]]]), {prompt: "Subject..."}, required: true %>
+    <h3>Subject</h3><%= f.select :skill, grouped_options_for_select([["Math", [["K - 8", "K-8 Math"], "Pre-Aglebra", "Integrated Math 1", "Aglebra 1", "Integrated Math 2", "Geometry", "Integrated Math 3", "Algbera 2", "Bridge Math", "Pre-Cal/Trig", "Calculus", "Economics", "Statistics", "College"]],["Science",["K - 8", "Physical Science", "Health", "Chemistry", "Forensic", "Biology", "Physics"]], ['Other', ["ACT Prep / Freshman Seminar", "Foreign Language - Spanish", "Language Arts / Reading / Vocabulary", "SS/ Geography / History / Govt.", "Music"]],["Non-Academic", ["Hotline info"]]]), {prompt: "Subject..."}, required: true %>
   </div>
 
   <div class="field checks">
