@@ -208,7 +208,7 @@ h4 {
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search through objects">
   <ul id="myUL">
     <% @results.each do |result| %>
-      <li><%= link_to "#{result.codename} - #{result.entered_by}","/call_logs/#{result.id}/edit" %></li><br>
+      <li><%= link_to "#{result.codename} - #{result.entered_by}","/call_logs/#{result.id}/edit" %></li>
   <% end %>
   </ul>
   <style type="text/css">
@@ -242,6 +242,10 @@ h4 {
     font-size: 18px; /* Increase the font-size */
     color: black !important; /* Add a black text color */
     display: block; /* Make it into a block element to fill the whole list */
+}
+
+li {
+  margin-bottom: 10px;
 }
 
 #myUL li a.header {
