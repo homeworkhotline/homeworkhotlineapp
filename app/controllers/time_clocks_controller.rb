@@ -14,19 +14,15 @@ class TimeClocksController < ApplicationController
     @total_hours = 0
     @unpaid_hours = 0
     @time_clocks.each do |time|
-      if time.clock_out.nil?
-      else
-        time.hours = time_diff(time.clock_in, time.clock_out).to_d
-        time.save!
+      unless time.clock_out.nil?
         @total_hours += time.hours
       end
     end
     @time_clocks.where(billed: false).each do |time|
-    if time.hours.nil?
-    else
-    @unpaid_hours += time.hours
-  end
-  end
+      unless time.hours.nil?
+        @unpaid_hours += time.hours
+      end
+    end
   end
 
   # GET /time_clocks/1
@@ -107,7 +103,6 @@ class TimeClocksController < ApplicationController
       if @time_clock.update(time_clock_params)
         format.html { redirect_to @time_clock.user }
         format.json { render :show, status: :ok, location: @time_clock }
-        @time_clock.hours = time_diff(@time_clock.clock_in, @time_clock.clock_out)
     @time_clock.billed = 0
     @time_clock.save!
       else

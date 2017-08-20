@@ -34,13 +34,13 @@
 	CLOCK IN
 	</div>
 	<div class="timeclock">
-	<%= f.select :clockinhour, options_for_select(('01'..'12').to_a, @time_clock.clock_in ? @time_clock.clock_in.strftime('%l').to_i : nil)%><span class="colon">:</span><%= f.select :clockinmin, options_for_select(('00'..'60').to_a, @time_clock.clock_in ? @time_clock.clock_in.strftime('%M').to_i : nil) %><%= f.select :clockinmeridiem, options_for_select(['AM', 'PM'], @time_clock.clock_in ? @time_clock.clock_in.strftime('%p') : nil) %>
+	<%= f.select :clockinhour, options_for_select(('01'..'12').to_a, @time_clock.clock_in ? @time_clock.clock_in.strftime('%I') : 12)%><span class="colon">:</span><%= f.select :clockinmin, options_for_select(('00'..'60').to_a, @time_clock.clock_in ? @time_clock.clock_in.strftime('%M') : 00) %><%= f.select :clockinmeridiem, options_for_select(['AM', 'PM'], @time_clock.clock_in ? @time_clock.clock_in.strftime('%p') : 'AM') %>
 	</div>
 	<div class="timetext">
 	CLOCK OUT
 	</div>
 	<div class="timeclock">
-	<%= f.select :clockouthour, options_for_select(('01'..'12').to_a, @time_clock.clock_in ? @time_clock.clock_in.strftime('%l').to_i : nil)%><span class="colon">:</span><%= f.select :clockoutmin, options_for_select(('00'..'60').to_a, @time_clock.clock_in ? @time_clock.clock_in.strftime('%M').to_i : nil) %><%= f.select :clockoutmeridiem, options_for_select(['AM', 'PM'], @time_clock.clock_in ? @time_clock.clock_in.strftime('%p') : nil) %>
+	<%= f.select :clockouthour, options_for_select(('01'..'12').to_a, @time_clock.clock_out ? @time_clock.clock_out.strftime('%I') : 12)%><span class="colon">:</span><%= f.select :clockoutmin, options_for_select(('00'..'60').to_a, @time_clock.clock_out ? @time_clock.clock_out.strftime('%M') : 00) %><%= f.select :clockoutmeridiem, options_for_select(['AM', 'PM'], @time_clock.clock_out ? @time_clock.clock_out.strftime('%p') : 'PM') %>
 	</div>
 	<div class="container">
 	<%= f.submit "SUBMIT", class: "submit" %>

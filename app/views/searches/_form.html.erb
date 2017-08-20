@@ -14,7 +14,7 @@
   <%= form_for(@search) do |f| %>
   <div class="container">
   <div class="field">
-    <%= f.select :select, options_for_select([["Prize Sent", "prize_sent"], ["Prize Given", "prize_given"], ["Language Spoken", "lang"], ["Understand at End", "placehold"], ["Subject", "skills"], ["Textbook Used", "textbool"]]) %>
+    <%= f.select :select, options_for_select([["Codename", "codename"], ["Prize Sent", "prize_sent"], ["Prize Given", "prize_given"], ["Language Spoken", "lang"], ["Understand at End", "placehold"], ["Subject", "skills"], ["Textbook Used", "textbool"]]) %>
     <%= f.text_field :search %>
     </div>
     </div>
@@ -71,7 +71,7 @@
   <div class="container">
   <div class="field">
     <%= f.select :select, options_for_select([["Employee Role", "role"]]) %>
-    <%= f.select :search, options_for_select([["Specialist", 7], ["Admin", 6], ["Metro Teacher", 2], ["Hotline Teacher", 1], ["Volunteer", 0]]) %>
+    <%= f.select :search, options_for_select([["Specialist", 7], ["Admin", 6], ["Metro Teacher", 4], ["Hotline Teacher", 1], ["Volunteer", 0]]) %>
     </div>
     </div>
     <div class="container">

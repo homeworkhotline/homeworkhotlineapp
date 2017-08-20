@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 	before_action :authenticate_user!, except: [:sessioninfo]
-  layout 'report', only: [:statistics]
+  layout 'report', only: [:statistics, :mnpssummary]
 
   def statistics
     unless current_user.administrator? || current_user.specialist?

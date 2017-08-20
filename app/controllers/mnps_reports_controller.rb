@@ -49,7 +49,7 @@ class MnpsReportsController < ApplicationController
     @user = @mnps_report.user
     respond_to do |format|
       if @mnps_report.save
-        @users = User.where.not(role: 4).includes(:time_clocks).where.not(:time_clocks => {clock_out: nil, billed: true})
+        @users = User.includes(:time_clocks).where.not(:time_clocks => {clock_out: nil, billed: true})
         @unpaid_hours = 0
         @users.each do |user|
           user.time_clocks.where(billed: false).each do |time|

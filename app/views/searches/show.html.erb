@@ -1,9 +1,28 @@
+
 <% if @search.model == "MnpsReport" || @search.model == "Prize" || @model.exists?("#{@param}": @search.search)%>
   <% if @search.model == "MnpsReport" %>
+  <% @results = User.where(role: @search.search) %>
   <% unless @results.nil? %>
+  <% if @search.search == "4" %>
+  <script type="text/javascript">
+  window.open("/", '_blank');
+  var url =  window.location.href
+    window.open('/mnpssummary.pdf', '_blank');
+    if (getLastPart(url) == "pdf") {
+      
+  }else {
+    window.open("/searches/<%= @search.id %>.pdf", '_blank');
+    setTimeout(function(){window.close();},1000);
+  }
+  function getLastPart(url) {
+    var parts = url.split(".");
+    return (url.lastIndexOf('.') !== url.length - 1 ? parts[parts.length - 1] : parts[parts.length - 2]);
+  }
+  </script>
+  <% end %>
   <% @results.each do |user| %>
-  <% user.call_logs.each do |bigreport| %>
-<% @user = bigreport.user %>
+  <% @bigreport = user.mnps_reports.last %>
+<% @user = user %>
 <% @totalhours = 0 %>
 <% @user.time_clocks.where.not(billed: false).each do |total| %>
   <% @totalhours += total.hours %>
@@ -19,8 +38,8 @@ Session Accountability Form for Teachers</h3>
   <p class="men"><strong>Metro Employee #: <u><%= @user.men %></u></strong></p>
 </div>
 <h4>Hours Worked:<br><br><%= @totalhours %></h4>
-<h4>Amount Billed:<br><br><%= bigreport.hours %></h4>
-<h4>Previously Billed:<br><br><%= @totalhours - bigreport.hours %></h4>
+<h4>Amount Billed:<br><br><%= @bigreport.hours %></h4>
+<h4>Previously Billed:<br><br><%= @totalhours - @bigreport.hours %></h4>
 <div class="middleparent">
 <table class="maintable" style="width:350px;">
   <tr>
@@ -48,7 +67,7 @@ Session Accountability Form for Teachers</h3>
 </table>
 <div class="bottomdiv">
 <%= image_tag "gth54bt3kj4j5jk4b3.png", width: "250px" %>
-<b style="float: right;"><%= @mnps_report.billdate %></b>
+<b style="float: right;"><%= @bigreport.billdate %></b>
 </div>
 </div>
 <table class="prevtable">
@@ -64,7 +83,6 @@ Session Accountability Form for Teachers</h3>
   <% end %>
 </table>
 </div>
-<% end %>
 <% end %>
 <style>
 .middleparent {
@@ -187,9 +205,74 @@ h4 {
       }
     </style>
   <% elsif @search.model == "CallLog" %>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search through objects">
+  <ul id="myUL">
     <% @results.each do |result| %>
-      <%= link_to "#{result.codename}","/#{@search.model.downcase}s/#{result.id}" %><br>
+      <li><%= link_to "#{result.codename} - #{result.entered_by}","/call_logs/#{result.id}/edit" %></li><br>
   <% end %>
+  </ul>
+  <style type="text/css">
+    input {
+      background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat;
+    background-size: 30%; /* Do not repeat the icon image */
+    width: 80%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    }
+    a {
+      color: black !important;
+    }
+    #myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black !important; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; /* Add a darker background color for headers */
+    cursor: default; /* Change cursor style */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+  </style>
+  <script>
+function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
   <% else %>
     <% @results.each do |result| %>
       <%= link_to "#{result.schoolsystem}","/#{@search.model.downcase}s/#{result.id}" %><br>

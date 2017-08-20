@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808212401) do
+ActiveRecord::Schema.define(version: 20170820192532) do
 
   create_table "call_logs", force: :cascade do |t|
     t.string   "entered_by"
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(version: 20170808212401) do
     t.datetime "starttime"
     t.datetime "endtime"
     t.decimal  "duration",       precision: 5, scale: 2
+    t.boolean  "dropped"
+    t.boolean  "transferred"
+    t.boolean  "chat"
   end
 
   create_table "image_shares", force: :cascade do |t|

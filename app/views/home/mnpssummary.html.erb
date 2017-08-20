@@ -1,4 +1,5 @@
-<table>
+<div class="container">
+<table border="1px">
   <thead>
     <tr>
       <th>Pay Code</th>
@@ -12,6 +13,7 @@
   </thead>
 
   <tbody>
+  <% @total = 0 %>
   <% @allreport = MnpsReport.where(var: -1).last %>
     <% User.where(role: 4).includes(:mnps_reports).where(mnps_reports: {var: MnpsReport.where(var: -1).last.id}).each do |user| %>
       <% @report = user.mnps_reports.last %>
@@ -23,7 +25,17 @@
         <td><%= @report.hours %></td>
         <td>25.00</td>
         <td><%= user.loc %></td>
+        <% @total += @report.hours %>
       </tr>
     <% end %>
   </tbody>
 </table>
+<h3>Total billed this period: <%= @total %></h3>
+</div>
+<style type="text/css">
+  td,th {
+    font-size: 12px;
+    width: 0;
+    padding: 1px;
+  }
+</style>

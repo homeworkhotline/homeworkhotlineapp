@@ -77,7 +77,7 @@
   </thead>
 
   <tbody>
-    <% @time_clocks.order('date').each do |time_clock| %>
+    <% @time_clocks.order('clock_in').each do |time_clock| %>
       <tr>
       <td><%= time_clock.date.strftime("%-m/%-d/%Y") %></td>
         <td><%= time_clock.clock_in.strftime("%l:%M %p") %></td>

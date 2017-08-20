@@ -11,40 +11,36 @@ class SearchesController < ApplicationController
   # GET /searches/1
   # GET /searches/1.json
   def show
-    render :layout => 'report'
     @principals = Principal.all
     @reports = MnpsReport.all
     @search = Search.find(params[:id])
-    unless @search.model == "Prize"
-    @model = @search.model.constantize
-    @param = @search.select
+      @model = @search.model.constantize
+      @param = @search.select
       @results = @model.where("#{@param}": @search.search)
-    if @param.include?("titlei") || @search.select.include?("sonicpartner") || @search.select.include?("appalachain")
-    @results = @model.where("#{@param}": @search.search.to_b)
-    elsif @param.instance_of?(String) && @search.model != "MnpsReport"
-      if @search.search.include?(">")
-        @gsearch = @search.search.tr(">","")
-        @results = @model.where("#{@param} > ?", @gsearch.to_i)
-        if @model.find_by("#{@param} > ?", @gsearch.to_i).present?
-          @search.search = @model.first.id
-          @param = "id"
-          @search.save!
+      if @param.include?("titlei") || @search.select.include?("sonicpartner") || @search.select.include?("appalachain")
+        @results = @model.where("#{@param}": @search.search.to_b)
+      elsif @param.instance_of?(String) && @search.model != "MnpsReport"
+        if @search.search.include?(">")
+          @gsearch = @search.search.tr(">","")
+          @results = @model.where("#{@param} > ?", @gsearch.to_i)
+          if @model.find_by("#{@param} > ?", @gsearch.to_i).present?
+            @search.search = @model.first.id
+            @param = "id"
+            @search.save!
+          end
+        elsif @search.search.include?("<")
+          @gsearch = @search.search.tr("<","")
+          @results = @model.where("#{@param} < ?", @gsearch.to_i)
+          if @model.find_by("#{@param} < ?", @gsearch.to_i).present?
+            @search.search = @model.first.id
+            @param = "id"
+            @search.save!
+          end
+        elsif true && @search.model != "MnpsReport"
+          @results = @model.where("#{@param}": @search.search)
         end
-      elsif @search.search.include?("<")
-        @gsearch = @search.search.tr("<","")
-        @results = @model.where("#{@param} < ?", @gsearch.to_i)
-        if @model.find_by("#{@param} < ?", @gsearch.to_i).present?
-          @search.search = @model.first.id
-          @param = "id"
-          @search.save!
-        end
-      else
-      @results = @model.where("#{@param}": @search.search)
       end
-    elsif @search.model == "MnpsReport"
-      @results = User.where(role: @search.search)
-    end
-  end
+      render :layout => 'report'
   end
 
   # GET /searches/new
@@ -79,7 +75,7 @@ class SearchesController < ApplicationController
   def update
     respond_to do |format|
       if @search.update(search_params)
-        if (@search.model == "MnpsReport" and not User.where(role: @search.search).nil?) || @search.model == "Prize"
+        if @search.model == "Prize"
         format.html { redirect_to search_path(@search, format: 'pdf'), notice: 'Search Results:' }
         format.json { render :show, status: :ok, location: @search }
       else

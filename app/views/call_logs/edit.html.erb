@@ -3,7 +3,9 @@
 <div class="banner"></div>
 <h1 style="position: fixed;">Codename: <%= @call_log.codename %></h1><br><br>
 <h1 style="position: fixed;">Student Grade: <%= @student.grade %></h1><br><br>
+<% if Rails.env.production? %>
 <h1 style="position: fixed;">County: <%= Principal.find_by_id(@school.county).schoolsystem %></h1>
+<% end %>
 <%= form_for(@call_log) do |f| %>
   <div class="calldetails">
   <h2>CALL DETAILS</h2>
@@ -16,6 +18,14 @@
   <div class="field">
   <h3>Parent participation</h3>
     <%= f.check_box :parent %>
+  </div>
+  <div class="field">
+  <h3>Call Dropped</h3>
+    <%= f.check_box :dropped %>
+  </div>
+  <div class="field">
+  <h3>Call Transferred</h3>
+    <%= f.check_box :transferred %>
   </div>
   </div>
 <div class="material">
@@ -43,6 +53,11 @@
   <div class="field checks">
     <h4>Image Share</h4>
     <%= f.check_box :image_share %>
+  </div>
+
+  <div class="field checks">
+    <h4>Chat</h4>
+    <%= f.check_box :chat %>
   </div>
 
   <div class="field hide">
@@ -96,25 +111,25 @@
   <div class="field">
   <h3>Students name</h3>
   <% if @student.call_logs.exists?(prize_given: true) %>
-  <%= f.text_field :name, value: "#{@student.call_logs.first.name}", readonly: true %>
+  <%= f.text_field :name, value: "#{@student.call_logs.first.name}", class: "preq" %>
   <% else %>
-    <%= f.text_field :name, placeholder: "e.g. Tim S" %>
+    <%= f.text_field :name, placeholder: "e.g. Tim S", class: "preq" %>
     <% end %>
   </div>
 
   <div class="field">
   <h3>Teacher name</h3>
-    <%= f.text_field :teacher_name, placeholder: "e.g. Mrs. Sockel" %>
+    <%= f.text_field :teacher_name, placeholder: "e.g. Mrs. Sockel", class: "preq" %>
   </div>
 
   <div class="field">
   <h3>Prize given?</h3>
-    <%= f.check_box :prize_given %>
+    <%= f.check_box :prize_given, class: 'checked' %>
   </div>
   <%=f.hidden_field :prize_sent, value: false %>
     <div class="field">
   <h3>Prize type</h3>
-    <%= f.select :prize_type, options_for_select(["School Material", "Fun Toy", "Something else"]) %>
+    <%= f.select :prize_type, options_for_select(["School Material", "Fun Toy", "Something else"]), class: "preq" %>
   </div>
   </div>
   <div class="actions">
@@ -122,6 +137,10 @@
   </div>
 <% end %>
 <style type="text/css">
+form {
+  position: relative;
+  bottom: 90px;
+}
 input[type="range"]::-ms-fill-lower {
   background: transparent;
 }
@@ -482,5 +501,17 @@ if (document.getElementById('textbool').checked){
       $('.postcheck').prop("checked", true);
     }
   });
+  $('#call_log_prize_given').on('change', function() {
+    if(this.checked) {
+      $('.preq').prop("required", true);
+      console.log("works")
+    } else {
+      $('.preq').prop("required", false);
+    }
+  });
+  if ($('input[type=checkbox]').checked){
+    $('.preq').prop("required", true);
+    alert("Hi");
+  }
 });
 </script>
