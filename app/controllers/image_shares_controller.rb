@@ -13,7 +13,7 @@ class ImageSharesController < ApplicationController
         format.json { render json: @image.errors, status: :unprocessable_entity }
   	end
   end
-  	ActionCable.server.broadcast "image_channel",{image: @image.id, codename: @image.codename}
+  	ActionCable.server.broadcast "image_channel",{image: @image.id, codename: @image.codename, id: CallLog.where(duration: nil, codename: @image.codename).last.id}
   	ActionCable.server.broadcast "call_log_channel",{calllogs: CallLog.all.size, user: User.all.size, reports: MnpsReport.all.size,schools: School.all.size, principals: Principal.all.size, searches: Search.all.size, students:Student.all.size, timesheets: TimeClock.all.size}
   end
 

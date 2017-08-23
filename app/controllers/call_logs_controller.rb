@@ -81,7 +81,9 @@ class CallLogsController < ApplicationController
       @call_log.duration = time_diff(@call_log.starttime, @call_log.endtime).to_d
       @call_log.save!
   ActionCable.server.broadcast "stats_channel", {
-    sessions: CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).size
+    sessions: CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).size,
+    prevsessions: CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day, 28.days.ago.end_of_day).size,
+    sessiongraph: CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day)
   }
   ActionCable.server.broadcast "active_log_channel",{activelogs: CallLog.all.where(endtime: nil).count}
   end

@@ -22,33 +22,13 @@
     </div>
 <% end %>
  <% elsif @search.model == "Student" %>
-    <% @schools = School.all %>
   <%= form_for(@search) do |f| %>
   <div class="field">
-    <%= f.select :select, options_for_select([["Grade", "grade"], ["School", "school_id"]]), {}, { :class => 'select' } %>
-    <%= f.select :search, options_for_select(@schools.collect { | school | ["#{school.name}", school.id] }), {:prompt => 'School...'}, { :class => 'schools' }%>
+    <%= f.select :select, options_for_select([["Codename", "codename"],["Grade", "grade"]]), {}, { :class => 'select' } %>
     <%= f.text_field :search, class: "text" %>
     <%= f.submit "Finish Search" %>
     </div>
 <% end %>
-    <script type="text/javascript">
-      $('.schools').hide();
-      var input = $('.select').val();
-      $('.select').change(function() {
-      var input = $('.select').val();
-      if (input == "school_id") {
-        $('.schools').show();
-        $('.text').remove();
-      } else {
-        $('.text').show();
-        $('.schools').remove(); 
-      }
-    });
-      if (input == "school_id") {
-        $('.schools').show();
-        $('.text').hide();
-      }
-    </script>
 <% else %>
   <%= form_for(@search) do |f| %>
   <div class="field">

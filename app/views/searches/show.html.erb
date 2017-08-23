@@ -158,7 +158,78 @@ h4 {
     <% end %>
   <% elsif @search.model == "Student" %>
     <% @results.each do |result| %>
-      <%= link_to "#{result.codename}","/#{@search.model.downcase}s/#{result.id}" %><br>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search through objects">
+  <ul id="myUL">
+    <% @results.each do |result| %>
+      <li><%= link_to "#{result.codename}","/students/#{result.id}/edit" %></li>
+  <% end %>
+  </ul>
+  <style type="text/css">
+    input {
+      background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat;
+    background-size: 30%; /* Do not repeat the icon image */
+    width: 80%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    }
+    a {
+      color: black !important;
+    }
+    #myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black !important; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; /* Add a darker background color for headers */
+    cursor: default; /* Change cursor style */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+  </style>
+  <script>
+function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
     <% end %>
   <% elsif @search.model == "Prize" %>
     <% @results = CallLog.where(prize_given: true, prize_sent: false) %>

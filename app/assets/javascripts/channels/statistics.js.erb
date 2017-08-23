@@ -1,4 +1,4 @@
-App.devstats = App.cable.subscriptions.create("ImageshareChannel", {
+App.devstats = App.cable.subscriptions.create("StatisticsChannel", {
   connected: function() {
     // Called when the subscription is ready for use on the server
 },
@@ -6,6 +6,7 @@ App.devstats = App.cable.subscriptions.create("ImageshareChannel", {
    // Called when the subscription has been terminated by the server
 },
   received: function(data) {
-    $('.sessionsh1').text(data['sessions'])
-},
+    $('.sessionsh1').text(data['sessions']);
+    var prevsessions = data['sessions'] - data['prevsessions']
+    $('.prevsessions').text(prevsessions);
 });
