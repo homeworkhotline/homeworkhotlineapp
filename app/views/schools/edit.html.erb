@@ -2,7 +2,9 @@
 
 <div class="parent">
 <%= form_for(@school) do |f| %>
-
+<div class="actions">
+    <%= f.submit "Add School", class:"button" %>
+  </div>
   <div class="field">
     <h4>School Name</h4>
     <%= f.text_field :name, :required => true %>
@@ -91,10 +93,6 @@
   </div>
 
 <br>
-
-  <div class="actions">
-    <%= f.submit "Add School", class:"button" %>
-  </div>
 <% end %>
 </div>
 <style type="text/css">

@@ -1,7 +1,6 @@
 <% content_for :page, "New Student Registration" %>
 <% content_for :title, "New Student Registration" %>
 <%= form_for(@student) do |f| %>
-<%= f.submit "Continue", class: "button" %>
 <h2>STUDENT INFORMATION</h2>
 <div class="field">
 <h3 class="numbertext">Grade</h3>
@@ -24,6 +23,7 @@
 <%= f.select :reffered_by, options_for_select(["Promo Item", "Website", "TV Ad", "Teacher", "Student", "Parent", "Other"])%>
 </div>
 <div style="clear: both;"></div>
+<%= f.submit "Continue", class: "button" %>
 <% end %>
 <style type="text/css">
 input[disabled="disabled"] {
