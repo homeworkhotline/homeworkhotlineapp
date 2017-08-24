@@ -30,9 +30,9 @@ $('.error').hide();
 $('.error2').hide();
 $('.input').change(function() {
 	var value = $('.input').val().toUpperCase();
-        if ((<% Student.all.each do |student| %>value == "<%= student.codename %>" <% unless student.id + 1 > Student.last.id %>|| <% end %><% end %>) && value != ""){
+        if ((<% @students = 0 %><% Student.all.each do |student| %>value == "<%= student.codename %>" <% @students += 1 %><% unless @students + 1 > Student.count %>||<% end %><% end %>) && value != ""){
 
-        	if (<% CallLog.where(duration: nil).each do |log|%>value == "<%= log.codename %>"<% unless log.id + 1 > CallLog.where(duration: nil).last.id %>|| <% end %><% end %> <% if CallLog.exists? && CallLog.where(duration: nil) %> && value != "" <% else %> false == false <% end %>){
+        	if (<% @logs = 0 %><% CallLog.where(duration: nil).each do |log|%>value == "<%= log.codename %>"<% @logs += 1 %><% unless @logs + 1 > CallLog.where(duration: nil).count %>|| <% end %><% end %> <% if CallLog.exists? && CallLog.where(duration: nil) %> && value != "" <% else %> false == false <% end %>){
 
           $('.input').css("border", "none");
           $('.error').hide();

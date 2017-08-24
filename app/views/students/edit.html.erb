@@ -20,7 +20,7 @@
 </div>
 <div class="field">
 <h3>Referred By</h3>
-<%= f.text_field :reffered_by%>
+<%= f.select :reffered_by, options_for_select(["Promo Item", "Website", "TV Ad", "Teacher", "Student", "Parent", "Other"])%>
 </div>
 <div style="clear: both;"></div>
 <%= f.submit "Continue", class: "button" %>
