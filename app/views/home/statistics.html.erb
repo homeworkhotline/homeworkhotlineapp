@@ -335,9 +335,13 @@
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Calls'],
           <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).to_date).each do |date| %>
-          ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
+          <% unless date.on_weekend? %>
+            ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
           <% end %>
+          <% end %>
+          <% unless Date.today.on_weekend? %>
           ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).size %>]
+          <% end %>
         ]);
         var options = {
           legend: 'none',
