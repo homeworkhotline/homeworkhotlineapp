@@ -335,11 +335,11 @@
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Calls'],
           <% ((28.days.ago - 5.hours).beginning_of_day.to_date..(1.day.ago - 5.hours).to_date).each do |date| %>
-          <% unless date.on_weekend? %>
+          <% unless date.on_weekend? || date.friday? %>
             ['<%= date.strftime('%B %d, %Y') %>',<%= CallLog.where(date: date).size %>],
           <% end %>
           <% end %>
-          <% unless Date.today.on_weekend? %>
+          <% unless Date.today.on_weekend? || Date.today.friday? %>
           ['<%= Date.today.strftime('%B %d, %Y') %>',<%= CallLog.where(date: Date.today).size %>]
           <% end %>
         ]);
