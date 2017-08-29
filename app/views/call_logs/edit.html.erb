@@ -4,7 +4,7 @@
 <h1 style="position: fixed;">Codename: <%= @call_log.codename %></h1><br><br>
 <h1 style="position: fixed;">Student Grade: <%= @student.grade %></h1><br><br>
 <% if Rails.env.production? %>
-<h1 style="position: fixed;">County: <%= Principal.find_by_id(@school.county).schoolsystem %></h1>
+<h1 style="position: fixed;">County: <%= @school.name %></h1>
 <% end %>
 <%= form_for(@call_log) do |f| %>
   <div class="calldetails">
