@@ -38,6 +38,13 @@ class HomeController < ApplicationController
     if @prevmaster.nan? then @prevmaster = 0 end
     if @complete.nan? then @complete = 0 end
     if @prevcomplete.nan? then @prevcomplete = 0 end
+
+
+    @math = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill: ["K-8 Math", "Pre-Aglebra", "Integrated Math 1", "Aglebra 1", "Integrated Math 2", "Geometry", "Integrated Math 3", "Algbera 2", "Bridge Math", "Pre-Cal/Trig", "Calculus", "Economics", "Statistics", "College"]).size
+    @la = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill: ["Language Arts / Reading / Vocabulary"]).size
+    @ss = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill: ["SS/ Geography / History / Govt."]).size
+    @science = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill: ["K - 8", "Physical Science", "Health", "Chemistry", "Forensic", "Biology", "Physics"]).size
+    @other = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill:["ACT Prep / Freshman Seminar", "Foreign Language - Spanish", "Music","Non-Academic", "Hotline info"]).size
   end
 
   def sessioninfo

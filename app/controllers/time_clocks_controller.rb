@@ -6,11 +6,6 @@ class TimeClocksController < ApplicationController
   # GET /time_clocks.json
   def index
     @time_clocks = current_user.time_clocks
-    @time_clock = TimeClock.new
-    unless @time_clocks.exists?(clock_out: nil)
-      @time = TimeClock.new(clock_in: DateTime.now, user_id: current_user.id, date: Date.today.to_s)
-      @time.save!
-    end
     @total_hours = 0
     @unpaid_hours = 0
     @time_clocks.each do |time|

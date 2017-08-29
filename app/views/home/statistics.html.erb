@@ -86,7 +86,7 @@
   <div class="second right">
   <div class="hours block">
   <h2>HOURS TUTORED</h2>
-  <h1><%= @hours%></h1>
+  <h1><%= @hours %></h1>
   <% if (@hours - @prevhours) > 0 %>
   <span class="icon-up-arrow"></span>
   <% elsif (@hours - @prevhours) < 0 %>
@@ -392,7 +392,9 @@
   width: 0%;
   left: 50%;
 }
-
+ellipse[stroke-width="6.5"] {
+  stroke: transparent;
+}
     </style>
         <script type="text/javascript">
     $(document).ready(function(){
@@ -499,16 +501,19 @@
     });
     function drawSubject() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          ['Subject', '# of Calls'],
+          ['Math',     <%= @math %>],
+          ['ELA',  <%= @la %>],
+          ['Science', <%= @science %>],
+          ['Social Studies',      <%= @ss %>],
+          ['Other', <%= @other %>]
         ]);
         var options = {
-          legend: 'none',
+          legend: {textStyle: {color: 'white'}},
           lineWidth: 2,
+          pieSliceBorderColor : "transparent",
+          pieSliceText: 'none',
+          colors: ['#00bdfe', '#eac73e', '#ff8b32', '#e93d50', '#9b7ffe'],
           animation:{
         duration: 100,
         easing: 'inAndOut',
@@ -519,7 +524,7 @@
             width: '100%',
           },
           backgroundColor: { fill:'#3c3e47' },
-          pieHole: 0.6,
+          pieHole: 0.85,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));

@@ -17,7 +17,7 @@
       $('.button').attr('disabled','disabled');
       $('.input').change(function() {
         var value = $('.input').val().toUpperCase();
-        if ((<% if Student.count == 0 %>false<% else %><% Student.all.each do |student| %>value == "<%= student.codename %>" <% if student == Student.last %><% else %>|| <% end %><% end %><% end %>) && value != ""){
+        if ((<% @students = 0 %><% Student.all.each do |student| %>value == "<%= student.codename %>" <% @students += 1 %><% unless @students + 1 > Student.count %>||<% end %><% end %>) && value != ""){
           $('.button').removeAttr('disabled');
           $('.error').hide();
           $('.correct').show();
