@@ -98,6 +98,26 @@
   <div id="hours" style="width: 770px; height: 190px"></div>
   </div>
   </div>
+  <div class="third right">
+  <div class="grade">
+  <ul class="gradeul">
+    <li>Sessions by Grade</li>
+    <li><div class="libg bgk"></div><span>Kindergarten</span><%= @k %></li>
+    <li><div class="libg bg1"></div><span>1st Grade</span><%= @first %></li>
+    <li><div class="libg bg2"></div><span>2nd Grade</span><%= @second %></li>
+    <li><div class="libg bg3"></div><span>3rd Grade</span><%= @third %></li>
+    <li><div class="libg bg4"></div><span>4th Grade</span><%= @fourth %></li>
+    <li><div class="libg bg5"></div><span>5th Grade</span><%= @fifth %></li>
+    <li><div class="libg bg6"></div><span>6th Grade</span><%= @sixth %></li>
+    <li><div class="libg bg7"></div><span>7th Grade</span><%= @seventh %></li>
+    <li><div class="libg bg8"></div><span>8th Grade</span><%= @eigth %></li>
+    <li><div class="libg bg9"></div><span>9th Grade</span><%= @ninth %></li>
+    <li><div class="libg bg10"></div><span>10th Grade</span><%= @tenth %></li>
+    <li><div class="libg bg11"></div><span>11th Grade</span><%= @eleventh %></li>
+    <li><div class="libg bg12"></div><span>12th Grade</span><%= @twelvth %></li>
+  </ul>
+  </div>
+  </div>
   </div>
   <% end %>
     <style type="text/css">
@@ -124,6 +144,116 @@
         display: table-cell;
         vertical-align: bottom;
         position: relative;
+      }
+      .grade {
+        color: white;
+        background-color: #3c3e47;
+        height: 658px;
+        width: 302px;
+        position: relative;
+        right: 152px;
+        padding: 0;
+      }
+      .gradeul {
+        width: 300px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 656px;
+        border: 2px solid #aaa;
+      }
+      .gradeul > li:first-child {
+        font-size: 25px;
+        justify-content: flex-start !important;
+      }
+      .gradeul > li {
+        font-weight: 300;
+        letter-spacing: 1px;
+        font-size: 18px;
+        opacity: .75;
+        border-bottom: 2px solid #aaa;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 15px;
+      }
+      .gradeul > li > span {
+        margin-right: auto;
+      }
+      .libg {
+        justify-content: flex-start;
+        position: absolute;
+        left: 2px;
+        z-index: -1;
+        height: 45px;
+        width: 200px;
+        background-color: #282b33;
+      }
+      .bgk {
+        width: -webkit-calc((<%= @k %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @k %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @k %> / <%= @highest %>) * 300px);
+      }
+      .bg1 {
+        width: -webkit-calc((<%= @first %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @first %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @first %> / <%= @highest %>) * 300px);
+      }
+      .bg2 {
+        width: -webkit-calc((<%= @second %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @second %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @second %> / <%= @highest %>) * 300px);
+      }
+      .bg3 {
+        width: -webkit-calc((<%= @third %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @third %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @third %> / <%= @highest %>) * 300px);
+      }
+      .bg4 {
+        width: -webkit-calc((<%= @fourth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @fourth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @fourth %> / <%= @highest %>) * 300px);
+      }
+      .bg5 {
+        width: -webkit-calc((<%= @fifth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @fifth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @fifth %> / <%= @highest %>) * 300px);
+      }
+      .bg6 {
+        width: -webkit-calc((<%= @sixth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @sixth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @sixth %> / <%= @highest %>) * 300px);
+      }
+      .bg7 {
+        width: -webkit-calc((<%= @seventh %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @seventh %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @seventh %> / <%= @highest %>) * 300px);
+      }
+      .bg8 {
+        width: -webkit-calc((<%= @eigth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @eigth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @eigth %> / <%= @highest %>) * 300px);
+      }
+      .bg9 {
+        width: -webkit-calc((<%= @ninth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @ninth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @ninth %> / <%= @highest %>) * 300px);
+      }
+      .bg10 {
+        width: -webkit-calc((<%= @tenth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @tenth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @tenth %> / <%= @highest %>) * 300px);
+      }
+      .bg11 {
+        width: -webkit-calc((<%= @eleventh %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @eleventh %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @eleventh %> / <%= @highest %>) * 300px);
+      }
+      .bg12 {
+        width: -webkit-calc((<%= @twelvth %> / <%= @highest %>) * 300px);
+        width:    -moz-calc((<%= @twelvth %> / <%= @highest %>) * 300px);
+        width:         calc((<%= @twelvth %> / <%= @highest %>) * 300px);
       }
       .block > h2 {
         font-weight: 300;
@@ -214,6 +344,7 @@
         margin-bottom: 100px;
         display: flex;
         align-items: center;
+        z-index: 100;
       }
       .topleft > h1 {
         font-weight: 300;
@@ -293,8 +424,8 @@
       .datediv {
         width: 995px;
         height: 85px;
-        position: fixed;
-        top: 60px;
+        position: absolute;
+        top: 30px;
         border-bottom: 1px solid #3c3e47;
         display: flex;
         align-items: center;
@@ -321,6 +452,11 @@
       .second {
         top: 318px;
         position: relative;
+        left: 150px;
+      }
+      .third {
+        position: relative;
+        top: 636px;
       }
       #nav-icon1, #nav-icon2, #nav-icon3, #nav-icon4 {
   width: 20px;
