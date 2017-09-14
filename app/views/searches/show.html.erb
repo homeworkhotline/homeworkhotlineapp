@@ -235,9 +235,10 @@ function myFunction() {
     <% @results = CallLog.where(prize_given: true, prize_sent: false) %>
     <% @test = 0 %>
     <% @results.where.not(teacher_name: nil, name: nil).each do |result| %>
+    <% @school = School.find_by_id((result.student).school_id) %>
       <div class="student">
       <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
-      <p><%= Date.today.strftime('%B %e, %Y') %></p>
+      <p><%= Date.today.strftime('%B %e, %Y') %><br><%= @school.name %><br><%= @school.address %></p>
       <p><%= result.name %> and Parent or Guardian,</p>
       <p>Dear <%= result.name %>,</p>
       <p>Congratulations! You worked very hard during your tutoring session with Homework Hotline! Enjoy your prize.</p>
@@ -266,8 +267,8 @@ function myFunction() {
       <div class="page-break"></div>
       <% end %>
       </div>
-      <% result.prize_sent = 1 %>
-      <% result.save! %>
+      <% #result.prize_sent = 1 %>
+      <% #result.save! %>
     <% end %>
     <style type="text/css">
       .page-break { display:block; clear:both; page-break-after:always; }
