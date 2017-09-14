@@ -46,20 +46,14 @@ class HomeController < ApplicationController
     @science = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill: ["K - 8", "Physical Science", "Health", "Chemistry", "Forensic", "Biology", "Physics"]).size
     @other = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 28.days.ago.beginning_of_day, Date.today.end_of_day).where(skill:["ACT Prep / Freshman Seminar", "Foreign Language - Spanish", "Music","Non-Academic", "Hotline info"]).size
 
-    @k = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).where(students: { grade: 0 }).size
-    @first = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).where(students:{ grade: 1 }).size
-    @second = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).where(students:{ grade: 2 }).size
-    @third = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).where(students:{ grade: 3 }).size
-    @fourth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).where(students:{ grade: 4 }).size
-    @fifth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).where(students:{ grade: 5 }).size
-    @sixth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 6)).size
-    @seventh = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 7)).size
-    @eigth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 8)).size
-    @ninth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 9)).size
-    @tenth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 10)).size
-    @eleventh = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 11)).size
-    @twelvth = CallLog.where.not(duration: nil).where('date BETWEEN ? AND ?', 56.days.ago.beginning_of_day,  28.days.ago.end_of_day).joins(:student).references(:student).where(student: Student.where(grade: 12)).size
-    @highest = [@k, @first, @second, @third, @fourth, @fifth, @sixth, @seventh, @eigth, @ninth, @tenth, @eleventh, @twelvth].max
+
+
+    @grades = CallLog.where.not(duration: nil).where(date: (28.days.ago.beginning_of_day..1.day.ago.end_of_day)).joins(:student).group('students.grade').count
+    @highest = 0
+    (0..12).each do |g|
+      @grades[g] ||= 0
+      @highest = @grades[g] if @grades[g] > @highest
+    end
   end
 
   def sessioninfo

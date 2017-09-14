@@ -78,12 +78,12 @@ class SearchesController < ApplicationController
     respond_to do |format|
       if @search.update(search_params)
         if @search.model == "Prize"
-        format.html { redirect_to search_path(@search, format: 'pdf'), notice: 'Search Results:' }
-        format.json { render :show, status: :ok, location: @search }
-      else
-        format.html { redirect_to @search, notice: 'Search Results:' }
-        format.json { render :show, status: :ok, location: @search }
-      end
+          format.html { redirect_to search_path(@search, format: 'pdf'), notice: 'Search Results:' }
+          format.json { render :show, status: :ok, location: @search }
+        else
+          format.html { redirect_to @search, notice: 'Search Results:' }
+          format.json { render :show, status: :ok, location: @search }
+        end
       else
         format.html { render :edit }
         format.json { render json: @search.errors, status: :unprocessable_entity }

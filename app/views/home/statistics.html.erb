@@ -102,19 +102,19 @@
   <div class="grade">
   <ul class="gradeul">
     <li>Sessions by Grade</li>
-    <li><div class="libg bgk"></div><span>Kindergarten</span><%= @k %></li>
-    <li><div class="libg bg1"></div><span>1st Grade</span><%= @first %></li>
-    <li><div class="libg bg2"></div><span>2nd Grade</span><%= @second %></li>
-    <li><div class="libg bg3"></div><span>3rd Grade</span><%= @third %></li>
-    <li><div class="libg bg4"></div><span>4th Grade</span><%= @fourth %></li>
-    <li><div class="libg bg5"></div><span>5th Grade</span><%= @fifth %></li>
-    <li><div class="libg bg6"></div><span>6th Grade</span><%= @sixth %></li>
-    <li><div class="libg bg7"></div><span>7th Grade</span><%= @seventh %></li>
-    <li><div class="libg bg8"></div><span>8th Grade</span><%= @eigth %></li>
-    <li><div class="libg bg9"></div><span>9th Grade</span><%= @ninth %></li>
-    <li><div class="libg bg10"></div><span>10th Grade</span><%= @tenth %></li>
-    <li><div class="libg bg11"></div><span>11th Grade</span><%= @eleventh %></li>
-    <li><div class="libg bg12"></div><span>12th Grade</span><%= @twelvth %></li>
+    <li><div class="libg bg0"></div><span>Kindergarten</span><%= @grades[0] %></li>
+    <li><div class="libg bg1"></div><span>1st Grade</span><%= @grades[1] %></li>
+    <li><div class="libg bg2"></div><span>2nd Grade</span><%= @grades[2] %></li>
+    <li><div class="libg bg3"></div><span>3rd Grade</span><%= @grades[3] %></li>
+    <li><div class="libg bg4"></div><span>4th Grade</span><%= @grades[4] %></li>
+    <li><div class="libg bg5"></div><span>5th Grade</span><%= @grades[5] %></li>
+    <li><div class="libg bg6"></div><span>6th Grade</span><%= @grades[6] %></li>
+    <li><div class="libg bg7"></div><span>7th Grade</span><%= @grades[7] %></li>
+    <li><div class="libg bg8"></div><span>8th Grade</span><%= @grades[8] %></li>
+    <li><div class="libg bg9"></div><span>9th Grade</span><%= @grades[9] %></li>
+    <li><div class="libg bg10"></div><span>10th Grade</span><%= @grades[10] %></li>
+    <li><div class="libg bg11"></div><span>11th Grade</span><%= @grades[11] %></li>
+    <li><div class="libg bg12"></div><span>12th Grade</span><%= @grades[12] %></li>
   </ul>
   </div>
   </div>
@@ -190,71 +190,13 @@
         width: 200px;
         background-color: #282b33;
       }
-      .bgk {
-        width: -webkit-calc((<%= @k %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @k %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @k %> / <%= @highest %>) * 300px);
-      }
-      .bg1 {
-        width: -webkit-calc((<%= @first %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @first %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @first %> / <%= @highest %>) * 300px);
-      }
-      .bg2 {
-        width: -webkit-calc((<%= @second %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @second %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @second %> / <%= @highest %>) * 300px);
-      }
-      .bg3 {
-        width: -webkit-calc((<%= @third %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @third %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @third %> / <%= @highest %>) * 300px);
-      }
-      .bg4 {
-        width: -webkit-calc((<%= @fourth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @fourth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @fourth %> / <%= @highest %>) * 300px);
-      }
-      .bg5 {
-        width: -webkit-calc((<%= @fifth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @fifth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @fifth %> / <%= @highest %>) * 300px);
-      }
-      .bg6 {
-        width: -webkit-calc((<%= @sixth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @sixth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @sixth %> / <%= @highest %>) * 300px);
-      }
-      .bg7 {
-        width: -webkit-calc((<%= @seventh %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @seventh %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @seventh %> / <%= @highest %>) * 300px);
-      }
-      .bg8 {
-        width: -webkit-calc((<%= @eigth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @eigth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @eigth %> / <%= @highest %>) * 300px);
-      }
-      .bg9 {
-        width: -webkit-calc((<%= @ninth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @ninth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @ninth %> / <%= @highest %>) * 300px);
-      }
-      .bg10 {
-        width: -webkit-calc((<%= @tenth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @tenth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @tenth %> / <%= @highest %>) * 300px);
-      }
-      .bg11 {
-        width: -webkit-calc((<%= @eleventh %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @eleventh %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @eleventh %> / <%= @highest %>) * 300px);
-      }
-      .bg12 {
-        width: -webkit-calc((<%= @twelvth %> / <%= @highest %>) * 300px);
-        width:    -moz-calc((<%= @twelvth %> / <%= @highest %>) * 300px);
-        width:         calc((<%= @twelvth %> / <%= @highest %>) * 300px);
-      }
+      <% (0..12).each do |bg| %>
+        .bg<%= bg %> {
+          width: -webkit-calc((<%= @grades[bg] %> / <%= @highest %>) * 300px);
+          width:    -moz-calc((<%= @grades[bg] %> / <%= @highest %>) * 300px);
+          width:         calc((<%= @grades[bg] %> / <%= @highest %>) * 300px);
+        }
+      <% end %>
       .block > h2 {
         font-weight: 300;
         letter-spacing: 2px;
@@ -344,7 +286,7 @@
         margin-bottom: 100px;
         display: flex;
         align-items: center;
-        z-index: 100;
+        z-index: 10;
       }
       .topleft > h1 {
         font-weight: 300;
@@ -381,7 +323,7 @@
         padding-left: 15px;
         background-color: white;
         box-shadow: 0px 1px 20px rgba(0, 0, 0, .1);
-        z-index: 3
+        z-index: 30;
       }
       .bottomleft {
         background-color: #24262d;
