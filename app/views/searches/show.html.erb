@@ -239,8 +239,8 @@ function myFunction() {
       <div class="student">
       <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
       <p><%= Date.today.strftime('%B %e, %Y') %><br><%= @school.name %><br><%= @school.address %></p>
-      <p><%= result.name %> and Parent or Guardian,</p>
-      <p>Dear <%= result.name %>,</p>
+      <p><%= if result.name.nil? then result.codename else result.name end %> and Parent or Guardian,</p>
+      <p>Dear <%= if result.name.nil? then result.codename else result.name end %>,</p>
       <p>Congratulations! You worked very hard during your tutoring session with Homework Hotline! Enjoy your prize.</p>
       <b>Tell your friends to call Homework Hotline for free tutoring and  <u>YOU</u> will recieve an additional prize!</b><br><br>
       <b><u>Here's how:</u></b>
@@ -258,7 +258,7 @@ function myFunction() {
         <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
       <p><%= Date.today.strftime('%B %e, %Y') %></p>
       <p>Dear <%= result.teacher_name %>,</p>
-      <p>Your student, <%= result.name %>, has asked a good question and won a prize. Enclosed please find a <%= result.prize_type %> from Homework Hotline. Please pass it on with our congratulations.</p>
+      <p>Your student, <%= if result.name.nil? then result.codename else result.name end %>, has asked a good question and won a prize. Enclosed please find a <%= result.prize_type %> from Homework Hotline. Please pass it on with our congratulations.</p>
       <p>We know that only motivated students from the most inspiring teachers call the Hotline. Thanks to you both.</p>
       <p>Sincerely yours,</p>
       <h2 style="font-family: cursive;">Homework Hotline</h2>
