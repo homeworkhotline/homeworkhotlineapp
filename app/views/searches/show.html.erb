@@ -234,7 +234,7 @@ function myFunction() {
   <% elsif @search.model == "Prize" %>
     <% @results = CallLog.where(prize_given: true, prize_sent: false) %>
     <% @test = 0 %>
-    <% @results.where.not(teacher_name: nil, name: nil).first(100).each do |result| %>
+    <% @results.where.not(teacher_name: nil, name: nil).first(50).each do |result| %>
     <% @school = School.find_by_id((result.student).school_id) %>
       <div class="student">
       <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
