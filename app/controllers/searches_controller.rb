@@ -14,6 +14,7 @@ class SearchesController < ApplicationController
     @principals = Principal.all
     @reports = MnpsReport.all
     @search = Search.find(params[:id])
+    unless @search.model == "Prize"
       @model = @search.model.constantize
       @param = @search.select
       @results = @model.where("#{@param}": @search.search)
@@ -40,6 +41,7 @@ class SearchesController < ApplicationController
           @results = @model.where("#{@param}": @search.search)
         end
       end
+    end
       render :layout => 'report'
   end
 
