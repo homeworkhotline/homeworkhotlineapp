@@ -238,10 +238,10 @@ function myFunction() {
     <% @school = School.find_by_id((result.student).school_id) %>
       <div class="student">
       <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
-      <p><%= Date.today.strftime('%B %e, %Y') %></p><p><%= @school.name %><br><% unless @school.nil? && Geocoder.search(@school.address).search.nil? %><%= @school.address %><br> <%= Geocoder.search(@school.address).first.city %>, <%= Geocoder.search(@school.address).first.state %> <%= Geocoder.search(@school.address).first.postal_code %><% end %></p>
+      <p><%= Date.today.strftime('%B %e, %Y') %></p><p><%= @school.name %><br><% unless @school.nil? && Geocoder.search(@school.address).search.nil? %><%= @school.address %><br> <% if Geocoder.search(@school.address).first.state == "Tennessee" %> <%= Geocoder.search(@school.address).first.city %>, <%= Geocoder.search(@school.address).first.state %> <%= Geocoder.search(@school.address).first.postal_code %><% else %><%= Geocoder.search(@school.address).second.city %>, <%= Geocoder.search(@school.address).second.state %> <%= Geocoder.search(@school.address).second.postal_code %><% end %><% end %></p>
       <p>Dear <%= if result.name.nil? then result.codename else result.name end %>,</p>
       <p>Congratulations! You worked very hard during your tutoring session with Homework Hotline! Enjoy your prize.</p>
-      <b>Tell your friends to call Homework Hotline for free tutoring and  <u>YOU</u> will recieve an additional prize!</b><br><br>
+      <p><b>Tell your friends to call Homework Hotline for free tutoring and  <u>YOU</u> will recieve an additional prize!</b></p><br><br>
       <b><u>Here's how:</u></b>
       <ol>
         <li>Tell your friends to call <b>615-298-6636</b> for tutoring. They must be first time callers.</li>
@@ -250,7 +250,7 @@ function myFunction() {
       </ol>
       <p>Keep working hard! We are here to help.</p>
       <p>Sincerely yours,</p>
-      <h2 style="font-family: cursive;">Homework Hotline</h2>
+      <%= image_tag 'gth54bt3kj4j5jk4b3.png',width: "150px" %>
       </div>
       <div class="page-break"></div>
       <div class="teacher">
@@ -260,7 +260,7 @@ function myFunction() {
       <p>Your student, <%= if result.name.nil? then result.codename else result.name end %>, asked a good question and won a prize. Enclosed please find a <%= result.prize_type %> from Homework Hotline. Please pass it on with our congratulations.</p>
       <p>We know that only motivated students from the most inspiring teachers call the Hotline. Thanks to you both.</p>
       <p>Sincerely yours,</p>
-      <h2 style="font-family: cursive;">Homework Hotline</h2>
+      <%= image_tag 'gth54bt3kj4j5jk4b3.png',width: "150px" %>
       </div>
       <div class="page-break"></div>
     <% end %>
