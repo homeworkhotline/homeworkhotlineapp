@@ -277,6 +277,8 @@ function myFunction() {
       <%= image_tag 'gth54bt3kj4j5jk4b3.png',width: "250px" %>
       </div>
       <div class="page-break"></div>
+      <% result.prize_sent = true %>
+      <% result.save! %>
     <% end %>
     <style type="text/css">
       .page-break { display:block; clear:both; page-break-after:always; }
