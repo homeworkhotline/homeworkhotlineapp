@@ -238,8 +238,7 @@ function myFunction() {
     <% @school = School.find_by_id((result.student).school_id) %>
       <div class="student">
       <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
-      <p><%= Date.today.strftime('%B %e, %Y') %><br><%= @school.name %><br><%= @school.address %></p>
-      <p><%= if result.name.nil? then result.codename else result.name end %> and Parent or Guardian,</p>
+      <p><%= Date.today.strftime('%B %e, %Y') %></p><p><%= @school.name %><br><%= @school.address %><br> <%= Geocoder.search(@school.address).first.city %>, <%= Geocoder.search(@school.address).first.state %> <%= Geocoder.search(@school.address).first.postal_code %></p>
       <p>Dear <%= if result.name.nil? then result.codename else result.name end %>,</p>
       <p>Congratulations! You worked very hard during your tutoring session with Homework Hotline! Enjoy your prize.</p>
       <b>Tell your friends to call Homework Hotline for free tutoring and  <u>YOU</u> will recieve an additional prize!</b><br><br>
@@ -247,28 +246,23 @@ function myFunction() {
       <ol>
         <li>Tell your friends to call <b>615-298-6636</b> for tutoring. They must be first time callers.</li>
         <li>Have them say: "<%= result.codename %> told me to call for help!"</li>
-        <li>The <u>next  time  you call for tutoring</u> YOU will an additional prize. just tell us your friends called!</li>
+        <li>The <u>next time you call for tutoring</u>, and YOU will receive an additional prize. Just tell us your friends called!</li>
       </ol>
       <p>Keep working hard! We are here to help.</p>
       <p>Sincerely yours,</p>
       <h2 style="font-family: cursive;">Homework Hotline</h2>
       </div>
-      <div class="page-break"></div>
+      <br>
+      <div class="page-break"></div><br>
       <div class="teacher">
         <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
       <p><%= Date.today.strftime('%B %e, %Y') %></p>
       <p>Dear <%= result.teacher_name %>,</p>
-      <p>Your student, <%= if result.name.nil? then result.codename else result.name end %>, has asked a good question and won a prize. Enclosed please find a <%= result.prize_type %> from Homework Hotline. Please pass it on with our congratulations.</p>
+      <p>Your student, <%= if result.name.nil? then result.codename else result.name end %>, asked a good question and won a prize. Enclosed please find a <%= result.prize_type %> from Homework Hotline. Please pass it on with our congratulations.</p>
       <p>We know that only motivated students from the most inspiring teachers call the Hotline. Thanks to you both.</p>
       <p>Sincerely yours,</p>
       <h2 style="font-family: cursive;">Homework Hotline</h2>
-      <% @test += 1 %>
-      <% unless (@test + 1) > @results.count %>
-      <div class="page-break"></div>
-      <% end %>
       </div>
-      <% result.prize_sent = 1 %>
-      <% result.save! %>
     <% end %>
     <style type="text/css">
       .page-break { display:block; clear:both; page-break-after:always; }
