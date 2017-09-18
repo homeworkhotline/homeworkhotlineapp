@@ -238,7 +238,7 @@ function myFunction() {
     <% @school = School.find_by_id((result.student).school_id) %>
       <div class="student">
       <%= image_tag 'hh.png', width: "400px", style: "margin-left: -200px; position: relative; left: 50%" %>
-      <p><%= Date.today.strftime('%B %e, %Y') %></p><p><%= @school.name %><br><%= @school.address %><br> <%= Geocoder.search(@school.address).first.city %>, <%= Geocoder.search(@school.address).first.state %> <%= Geocoder.search(@school.address).first.postal_code %></p>
+      <p><%= Date.today.strftime('%B %e, %Y') %></p><p><%= @school.name %><br><% unless @school.nil? %><%= @school.address %><br> <%= Geocoder.search(@school.address).first.city %>, <%= Geocoder.search(@school.address).first.state %> <%= Geocoder.search(@school.address).first.postal_code %><% end %></p>
       <p>Dear <%= if result.name.nil? then result.codename else result.name end %>,</p>
       <p>Congratulations! You worked very hard during your tutoring session with Homework Hotline! Enjoy your prize.</p>
       <b>Tell your friends to call Homework Hotline for free tutoring and  <u>YOU</u> will recieve an additional prize!</b><br><br>
