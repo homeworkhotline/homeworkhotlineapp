@@ -244,12 +244,12 @@ function myFunction() {
         <% if Geocoder.search(@school.address).first.state == "Tennessee"%> 
           <%= Geocoder.search(@school.address).first.city %>, 
           <%= Geocoder.search(@school.address).first.state %> 
-          <%= Geocoder.search(@school.address).first.postal_code %>
+          <%= Geocoder.search(@school.address).first.postal_code unless Geocoder.search(@school.address).first.postal_code.nil? %>
         <% else %>
         <% unless Geocoder.search(@school.address).second.nil? %>
-          <%= Geocoder.search(@school.address).second.city %>, 
-          <%= Geocoder.search(@school.address).second.state %> 
-          <%= Geocoder.search(@school.address).second.postal_code %>
+          <%= Geocoder.search(@school.address).second.city unless Geocoder.search(@school.address).second.city.nil? %>, 
+          <%= Geocoder.search(@school.address).second.state unless Geocoder.search(@school.address).second.state.nil? %> 
+          <%= Geocoder.search(@school.address).second.postal_code unless Geocoder.search(@school.address).second.postal_code.nil? %>
           <% end %>
         <% end %>
       <% end %></p>
