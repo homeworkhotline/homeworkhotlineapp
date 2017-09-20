@@ -242,8 +242,8 @@ function myFunction() {
       <% unless @school.nil? && Geocoder.search(@school.address).search.nil?  && Geocoder.search(@school.address).search.first.nil? %>
         <%= @school.address %><br> 
         <% if Geocoder.search(@school.address).first.state == "Tennessee" and not Geocoder.search(@school.address).first.nil?%> 
-          <%= Geocoder.search(@school.address).first.city %>, 
-          <%= Geocoder.search(@school.address).first.state %> 
+          <%= Geocoder.search(@school.address).first.city unless Geocoder.search(@school.address).first.city.nil? %>, 
+          <%= Geocoder.search(@school.address).first.state unless Geocoder.search(@school.address).first.state.nil? %> 
           <%= Geocoder.search(@school.address).first.postal_code unless Geocoder.search(@school.address).first.postal_code.nil? %>
         <% else %>
         <% unless Geocoder.search(@school.address).second.nil? %>
